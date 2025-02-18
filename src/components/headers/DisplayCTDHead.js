@@ -35,6 +35,7 @@ const DisplayCTDHead = () => {
     const formatPage = () => {
 
         return (
+            //TODO add navigation to CTD Data page
             <Container>
                 <BorderCard>
                     <h1>Sonde Name: {ctdHead.sondeName}</h1>
