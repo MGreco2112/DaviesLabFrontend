@@ -3,6 +3,8 @@ import {Route, Routes} from "react-router-dom";
 import Navbar from "../navbar/Navbar";
 import Home from "../Home/Home";
 import Landers from "../landers/Landers";
+import DisplayLander from "../landers/DisplayLander";
+import DisplayCTDHead from "../headers/DisplayCTDHead";
 // import new routes here
 
 const AppRouter = () => {
@@ -12,6 +14,8 @@ const AppRouter = () => {
         <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/landers" element={<Landers/>}/>
+            <Route path="/landers/:id" element={<DisplayLander/>}/>
+            <Route path="/ctdhead/:id" element={<DisplayCTDHead/>}/>
         </Routes>
     </div>
     )
