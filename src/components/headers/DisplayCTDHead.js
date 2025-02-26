@@ -12,8 +12,6 @@ const DisplayCTDHead = () => {
         headID: params.id
     });
     const [loading, setLoading] = useState(true);
-
-    console.log(ctdHead);
     
 
     useEffect(() => {
