@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { apiHostURL } from "../../config";
 import BorderCard from "../common/BorderCard";
 import Container from "../common/Container";
+import Button from "../common/Button";
+import "./Headers.css";
 
 const DisplayCTDHead = () => {
     const params = useParams();
@@ -11,6 +13,7 @@ const DisplayCTDHead = () => {
     const [ctdHead, setCtdHead] = useState({
         headID: params.id
     });
+    const [ctdData, setCtdData] = useState([]);
     const [loading, setLoading] = useState(true);
     
 
@@ -30,11 +33,26 @@ const DisplayCTDHead = () => {
         _fetchCtdHead();
     }, [ctdHead.headID]);
 
+    const onClick = () => {
+        const _fetchCtdData = async () => {
+            try {
+                const res = await axios.get(`${apiHostURL}/api/processed/ctd/data/headId/${ctdHead.headID}`);
+
+                console.table(res.data);
+                setCtdData(res.data);
+            } catch (err) {
+                console.error(err.message ? err.message : err.response);
+            }
+        }
+
+        _fetchCtdData();
+    }
+
     const formatPage = () => {
 
         return (
             //TODO add navigation to CTD Data page
-            <Container>
+            <Container id="PageContainer">
                 <h1>CTD DATA</h1>
                 <BorderCard>
                     <h1>Sonde Name: {ctdHead.sondeName}</h1>
@@ -68,6 +86,11 @@ const DisplayCTDHead = () => {
                     <p>DepM: {ctdHead.depM}</p>
                     <p>CondDepB: {ctdHead.condDepB}</p>
                 </BorderCard>
+
+                <Button 
+                    id="DataButton"
+                    onClick={onClick}
+                >Show Data</Button>
             </Container>
         )
     }

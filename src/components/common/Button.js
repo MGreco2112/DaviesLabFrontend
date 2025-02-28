@@ -1,11 +1,11 @@
 import React from 'react';
-// fontawesome spinner
 
 const Button = (props) => {
 
   return (
     <button
       id={props.id}
+      className={props.className}
       type={props.type || "submit"}
       onClick={props.onClick}
       disabled={props.disabled}
