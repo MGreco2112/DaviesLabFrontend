@@ -4,6 +4,10 @@ import { useParams } from "react-router-dom";
 import { apiHostURL } from "../../config";
 import BorderCard from "../common/BorderCard";
 import Container from "../common/Container";
+import Button from "../common/Button";
+import Chart from "chart.js/auto";
+import "./Headers.css";
+
 
 const DisplayDOHead = () => {
     const params = useParams();
@@ -11,6 +15,8 @@ const DisplayDOHead = () => {
     const [doHead, setDoHead] = useState({
         headID: params.id
     });
+    const [doData, setDoData] = useState([]);
+    const [chartExists, setChartExists] = useState(false);
     const [loading, setLoading] = useState(true);
 
     
@@ -27,14 +33,47 @@ const DisplayDOHead = () => {
             }
         }
 
+        const _fetchDoData = async () => {
+            try {
+                const res = await axios.get(`${apiHostURL}/api/processed/do/data/headId/${doHead.headID}`);
+
+                setDoData(res.data);
+            } catch (err) {
+                console.error(err.message ? err.message : err.response);
+            }
+        }
+
         setLoading(true);
         _fetchDoHead();
+        _fetchDoData();
     }, [doHead.headID]);
+
+    const createTable = () => {
+        const container = document.getElementById("PageContainer");
+        const canvas = document.createElement("canvas");
+
+        new Chart(canvas, {
+            type: 'line',
+            data: {
+                labels: doData.map(row => row.date),
+                datasets: [
+                    {
+                        label: "DO",
+                        data: doData.map(row => row.do)
+                    }
+                ]
+            }
+        });
+
+        canvas.id = "SensorChart";
+        setChartExists(true);
+        container.appendChild(canvas);
+    }
     
     
     const formatPage = () => {
         return (
-            <Container>
+            <Container id="PageContainer">
                 <h1>DO DATA</h1>
                 <BorderCard>
                     <h1>Sonde Name: {doHead.sondeName}</h1>
@@ -64,6 +103,16 @@ const DisplayDOHead = () => {
                     <p>Set Sal: {doHead.setSal}</p>
                     <p>Film Number: {doHead.filmNo}</p>
                 </BorderCard>
+                {
+                    document.getElementById("SensorChart")
+                    ?
+                    null:
+                    <Button
+                        id="DataButton"
+                        onClick={createTable}
+                        disabled={chartExists}
+                    >Show Data</Button>
+                }
             </Container>
         )
     }

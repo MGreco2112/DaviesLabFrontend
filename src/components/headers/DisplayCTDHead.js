@@ -5,6 +5,7 @@ import { apiHostURL } from "../../config";
 import BorderCard from "../common/BorderCard";
 import Container from "../common/Container";
 import Button from "../common/Button";
+import Chart from "chart.js/auto";
 import "./Headers.css";
 
 const DisplayCTDHead = () => {
@@ -15,6 +16,7 @@ const DisplayCTDHead = () => {
     });
     const [ctdData, setCtdData] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [chartExists, setChartExists] = useState(false);
     
 
     useEffect(() => {
@@ -29,29 +31,50 @@ const DisplayCTDHead = () => {
             }
         }
 
-        setLoading(true);
-        _fetchCtdHead();
-    }, [ctdHead.headID]);
-
-    const onClick = () => {
         const _fetchCtdData = async () => {
             try {
                 const res = await axios.get(`${apiHostURL}/api/processed/ctd/data/headId/${ctdHead.headID}`);
 
-                console.table(res.data);
                 setCtdData(res.data);
             } catch (err) {
                 console.error(err.message ? err.message : err.response);
             }
         }
 
+       
+
+        setLoading(true);
+        _fetchCtdHead();
         _fetchCtdData();
+    }, [ctdHead.headID]);
+
+    const createTable = () => {
+
+        const container = document.getElementById("PageContainer");
+        const canvas = document.createElement("canvas");
+
+        
+        new Chart(canvas, {
+            type: 'line',
+            data: {
+                labels: ctdData.map(row => row.date),
+                datasets: [
+                    {
+                        label: "Temp Degrees (C)",
+                        data: ctdData.map(row => row.tempDegC)
+                    }
+                ]
+            }
+        });
+        canvas.id = "SensorChart";
+        setChartExists(true);
+
+        container.appendChild(canvas);
     }
 
     const formatPage = () => {
 
         return (
-            //TODO add navigation to CTD Data page
             <Container id="PageContainer">
                 <h1>CTD DATA</h1>
                 <BorderCard>
@@ -86,11 +109,18 @@ const DisplayCTDHead = () => {
                     <p>DepM: {ctdHead.depM}</p>
                     <p>CondDepB: {ctdHead.condDepB}</p>
                 </BorderCard>
-
-                <Button 
-                    id="DataButton"
-                    onClick={onClick}
-                >Show Data</Button>
+                {
+                    document.getElementById("SensorChart")
+                    ?
+                    null
+                    :
+                    <Button 
+                        id="DataButton"
+                        onClick={createTable}
+                        disabled={chartExists}
+                    >Show Data</Button>
+                }
+                
             </Container>
         )
     }

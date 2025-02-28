@@ -4,6 +4,9 @@ import { useParams } from "react-router-dom";
 import { apiHostURL } from "../../config";
 import BorderCard from "../common/BorderCard";
 import Container from "../common/Container";
+import Button from "../common/Button";
+import Chart from "chart.js/auto";
+import "./Headers.css";
 
 const DisplayFLNTUHead = () => {
     const params = useParams();
@@ -11,7 +14,9 @@ const DisplayFLNTUHead = () => {
     const [flntuHead, setFlntuHead] = useState({
         headID: params.id
     });
+    const [flntuData, setFlntuData] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [chartExists, setChartExists] = useState(false);
 
 
     useEffect(() => {
@@ -27,15 +32,49 @@ const DisplayFLNTUHead = () => {
             }
         }
 
+        const _fetchFlntuData = async () => {
+            try {
+                const res = await axios.get(`${apiHostURL}/api/processed/flntu/data/headId/${flntuHead.headID}`);
+
+                console.table(res.data);
+
+                setFlntuData(res.data);
+            } catch (err) {
+                console.error(err.message ? err.message : err.response);
+            }
+        }
+
         setLoading(true);
         _fetchFlntuHead();
+        _fetchFlntuData();
     }, [flntuHead.headID]);
 
-    console.table(flntuHead);
+    const createTable = () => {
+
+        const container = document.getElementById("PageContainer");
+        const canvas = document.createElement("canvas");
+
+        new Chart(canvas, {
+            type: 'line',
+            data: {
+                labels: flntuData.map(row => row.date),
+                datasets: [
+                    {
+                        label: "Chl Au Gl",
+                        data: flntuData.map(row => row.chlAUgL)
+                    }
+                ]
+            }
+        });
+        canvas.id = "SensorChart"
+        setChartExists(true);
+
+        container.appendChild(canvas);
+    }
 
     const formatPage = () => {
         return (
-            <Container>
+            <Container id="PageContainer">
                 <h1>FLNTU DATA</h1>
                 <BorderCard>
                     <h1>Sonde Name: {flntuHead.sondeName}</h1>
@@ -65,6 +104,17 @@ const DisplayFLNTUHead = () => {
                     <p>Sensor Type 2: {flntuHead.sensorType2}</p>
                     <p>Buzzer Number: {flntuHead.buzzerNumber}</p>
                 </BorderCard>
+                {
+                    document.getElementById("SensorChart")
+                    ?
+                    null
+                    :
+                    <Button
+                        id="DataButton"
+                        onClick={createTable}
+                        disabled={chartExists}
+                    >Show Data</Button>
+                }
             </Container>
         );
     }
