@@ -1,8 +1,14 @@
 import React from "react";
+import Container from "../common/Container";
+import "./Home.css";
 
 const Home = () => {
     return (
-        <h1>Home</h1>
+        <Container id="HomeContainer">
+            <h1>Welcome to the Davies Lab</h1>
+
+            <p>Navigate to Landers to view data</p>
+        </Container>
     );
 }
 

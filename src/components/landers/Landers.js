@@ -4,6 +4,7 @@ import Container from "../common/Container";
 import {apiHostURL} from "../../config";
 import { useNavigate } from "react-router-dom";
 import Lander from "./Lander";
+import "./Landers.css";
 
 const Landers = () => {
     // Array State for Lander Objects
@@ -42,7 +43,7 @@ const Landers = () => {
     }
 
     return (
-        <Container>
+        <Container className="LandersContainer">
             <h1>Active Landers</h1>
             { loading ? 
                 <p>FETCHING DATA...</p>

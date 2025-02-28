@@ -49,12 +49,12 @@ const DisplayLander = () => {
 
 
     return(
-        <Container>
+        <Container className="LandersContainer">
             {
                 loading ?
                     <p>FETCHING LANDER...</p>
                     :
-                    <Container>
+                    <Container className="LandersContainer">
                         <p>Lander ID: {lander.asdblanderID}</p>
                         <p>CTD Header ID: {lander.ctdheads[0].headID}</p>
                         <p>DO Header ID: {lander.doheads[0].headID}</p>
