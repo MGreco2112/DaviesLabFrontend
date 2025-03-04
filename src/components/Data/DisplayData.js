@@ -76,6 +76,8 @@ const DisplayData = () => {
 
     const createTable = () => {
         //TODO: Create Menu System to allow elements to be added/removed from Chart dynamically via User Input
+            //move chartData Object to top of page
+            //create Form element to house the menu system
             //dropdown menu with Object.keys() for any given element within the data[]
             //once selected, create new Object with props:
                 //label: ${dropdown value},
