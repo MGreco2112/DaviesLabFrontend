@@ -46,19 +46,13 @@ const DisplayData = () => {
         _fetchData();
     }, [head.headId]);
 
-    if (!loading) {
-        console.table(head);
-        console.table(data);
-    }
-
     const formatPage = () => {
         let headInfo = <h1>Unable To Load Header</h1>
 
         const buttonProps = {
             buttonDisabled: chartExists,
             buttonId: "DataButton",
-            onClick: createTable,
-            chartElement: "SensorChart"
+            onClick: createTable
         }
 
         if (params.headType === "ctd") {
@@ -79,6 +73,8 @@ const DisplayData = () => {
     }
 
     const createTable = () => {
+        //TODO: Create Menu System to allow elements to be added/removed from Chart dynamically via User Input
+        //TODO: Create Menu to allow User to determine type of chart created
         const container = document.getElementById("PageContainer");
         const canvas = document.createElement("canvas");
 

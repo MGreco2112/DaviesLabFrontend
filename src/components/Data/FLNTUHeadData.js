@@ -6,7 +6,7 @@ import Button from "../common/Button";
 const FLNTUHeadData = (props) => {
     const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measMode, burstTime, burstCount, intervalData, wiperInterval, sampleCnt, startTime, endTime, chla, chlb, coefDate, ch1, ch2, ch3, ch4, buzzerEn, buzzerInterval, comment, sensorType2, buzzerNumber} = props.header;
 
-    const {buttonDisabled, buttonId, onClick, chartName} = props.button;
+    const {buttonDisabled, buttonId, onClick} = props.button;
 
     return (
         <Container id={props.id}>
@@ -39,17 +39,11 @@ const FLNTUHeadData = (props) => {
                 <p>Sensor Type 2: {sensorType2}</p>
                 <p>Buzzer Number: {buzzerNumber}</p>
             </BorderCard>
-            {
-                document.getElementById({chartName})
-                ?
-                null
-                :
-                <Button
-                    id={buttonId}
-                    onClick={onClick}
-                    disabled={buttonDisabled}
-                >Show Data</Button>
-            }
+            <Button
+                id={buttonId}
+                onClick={onClick}
+                disabled={buttonDisabled}
+            >Show Data</Button>
         </Container>
     );
 }

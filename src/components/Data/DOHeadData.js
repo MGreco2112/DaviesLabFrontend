@@ -6,7 +6,7 @@ import Button from "../common/Button";
 const DOHeadData = (props) => {
     const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measModel, burstTime, burstCount, intervalData, sampleCount, startTime, endTime, depAdiRho, coefDate, ch1, ch2, ch3, buzzerEN, buzzerInterval, comment, sensorType2, buzzerNumber, depM, setSal, filmNo} = props.header;
 
-    const {buttonDisabled, buttonId, onClick, chartName} = props.button;
+    const {buttonDisabled, buttonId, onClick} = props.button;
 
 
     return (
@@ -40,17 +40,11 @@ const DOHeadData = (props) => {
                 <p>Set Sal: {setSal}</p>
                 <p>Film Number: {filmNo}</p>
             </BorderCard>
-            {
-                document.getElementById({chartName})
-                ?
-                null
-                :
-                <Button
-                    id={buttonId}
-                    onClick={onClick}
-                    disabled={buttonDisabled}
-                >Show Data</Button>
-            }
+            <Button
+                id={buttonId}
+                onClick={onClick}
+                disabled={buttonDisabled}
+            >Show Data</Button>
         </Container>
     );
 }

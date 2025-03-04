@@ -6,7 +6,7 @@ import Button from "../common/Button";
 const CTDHeadData = (props) => {
     const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measMode, burstTime, burstCnt, intervalData, sampleCnt, startTime, endTime, depAdiRho, eca, ecb, ecdeg, eccoef, coefDate, ch1, ch2, ch3, ch4, buzzerEN, buzzerInterval, comment, sensorType2, buzzerNumber, depM, condDepB} = props.header;
 
-    const {buttonDisabled, buttonId, onClick, chartName} = props.button;
+    const {buttonDisabled, buttonId, onClick} = props.button;
     
 
     return (
@@ -44,17 +44,11 @@ const CTDHeadData = (props) => {
                 <p>DepM: {depM}</p>
                 <p>CondDepB: {condDepB}</p>
             </BorderCard>
-            {
-                document.getElementById({chartName})
-                ?
-                null
-                :
-                <Button
-                    id={buttonId}
-                    onClick={onClick}
-                    disabled={buttonDisabled}
-                >Show Data</Button>
-            }
+            <Button
+                id={buttonId}
+                onClick={onClick}
+                disabled={buttonDisabled}
+            >Show Data</Button>
         </Container>
     );
 }
