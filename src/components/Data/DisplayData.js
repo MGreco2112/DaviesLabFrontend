@@ -50,9 +50,11 @@ const DisplayData = () => {
         let headInfo = <h1>Unable To Load Header</h1>
 
         const buttonProps = {
+            enabled: true,
             buttonDisabled: chartExists,
             buttonId: "DataButton",
-            onClick: createTable
+            onClick: createTable,
+            buttonText: "Show Data"
         }
 
         if (params.headType === "ctd") {
