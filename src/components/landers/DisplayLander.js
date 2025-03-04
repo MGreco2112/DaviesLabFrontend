@@ -21,8 +21,8 @@ const DisplayLander = () => {
             try {
                 const res = await axios.get(`${apiHostURL}/api/landers/${lander.asdblanderID}`);
 
-                setLoading(false);
                 setLander(res.data);
+                setLoading(false);
                 console.table(res.data);
             } catch (err) {
                 console.error(err.message ? err.message : err.response);
@@ -45,6 +45,49 @@ const DisplayLander = () => {
         navigate(`/landers/data/flntu/${lander.flntuheads[0].headID}`);
     }
 
+    const formatPage = () => {
+        return (
+            <Container className="LandersContainer">
+                <p>Lander ID: {lander.asdblanderID}</p>
+                <p>CTD Header ID: {lander.ctdheads[0].headID}</p>
+                <p>DO Header ID: {lander.doheads[0].headID}</p>
+                <p>FLNTU Header ID: {lander.flntuheads[0].headID}</p>
+                <div id="ButtonDiv">
+                    {
+                        lander.ctdheads.length !== 0
+                        ?
+                        <Button 
+                            id="LanderButton"
+                            onClick={ctdNav}
+                        >CTD Data</Button>
+                        :
+                        null
+                    }
+                    {
+                        lander.ctdheads.length !== 0
+                        ?
+                        <Button 
+                            id="LanderButton"
+                            onClick={doNav}
+                        >DO Data</Button>
+                        :
+                        null
+                    }
+                    {
+                        lander.ctdheads.length !== 0
+                        ?
+                        <Button 
+                            id="LanderButton"
+                            onClick={flntuNav}
+                        >FLNTU Data</Button>
+                        :
+                        null
+                    }
+                </div>
+            </Container>
+        );
+    }
+
 
 
 
@@ -54,44 +97,7 @@ const DisplayLander = () => {
                 loading ?
                     <p>FETCHING LANDER...</p>
                     :
-                    <Container className="LandersContainer">
-                        <p>Lander ID: {lander.asdblanderID}</p>
-                        <p>CTD Header ID: {lander.ctdheads[0].headID}</p>
-                        <p>DO Header ID: {lander.doheads[0].headID}</p>
-                        <p>FLNTU Header ID: {lander.flntuheads[0].headID}</p>
-                        <div id="ButtonDiv">
-                            {
-                                lander.ctdheads.length !== 0
-                                ?
-                                <Button 
-                                    id="LanderButton"
-                                    onClick={ctdNav}
-                                >CTD Data</Button>
-                                :
-                                null
-                            }
-                                                        {
-                                lander.ctdheads.length !== 0
-                                ?
-                                <Button 
-                                    id="LanderButton"
-                                    onClick={doNav}
-                                >DO Data</Button>
-                                :
-                                null
-                            }
-                                                        {
-                                lander.ctdheads.length !== 0
-                                ?
-                                <Button 
-                                    id="LanderButton"
-                                    onClick={flntuNav}
-                                >FLNTU Data</Button>
-                                :
-                                null
-                            }
-                        </div>
-                    </Container>
+                    formatPage()
             }
         </Container>
     );

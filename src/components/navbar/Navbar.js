@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import NavButton from "./NavButton";
 
-const Navbar = (props) => {
+const Navbar = () => {
 
     return (
         <Fragment>
