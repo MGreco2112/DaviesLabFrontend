@@ -77,26 +77,42 @@ const DisplayData = () => {
     const createTable = () => {
         //TODO: Create Menu System to allow elements to be added/removed from Chart dynamically via User Input
         //TODO: Create Menu to allow User to determine type of chart created
+
+        //place main page Container into variable to append elements to it
         const container = document.getElementById("PageContainer");
+        //create Canvas element to hold new Chart once instantiated
         const canvas = document.createElement("canvas");
 
         let chartData = {
+            //type of chart
+                //options: bar, bubble, doughnut, pie, line (current), polarArea, radar, scatter
             type: 'line',
+            //data obj, contains properties for filling chart
             data: {
+                //labels the bottom of chart
                 labels: data.map(row => row.date),
+                //array of objects for populating the chart
                 datasets:  [
                     {
+                        //names the data
                         label: "Temp Degrees (C)",
+                        //pulls the data into chart
                         data: data.map(row => row.tempDegC)
                     }
                 ]
             }
         }
 
+        //instantiates new Chart object
+            //arg1: element into which Chart is placed
+            //arg2: Data Object for Chart Definition
         new Chart(canvas, chartData);
 
+        //set ID of canvas element for CSS purposes
         canvas.id="SensorChart";
+        //flip boolean flag, used to disable button that renders chart
         setChartExists(true);
+        //add chart canvas to element on page
         container.appendChild(canvas);
     }
     
