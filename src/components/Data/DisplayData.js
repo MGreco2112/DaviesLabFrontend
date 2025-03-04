@@ -82,9 +82,12 @@ const DisplayData = () => {
             //once selected, create new Object with props:
                 //label: ${dropdown value},
                 //data: data.map(row => row.${dropdown value})
-            //push new Object into datasets[] of chartData Object
-        
-        //TODO: Create Menu to allow User to determine type of chart created
+                //push new Object into datasets[] of chartData Object
+            //once at least one element has been added to array, render button on page (chartData.data.datasets.length > 0)
+            //STRETCH GOALS:
+                //as each key is added to datasets array, remove that option from the dropdown so no duplicates are allowed
+                //allow user to assign desired colors to chart
+                //allow user to determine type of chart created
 
         //place main page Container into variable to append elements to it
         const container = document.getElementById("PageContainer");
