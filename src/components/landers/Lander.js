@@ -10,7 +10,7 @@ const Lander = (props) => {
     }
 
     return (
-        <BorderCard onClick={onSelect}>
+        <BorderCard className={props.className} onClick={onSelect}>
             <h2>ID: {asdblanderID}</h2>
             <div style={{flexDirection: "column"}}>
                 <p>Platform ID: {landerPlatform}</p>

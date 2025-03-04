@@ -4,9 +4,7 @@ import Navbar from "../navbar/Navbar";
 import Home from "../Home/Home";
 import Landers from "../landers/Landers";
 import DisplayLander from "../landers/DisplayLander";
-import DisplayCTDHead from "../headers/DisplayCTDHead";
-import DisplayDOHead from "../headers/DisplayDOHead";
-import DisplayFLNTUHead from "../headers/DisplayFLNTUHead";
+import DisplayData from "../Data/DisplayData";
 // import new routes here
 
 const AppRouter = () => {
@@ -17,9 +15,7 @@ const AppRouter = () => {
             <Route path="/" element={<Home/>}/>
             <Route path="/landers" element={<Landers/>}/>
             <Route path="/landers/:id" element={<DisplayLander/>}/>
-            <Route path="/ctdhead/:id" element={<DisplayCTDHead/>}/>
-            <Route path="/dohead/:id" element={<DisplayDOHead/>}/>
-            <Route path="/flntuhead/:id" element={<DisplayFLNTUHead/>}/>
+            <Route path="/landers/data/:headType/:headId" element={<DisplayData/>}/>
         </Routes>
     </div>
     )

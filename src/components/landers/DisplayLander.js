@@ -34,15 +34,15 @@ const DisplayLander = () => {
     }, [lander.asdblanderID]);
 
     const ctdNav = () => {
-        navigate(`/ctdhead/${lander.ctdheads[0].headID}`);
+        navigate(`/landers/data/ctd/${lander.ctdheads[0].headID}`);
     }
 
     const doNav = () => {
-        navigate(`/dohead/${lander.doheads[0].headID}`);
+        navigate(`/landers/data/do/${lander.doheads[0].headID}`);
     }
 
     const flntuNav = () => {
-        navigate(`/flntuhead/${lander.flntuheads[0].headID}`);
+        navigate(`/landers/data/flntu/${lander.flntuheads[0].headID}`);
     }
 
 
@@ -66,7 +66,7 @@ const DisplayLander = () => {
                                 <Button 
                                     id="LanderButton"
                                     onClick={ctdNav}
-                                >CTD Info</Button>
+                                >CTD Data</Button>
                                 :
                                 null
                             }
@@ -76,7 +76,7 @@ const DisplayLander = () => {
                                 <Button 
                                     id="LanderButton"
                                     onClick={doNav}
-                                >DO Info</Button>
+                                >DO Data</Button>
                                 :
                                 null
                             }
@@ -86,7 +86,7 @@ const DisplayLander = () => {
                                 <Button 
                                     id="LanderButton"
                                     onClick={flntuNav}
-                                >FLNTU Info</Button>
+                                >FLNTU Data</Button>
                                 :
                                 null
                             }

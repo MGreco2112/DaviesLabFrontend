@@ -33,7 +33,7 @@ const Landers = () => {
     //Create Lander elements via iteration, return created elements
     const displayLanders = () => {
         return landers.map(land => {
-            return <Lander lander={land} key={land.asdblanderID} onSelect={onSelect}/>
+            return <Lander className="LanderCard" lander={land} key={land.asdblanderID} onSelect={onSelect}/>
         });
     }
 

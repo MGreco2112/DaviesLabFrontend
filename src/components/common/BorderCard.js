@@ -4,6 +4,7 @@ const BorderCard = (props) => {
 
   return (
     <div
+      className={props.className}
       style={{...styles.card, ...props.style}}
       onClick={props.onClick}
     >
