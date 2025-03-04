@@ -54,7 +54,7 @@ const DisplayData = () => {
             buttonDisabled: chartExists,
             buttonId: "DataButton",
             onClick: createTable,
-            buttonText: "Show Data"
+            buttonText: "Show Chart"
         }
 
         if (params.headType === "ctd") {
