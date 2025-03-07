@@ -6,7 +6,7 @@ const Form = props => {
     props.onSubmit(e);
   }
   return (
-    <form style={{ ...styles.form, ...props.style }} onSubmit={handleSubmit}>
+    <form id={props.id} style={{ ...styles.form, ...props.style }} onSubmit={handleSubmit}>
       {props.children}
     </form>
   )

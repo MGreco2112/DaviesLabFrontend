@@ -2,11 +2,12 @@ import React from "react";
 import Container from "../common/Container";
 import BorderCard from "../common/BorderCard";
 import Button from "../common/Button";
+import CustomizeFLNTUChartForm from "./CustomizeFLNTUChartForm";
 
 const FLNTUHeadData = (props) => {
     const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measMode, burstTime, burstCount, intervalData, wiperInterval, sampleCnt, startTime, endTime, chla, chlb, coefDate, ch1, ch2, ch3, ch4, buzzerEn, buzzerInterval, comment, sensorType2, buzzerNumber} = props.header;
 
-    const {enabled, buttonDisabled, buttonId, buttonText, onClick} = props.button;
+    const {enabled, onSubmit, setOuterArr} = props.form;
 
     return (
         <Container id={props.id}>
@@ -42,11 +43,7 @@ const FLNTUHeadData = (props) => {
             {
                 enabled
                 ?
-                <Button
-                    id={buttonId}
-                    onClick={onClick}
-                    disabled={buttonDisabled}
-                >{buttonText}</Button>
+                <CustomizeFLNTUChartForm onSubmit={onSubmit} setOuterArr={setOuterArr}/>
                 :
                 false
             }

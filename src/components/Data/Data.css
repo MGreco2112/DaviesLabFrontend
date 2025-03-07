@@ -1,4 +1,4 @@
-#DataButton {
+#DataButton, #SubmitButton {
     align-self: center;
     background-color: #3343f2;
     margin-left: 5px;
@@ -17,4 +17,18 @@
 #SensorChart {
     width: 75%!important;
     height: 75%!important;
+}
+
+#FormContainer {
+    min-height: fit-content!important;
+}
+
+#ButtonContainer {
+    min-height: fit-content!important;
+    padding-top: 1em!important;
+}
+
+.dataCheckbox {
+    height: 3em!important;
+    width: 3em!important;
 }

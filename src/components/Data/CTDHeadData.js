@@ -1,12 +1,12 @@
 import React from "react";
 import Container from "../common/Container";
 import BorderCard from "../common/BorderCard";
-import Button from "../common/Button";
+import CustomizeCTDChartForm from "./CustomizeCTDChartForm";
 
 const CTDHeadData = (props) => {
     const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measMode, burstTime, burstCnt, intervalData, sampleCnt, startTime, endTime, depAdiRho, eca, ecb, ecdeg, eccoef, coefDate, ch1, ch2, ch3, ch4, buzzerEN, buzzerInterval, comment, sensorType2, buzzerNumber, depM, condDepB} = props.header;
 
-    const {enabled, buttonDisabled, buttonId, buttonText, onClick} = props.button;
+    const {enabled, onSubmit, setOuterArr} = props.form;
     
 
     return (
@@ -47,11 +47,7 @@ const CTDHeadData = (props) => {
             {
                 enabled
                 ?
-                <Button
-                    id={buttonId}
-                    onClick={onClick}
-                    disabled={buttonDisabled}
-                >{buttonText}</Button>
+                <CustomizeCTDChartForm onSubmit={onSubmit} setOuterArr={setOuterArr}/>
                 :
                 null
             }

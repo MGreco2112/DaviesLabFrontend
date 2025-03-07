@@ -15,6 +15,7 @@ const DisplayData = () => {
 
     const [head, setHead] = useState({});
     const [data, setData] = useState([]);
+    const [dataNames, setDataNames] = useState([]);
     const [chartExists, setChartExists] = useState(false);
     const [loading, setLoading] = useState(true);
 
@@ -35,6 +36,7 @@ const DisplayData = () => {
                 const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/data/headId/${params.headId}`);
 
                 setData(res.data);
+                console.table(res.data);
                 setLoading(false);
             } catch (err) {
                 console.error(err.message ? err.message : err.response);
@@ -49,20 +51,18 @@ const DisplayData = () => {
     const formatPage = () => {
         let headInfo = <h1>Unable To Load Header</h1>
 
-        const buttonProps = {
+        const formProps = {
             enabled: true,
-            buttonDisabled: chartExists,
-            buttonId: "DataButton",
-            onClick: createTable,
-            buttonText: "Show Chart"
+            onSubmit: onFormSubmit,
+            setOuterArr: setDataNames
         }
 
         if (params.headType === "ctd") {
-            headInfo = <CTDHeadData header={head} id="PageContainer" button={buttonProps}/>
+            headInfo = <CTDHeadData header={head} id="PageContainer" form={formProps}/>
         } else if (params.headType === "do") {
-            headInfo = <DOHeadData header={head} id="PageContainer" button={buttonProps}/>
+            headInfo = <DOHeadData header={head} id="PageContainer" form={formProps}/>
         } else if (params.headType === "flntu") {
-            headInfo = <FLNTUHeadData header={head} id="PageContainer" button={buttonProps}/>
+            headInfo = <FLNTUHeadData header={head} id="PageContainer" form={formProps}/>
         }
 
 
@@ -117,6 +117,39 @@ const DisplayData = () => {
         //instantiates new Chart object
             //arg1: element into which Chart is placed
             //arg2: Data Object for Chart Definition
+        new Chart(canvas, chartData);
+
+        //set ID of canvas element for CSS purposes
+        canvas.id="SensorChart";
+        //flip boolean flag, used to disable button that renders chart
+        setChartExists(true);
+        //add chart canvas to element on page
+        container.appendChild(canvas);
+    }
+
+    const onFormSubmit = () => {
+        //place main page Container into variable to append elements to it
+        const container = document.getElementById("PageContainer");
+        //create Canvas element to hold new Chart once instantiated
+        const canvas = document.createElement("canvas");
+        
+        let chartData = {
+            type: 'line',
+            data: {
+                labels: data.map(row => row.date),
+                datasets: []
+            }
+        }
+
+        for (let i = 0; i < dataNames.length; i++) {
+            const tempDataSetObj = {
+                label: dataNames[i].label,
+                data: data.map(row => row[dataNames[i].data])
+            }
+
+            chartData.data.datasets.push(tempDataSetObj);
+        }
+
         new Chart(canvas, chartData);
 
         //set ID of canvas element for CSS purposes

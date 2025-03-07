@@ -3,12 +3,13 @@ import Container from "./Container";
 
 const Checkbox = (props) => {
     return(
-        <Container>
+        <Container style={{minHeight: "fitContent"}}>
             <input
-                style={{...style.input , ...props.style}}
+                style={{...props.style}}
                 type="checkbox"
                 id={props.id}
                 name={props.name}
+                className={props.className}
                 value={props.value}
                 onChange={props.onChange}
                 defaultChecked={props.checked}
@@ -20,23 +21,6 @@ const Checkbox = (props) => {
             </label>
         </Container>
     )
-}
-
-const style = {
-    input: {
-        color: "#000",
-        backgroundColor: "#eee",
-        paddingRight: 5,
-        paddingLeft: 10,
-        fontSize: 18,
-        border: "1px solid #d9d9d9",
-        width: "100%",
-        height: "auto",
-        minWidth: 250,
-        margin: 0,
-        borderRadius: 5,
-        flex: 1,
-    }
 }
 
 export default Checkbox;
