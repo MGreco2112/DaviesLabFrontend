@@ -45,7 +45,7 @@ const DisplayData = () => {
         setLoading(true);
         _fetchHead();
         _fetchData();
-    }, [head.headId]);
+    }, [head.headId, params.headId, params.headType]);
 
     const formatPage = () => {
         let headInfo = <h1>Unable To Load Header</h1>
