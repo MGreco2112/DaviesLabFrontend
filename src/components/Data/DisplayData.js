@@ -15,7 +15,6 @@ const DisplayData = () => {
 
     const [head, setHead] = useState({});
     const [data, setData] = useState([]);
-    const [dataNames, setDataNames] = useState([]);
     const [chartExists, setChartExists] = useState(false);
     const [loading, setLoading] = useState(true);
 
@@ -53,8 +52,7 @@ const DisplayData = () => {
 
         const formProps = {
             enabled: !chartExists,
-            onSubmit: createChart,
-            setOuterArr: setDataNames
+            onSubmit: onFormSubmit
         }
 
         if (params.headType === "ctd") {
@@ -74,7 +72,37 @@ const DisplayData = () => {
 
     }
 
-    const createChart = () => {
+    const buildDataNames = () => {
+        const dataButtons = document.getElementsByClassName("dataCheckbox");
+        const dataValues = [];
+
+        for (let i = 0; i < dataButtons.length; i++) {
+            if (dataButtons[i].checked) {
+                const tempObj = {
+                    label: dataButtons[i].name,
+                    data: dataButtons[i].value
+                }
+
+                dataValues.push(tempObj);
+            }
+        }
+
+        console.table(dataValues);
+
+        return dataValues;
+    }
+
+    const onFormSubmit = () => {
+        const dataValues = buildDataNames();
+
+        if (dataValues.length > 0) {
+            createChart(dataValues);
+        } else {
+           alert("ERROR: No Selection Made");
+        }
+    }
+
+    const createChart = (dataValues) => {
         //place main page Container into variable to append elements to it
         const container = document.getElementById("PageContainer");
         //create Canvas element to hold new Chart once instantiated
@@ -94,14 +122,14 @@ const DisplayData = () => {
             }
         }
 
-        //iterate through dataNames arr, holding objects sent back from the Form
-        for (let i = 0; i < dataNames.length; i++) {
+        //iterate through dataValues arr, holding objects sent back from the Form
+        for (let i = 0; i < dataValues.length; i++) {
             //create temporary Object to format data for datasets arr
             const tempDataSetObj = {
                 //label for dataset name
-                label: dataNames[i].label,
+                label: dataValues[i].label,
                 //map data in data object by the value of the checkbox selected by the User in the form
-                data: data.map(row => row[dataNames[i].data])
+                data: data.map(row => row[dataValues[i].data])
             }
 
             //push each temp obj into the datasets array of the data object inside the chartData object

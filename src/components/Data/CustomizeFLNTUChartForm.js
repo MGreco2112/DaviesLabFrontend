@@ -6,27 +6,7 @@ import Button from "../common/Button";
 import InlineInputContainer from "../common/InlineInputContainer";
 
 const CustomizeFLNTUChartForm = (props) => {
-    const {onSubmit, setOuterArr} = props;
-
-    const onClick = () => {
-        const dataButtons = document.getElementsByClassName("dataCheckbox");
-        const dataValues = [];
-
-        for (let i = 0; i < dataButtons.length; i++) {
-            if (dataButtons[i].checked) {
-                const tempObj = {
-                    label: dataButtons[i].name,
-                    data: dataButtons[i].value
-                }
-
-                dataValues.push(tempObj);
-            }
-        }
-
-        console.table(dataValues);
-
-        setOuterArr(dataValues);
-    }
+    const {onSubmit} = props;
 
     return (
         <Container id="FormContainer">
@@ -39,7 +19,6 @@ const CustomizeFLNTUChartForm = (props) => {
                         label = "Temp Degrees (C)"
                         id="tempDegC"
                         value="tempDegC"
-                        onChange={onClick}
                     />
                     <Checkbox
                         className="dataCheckbox"
@@ -47,7 +26,6 @@ const CustomizeFLNTUChartForm = (props) => {
                         label = "Chl Flu PPB"
                         id="chlFluPPB"
                         value="chlFluPPB"
-                        onChange={onClick}
                     />
                     <Checkbox
                         className="dataCheckbox"
@@ -55,7 +33,6 @@ const CustomizeFLNTUChartForm = (props) => {
                         label = "Chl AU gL"
                         id="chlAUgL"
                         value="chlAUgL"
-                        onChange={onClick}
                     />
                     <Checkbox
                         className="dataCheckbox"
@@ -63,7 +40,6 @@ const CustomizeFLNTUChartForm = (props) => {
                         label = "Turb MFTU"
                         id="turbMFTU"
                         value="turbMFTU"
-                        onChange={onClick}
                     />
                     <Checkbox
                         className="dataCheckbox"
@@ -71,7 +47,6 @@ const CustomizeFLNTUChartForm = (props) => {
                         label = "Batt V"
                         id="battV"
                         value="battV"
-                        onChange={onClick}
                     />
                 </InlineInputContainer>
                 <Container id="ButtonContainer">

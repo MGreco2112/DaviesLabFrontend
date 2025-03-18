@@ -6,27 +6,7 @@ import Checkbox from "../common/Checkbox";
 import Button from "../common/Button";
 
 const CustomizeDOChartForm = (props) => {
-    const {onSubmit, setOuterArr} = props;
-
-    const onClick = () => {
-        const dataButtons = document.getElementsByClassName("dataCheckbox");
-        const dataValues = [];
-
-        for (let i = 0; i < dataButtons.length; i++) {
-            if (dataButtons[i].checked) {
-                const tempObj = {
-                    label: dataButtons[i].name,
-                    data: dataButtons[i].value
-                }
-                dataValues.push(tempObj);
-            }
-
-        }
-
-        console.table(dataValues);
-
-        setOuterArr(dataValues);
-    }
+    const {onSubmit} = props;
 
     return (
         <Container id="FormContainer">
@@ -39,7 +19,6 @@ const CustomizeDOChartForm = (props) => {
                         label="Temp Degrees (C)"
                         id="tempDegC"
                         value="tempDegC"
-                        onChange={onClick}
                     />
                     <Checkbox
                         className="dataCheckbox"
@@ -47,7 +26,6 @@ const CustomizeDOChartForm = (props) => {
                         label="DO"
                         id="do"
                         value="do"
-                        onChange={onClick}
                     />
                     <Checkbox
                         className="dataCheckbox"
@@ -55,7 +33,6 @@ const CustomizeDOChartForm = (props) => {
                         label="Weiss Do Mg L"
                         id="weissDoMgL"
                         value="weissDoMgL"
-                        onChange={onClick}
                     />
                     <Checkbox
                         className="dataCheckbox"
@@ -63,7 +40,6 @@ const CustomizeDOChartForm = (props) => {
                         label="Batt V"
                         id="battV"
                         value="battV"
-                        onChange={onClick}
                     />
                     <Checkbox
                         className="dataCheckbox"
@@ -71,7 +47,6 @@ const CustomizeDOChartForm = (props) => {
                         label="GG DO Mg L"
                         id="ggdomgL"
                         value="ggdomgL"
-                        onChange={onClick}
                     />
                     <Checkbox
                         className="dataCheckbox"
@@ -79,7 +54,6 @@ const CustomizeDOChartForm = (props) => {
                         label="BK DO Mg L"
                         id="bkdomgL"
                         value="bkdomgL"
-                        onChange={onClick}
                     />
                 </InlineInputContainer>
                 <Container id="ButtonContainer">

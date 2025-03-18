@@ -6,7 +6,7 @@ import CustomizeCTDChartForm from "./CustomizeCTDChartForm";
 const CTDHeadData = (props) => {
     const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measMode, burstTime, burstCnt, intervalData, sampleCnt, startTime, endTime, depAdiRho, eca, ecb, ecdeg, eccoef, coefDate, ch1, ch2, ch3, ch4, buzzerEN, buzzerInterval, comment, sensorType2, buzzerNumber, depM, condDepB} = props.header;
 
-    const {enabled, onSubmit, setOuterArr} = props.form;
+    const {enabled, onSubmit} = props.form;
     
 
     return (
@@ -47,7 +47,7 @@ const CTDHeadData = (props) => {
             {
                 enabled
                 ?
-                <CustomizeCTDChartForm onSubmit={onSubmit} setOuterArr={setOuterArr}/>
+                <CustomizeCTDChartForm onSubmit={onSubmit}/>
                 :
                 null
             }

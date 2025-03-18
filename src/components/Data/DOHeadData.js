@@ -1,13 +1,12 @@
 import React from "react";
 import Container from "../common/Container";
 import BorderCard from "../common/BorderCard";
-import Button from "../common/Button";
 import CustomizeDOChartForm from "./CustomizeDOChartForm";
 
 const DOHeadData = (props) => {
     const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measModel, burstTime, burstCount, intervalData, sampleCount, startTime, endTime, depAdiRho, coefDate, ch1, ch2, ch3, buzzerEN, buzzerInterval, comment, sensorType2, buzzerNumber, depM, setSal, filmNo} = props.header;
 
-    const {enabled, onSubmit, setOuterArr} = props.form;
+    const {enabled, onSubmit} = props.form;
 
 
     return (
@@ -44,7 +43,7 @@ const DOHeadData = (props) => {
             {
                 enabled
                 ?
-                <CustomizeDOChartForm onSubmit={onSubmit} setOuterArr={setOuterArr}/>
+                <CustomizeDOChartForm onSubmit={onSubmit}/>
                 :
                 null
             }
