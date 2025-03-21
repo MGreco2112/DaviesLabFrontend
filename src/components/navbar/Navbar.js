@@ -33,6 +33,7 @@ const Navbar = () => {
             }}>
                 <NavButton to="/" label = "Home"/>
                 <NavButton to="/landers" label = "Landers"/>
+                <NavButton to="/uploads" label="Upload Files"/>
             </div>
         </div>
         <div style={{height: "75px"}}/>

@@ -5,6 +5,7 @@ import Home from "../Home/Home";
 import Landers from "../landers/Landers";
 import DisplayLander from "../landers/DisplayLander";
 import DisplayData from "../Data/DisplayData";
+import Uploads from "../uploads/Uploads";
 // import new routes here
 
 const AppRouter = () => {
@@ -16,6 +17,7 @@ const AppRouter = () => {
             <Route path="/landers" element={<Landers/>}/>
             <Route path="/landers/:id" element={<DisplayLander/>}/>
             <Route path="/landers/data/:headType/:headId" element={<DisplayData/>}/>
+            <Route path="/uploads" element={<Uploads/>}/>
         </Routes>
     </div>
     )
