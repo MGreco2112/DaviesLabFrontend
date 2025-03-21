@@ -25,15 +25,19 @@ const Uploads = () => {
                 try {
                     const formData = new FormData();
 
-                    const paramName = routeValue === "test" ? "processedFile" : "processedHead";
+                    let paramName = "";
+
+                    if (routeValue === "header/test") {
+                        paramName = "processedHead";
+                    } else {
+                        paramName = "processedFile";
+                    }
             
                     formData.append(
                         paramName,
                         state.selectedFile,
                         state.selectedFile.name
                     );
-            
-                    console.log(state.selectedFile);
                     
                     const res = await axios.post(`${apiHostURL}/api/processed/${sensorValue}/upload_csv/${routeValue}`, formData);
 
@@ -65,15 +69,17 @@ const Uploads = () => {
             );
         } else {
             return (
-                <div>
-                    <h4>Choose before Pressing the Upload button</h4>
-                </div>
+                <Container className="uploadsContainer">
+                    <h4>Upload CSV Data from Lander Sensors</h4>
+                    <h4>Currently accepts Header Data or Sensor Data without Header Data</h4>
+                    <p>Will only return data to the Console as of now, DB Saving will be implemented at a later date</p>
+                </Container>
             );
         }
     }
 
     return (
-        <Container id="uploadsContainer">
+        <Container className="uploadsContainer">
             <h1>CSV Upload Test</h1>
             <div>
                 <label htmlFor="sensor">Select a Sensor:</label>
@@ -85,11 +91,12 @@ const Uploads = () => {
                 </select>
             </div>
             <div>
-                <label htmlFor="route">Select File Type</label>
+                <label htmlFor="route">Select File Type:</label>
                 <select name="route" id="route">
                     <option value=""></option>
                     <option value="header/test">Head</option>
                     <option value="test">Data</option>
+                    <option value="combined/test">Combined</option>
                 </select>
             </div>
             <div>
