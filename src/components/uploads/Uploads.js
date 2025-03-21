@@ -8,8 +8,6 @@ const Uploads = () => {
     const [state, setState] = useState({
         selectedFile: null
     });
-    const [sensor, setSensor] = useState("");
-    const [route, setRoute] = useState("");
 
     const onFileChange = (event) => {
         setState({
@@ -17,23 +15,31 @@ const Uploads = () => {
         });
     }
 
-    const onFileUpload = () => {
+    const onFileUpload = async () => {
+        const sensorValue = document.getElementById("sensor").value;
+        const routeValue = document.getElementById("route").value;
+        
         if (state.selectedFile) {
 
-            if (sensor !== "" && route !== "") {
+            if (sensorValue !== "" && routeValue !== "") {
                 try {
                     const formData = new FormData();
+
+                    const paramName = routeValue === "test" ? "processedFile" : "processedHead";
             
                     formData.append(
-                        "testFile",
+                        paramName,
                         state.selectedFile,
                         state.selectedFile.name
                     );
             
                     console.log(state.selectedFile);
                     
-                    axios.post(`${apiHostURL}/api/processed/${sensor}/upload_csv/${route}`, formData);
+                    const res = await axios.post(`${apiHostURL}/api/processed/${sensorValue}/upload_csv/${routeValue}`, formData);
 
+                    console.table(res.data);
+
+                    alert("Success!");
                 } catch (err) {
                     console.error(err.message ? err.message : err.response);
                 }
@@ -70,9 +76,25 @@ const Uploads = () => {
         <Container id="uploadsContainer">
             <h1>CSV Upload Test</h1>
             <div>
+                <label htmlFor="sensor">Select a Sensor:</label>
+                <select name="sensor" id="sensor">
+                    <option value=""></option>
+                    <option value="ctd">CTD</option>
+                    <option value="do">DO</option>
+                    <option value="flntu">FLNTU</option>
+                </select>
+            </div>
+            <div>
+                <label htmlFor="route">Select File Type</label>
+                <select name="route" id="route">
+                    <option value=""></option>
+                    <option value="header/test">Head</option>
+                    <option value="test">Data</option>
+                </select>
+            </div>
+            <div>
                 <input type="file" onChange={onFileChange}/>
                 <button onClick={onFileUpload}>Upload!</button>
-                {/* TODO: Drop down menus to select Sensor and Data/Header route for testing */}
             </div>
             {fileData()}
         </Container>
