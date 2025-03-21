@@ -71,7 +71,6 @@ const Uploads = () => {
             return (
                 <Container className="uploadsContainer">
                     <h4>Upload CSV Data from Lander Sensors</h4>
-                    <h4>Currently accepts Header Data or Sensor Data without Header Data</h4>
                     <p>Will only return data to the Console as of now, DB Saving will be implemented at a later date</p>
                 </Container>
             );
