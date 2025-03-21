@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Container from "../common/Container";
 import {apiHostURL} from "../../config";
+import "./Uploads.css";
 import axios from "axios";
 
 const Uploads = () => {
@@ -32,7 +33,7 @@ const Uploads = () => {
                     console.log(state.selectedFile);
                     
                     axios.post(`${apiHostURL}/api/processed/${sensor}/upload_csv/${route}`, formData);
-                    
+
                 } catch (err) {
                     console.error(err.message ? err.message : err.response);
                 }
@@ -66,7 +67,7 @@ const Uploads = () => {
     }
 
     return (
-        <Container>
+        <Container id="uploadsContainer">
             <h1>CSV Upload Test</h1>
             <div>
                 <input type="file" onChange={onFileChange}/>
