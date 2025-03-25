@@ -37,7 +37,7 @@ const Uploads = () => {
 
     const onFileUpload = async () => {
         const sensorValue = document.getElementById("sensor").value;
-        const routeValue = document.getElementById("route").value;
+        let routeValue = document.getElementById("route").value;
         const landerValue = document.getElementById("lander").value;
         
         if (state.selectedFile) {
@@ -52,6 +52,10 @@ const Uploads = () => {
                         paramName = "processedHead";
                     } else {
                         paramName = "processedFile";
+                    }
+
+                    if (routeValue === "dynamic") {
+                        routeValue = `combined/${landerValue}`;
                     }
             
                     formData.append(
@@ -126,7 +130,7 @@ const Uploads = () => {
                     <option value=""></option>
                     <option value="header/test">Head</option>
                     <option value="test">Data</option>
-                    <option value="combined/test">Combined</option>
+                    <option value="dynamic">Combined</option>
                 </select>
             </div>
             <div>
