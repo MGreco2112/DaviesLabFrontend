@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Container from "../common/Container";
 import {apiHostURL} from "../../config";
 import "./Uploads.css";
@@ -9,6 +9,26 @@ const Uploads = () => {
         selectedFile: null
     });
 
+    const [landers, setLanders] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const _getAllLanders = async () => {
+            try {
+                const res = await axios.get(`${apiHostURL}/api/landers/all`);
+
+                console.table(res.data);
+                setLanders(res.data);
+                setLoading(false);
+            } catch (err) {
+                console.error(err.message ? err.message : err.response);
+            }
+        }
+
+        setLoading(true);
+        _getAllLanders();
+    }, []);
+
     const onFileChange = (event) => {
         setState({
             selectedFile: event.target.files[0]
@@ -18,10 +38,11 @@ const Uploads = () => {
     const onFileUpload = async () => {
         const sensorValue = document.getElementById("sensor").value;
         const routeValue = document.getElementById("route").value;
+        const landerValue = document.getElementById("lander").value;
         
         if (state.selectedFile) {
 
-            if (sensorValue !== "" && routeValue !== "") {
+            if (sensorValue !== "" && routeValue !== "" && landerValue !== "") {
                 try {
                     const formData = new FormData();
 
@@ -58,6 +79,7 @@ const Uploads = () => {
     }
 
     const fileData = () => {
+
         if (state.selectedFile) {
             return (
                 <div>
@@ -77,9 +99,18 @@ const Uploads = () => {
         }
     }
 
-    return (
-        <Container className="uploadsContainer">
+    const formatPage = () => {
+
+        return (
+            <Container className="uploadsContainer">
             <h1>CSV Upload Test</h1>
+            <div>
+                <label>Select a Lander:</label>
+                <select name="lander" id="lander">
+                    <option value=""></option>
+                    {landers.map( option => { return <option value={option.asdblanderID} key={option.asdblanderID}>{option.asdblanderID}</option>})}
+                </select>
+            </div>
             <div>
                 <label htmlFor="sensor">Select a Sensor:</label>
                 <select name="sensor" id="sensor">
@@ -103,6 +134,13 @@ const Uploads = () => {
                 <button onClick={onFileUpload}>Upload!</button>
             </div>
             {fileData()}
+        </Container>
+        );
+    }
+
+    return (
+        <Container className="uploadsContainer">
+            {loading ? <h1>loading...</h1> : formatPage()}
         </Container>
     );
 }
