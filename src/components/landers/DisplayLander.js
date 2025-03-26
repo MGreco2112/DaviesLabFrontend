@@ -49,9 +49,27 @@ const DisplayLander = () => {
         return (
             <Container className="LandersContainer">
                 <p>Lander ID: {lander.asdblanderID}</p>
-                <p>CTD Header ID: {lander.ctdheads[0].headID}</p>
-                <p>DO Header ID: {lander.doheads[0].headID}</p>
-                <p>FLNTU Header ID: {lander.flntuheads[0].headID}</p>
+                {
+                    lander.ctdheads.length !== 0
+                    ?
+                    <p>CTD Header ID: {lander.ctdheads[0].headID}</p>
+                    :
+                    null
+                }
+                {
+                    lander.doheads.length !== 0
+                    ?
+                    <p>DO Header ID: {lander.doheads[0].headID}</p>
+                    :
+                    null
+                }
+                {
+                    lander.flntuheads.length !== 0
+                    ?
+                    <p>FLNTU Header ID: {lander.flntuheads[0].headID}</p>
+                    :
+                    null
+                }
                 <div id="ButtonDiv">
                     {
                         lander.ctdheads.length !== 0
@@ -64,7 +82,7 @@ const DisplayLander = () => {
                         null
                     }
                     {
-                        lander.ctdheads.length !== 0
+                        lander.doheads.length !== 0
                         ?
                         <Button 
                             id="LanderButton"
@@ -74,7 +92,7 @@ const DisplayLander = () => {
                         null
                     }
                     {
-                        lander.ctdheads.length !== 0
+                        lander.flntuheads.length !== 0
                         ?
                         <Button 
                             id="LanderButton"
