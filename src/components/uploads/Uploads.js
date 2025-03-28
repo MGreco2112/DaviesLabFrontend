@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Container from "../common/Container";
 import {apiHostURL} from "../../config";
+import Button from "../common/Button";
 import "./Uploads.css";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Uploads = () => {
+    const navigate = useNavigate();
+
     const [state, setState] = useState({
         selectedFile: null
     });
@@ -33,6 +37,10 @@ const Uploads = () => {
         setState({
             selectedFile: event.target.files[0]
         });
+    }
+
+    const onLanderClick = () => {
+        navigate("/uploads/new_lander");
     }
 
     const onFileUpload = async () => {
@@ -97,7 +105,8 @@ const Uploads = () => {
             return (
                 <Container className="uploadsContainer">
                     <h4>Upload CSV Data from Lander Sensors</h4>
-                    <p>Will only return data to the Console as of now, DB Saving will be implemented at a later date</p>
+                    <p>Combined will Post to Server</p>
+                    <p>Other options will only return data to the Console</p>
                 </Container>
             );
         }
@@ -107,7 +116,7 @@ const Uploads = () => {
 
         return (
             <Container className="uploadsContainer">
-            <h1>CSV Upload Test</h1>
+            <h1>CSV Upload</h1>
             <div>
                 <label>Select a Lander:</label>
                 <select name="lander" id="lander">
@@ -115,6 +124,9 @@ const Uploads = () => {
                     {landers.map( option => { return <option value={option.asdblanderID} key={option.asdblanderID}>{option.asdblanderID}</option>})}
                 </select>
             </div>
+            <Button
+                    onClick={onLanderClick}
+                >Add Lander</Button>
             <div>
                 <label htmlFor="sensor">Select a Sensor:</label>
                 <select name="sensor" id="sensor">

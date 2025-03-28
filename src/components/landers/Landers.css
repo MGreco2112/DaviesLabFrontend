@@ -21,8 +21,13 @@
     cursor: pointer;
 }
 
+.inputContainer {
+    width: 0%!important;
+    padding-bottom: 10px!important;
+}
+
 .LandersContainer {
-    min-height: 50vh!important;
+    min-height: 10vh!important;
 }
 
 .LanderCard {
