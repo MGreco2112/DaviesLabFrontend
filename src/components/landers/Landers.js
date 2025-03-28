@@ -15,7 +15,6 @@ const Landers = () => {
     // Loading State for holding page state while API call is made
     const [loading, setLoading] = useState(true);
     const [query, setQuery] = useState("");
-    // Navigate function for new page rendering
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -73,18 +72,19 @@ const Landers = () => {
     }
 
     const onSelectChange = () => {
-        const placeholder = {
-            landerId: "Enter Lander ID",
-            date: "Enter Date YYYY-MM-DD"
-        }
-
         const value = document.getElementById("searchSelect").value;
         const inputElement = document.getElementById("searchInput");
 
-        if (value === "landerId") {
-            inputElement.placeholder = placeholder.landerId;
+        if (value === "landerId" || value === "") {
+            if (value === "") {
+                inputElement.placeholder = "";
+            } else {
+                inputElement.placeholder = "Enter Lander ID";
+            }
+
+            inputElement.type = "text";
         } else if (value === "date") {
-            inputElement.placeholder = placeholder.date;
+            inputElement.type = "date";
         }
     }
 
@@ -103,8 +103,8 @@ const Landers = () => {
                 break;
             }
             default: {
-                alert("Invalid Search Param");
-                return;
+                urlVal = "/api/landers/all";
+                break;
             }
         }
 
