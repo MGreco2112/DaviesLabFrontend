@@ -95,7 +95,7 @@ const Landers = () => {
 
         switch (searchValue) {
             case "landerId": {
-                urlVal = `/api/landers/${query}`;
+                urlVal = `/api/landers/search/id/${query}`;
                 break;
             }
             case "date": {
@@ -111,8 +111,7 @@ const Landers = () => {
         try {
             const res = await axios.get(`${apiHostURL}${urlVal}`);
 
-            alert("Success!");
-            console.table(res.data);
+            setLanders(res.data);
         } catch (err) {
             console.error(err.response ? err.response : err.message);
         }
