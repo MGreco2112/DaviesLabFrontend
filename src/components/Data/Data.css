@@ -33,3 +33,7 @@
     width: 3em!important;
     cursor: pointer!important;
 }
+
+.FormInputContainer {
+    width: 0%!important;
+}

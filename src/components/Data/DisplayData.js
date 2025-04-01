@@ -44,7 +44,8 @@ const DisplayData = () => {
 
         setLoading(true);
         _fetchHead();
-        _fetchData();
+        setLoading(false);
+        // _fetchData();
     }, [head.headId, params.headId, params.headType]);
 
     const formatPage = () => {
@@ -72,6 +73,29 @@ const DisplayData = () => {
 
     }
 
+    const fetchDataRange = () => {
+        const startDate = document.getElementById("startDateInput").value;
+        const endDate = document.getElementById("endDateInput").value;
+        
+        if (startDate !== "" && endDate !== "") {
+            
+            const _getData = async () => {
+                try {
+                    const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/data/headId/${head.headID}/startDate/${startDate}/endDate/${endDate}`);
+                
+                    console.log(res.data);
+                
+                    setData(res.data);
+                } catch (err) {
+                    console.error(err.response ? err.response : err.message);
+                }
+            }
+
+            _getData();
+        }    
+        
+    }
+
     const buildDataNames = () => {
         const dataButtons = document.getElementsByClassName("dataCheckbox");
         const dataValues = [];
@@ -94,9 +118,16 @@ const DisplayData = () => {
 
     const onFormSubmit = () => {
         const dataValues = buildDataNames();
+        fetchDataRange();
+        
 
         if (dataValues.length > 0) {
-            createChart(dataValues);
+            
+            console.log(data);
+            
+            if (data.length > 0) {
+                createChart(dataValues);
+            }
         } else {
            alert("ERROR: No Selection Made");
         }

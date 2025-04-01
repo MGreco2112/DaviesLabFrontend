@@ -1,6 +1,7 @@
 import React from "react";
 import Container from "../common/Container";
 import Form from "../common/Form";
+import Input from "../common/Input";
 import Checkbox from "../common/Checkbox";
 import Button from "../common/Button";
 import InlineInputContainer from "../common/InlineInputContainer";
@@ -11,6 +12,22 @@ const CustomizeFLNTUChartForm = (props) => {
     return (
         <Container id="FormContainer">
             <h1>FLNTU Chart Options</h1>
+            <InlineInputContainer className="FormInputContainer">
+                <Input
+                    className="DateInput"
+                    id="startDateInput"
+                    type="date"
+                    label="Start Date"
+                />
+            </InlineInputContainer>
+            <InlineInputContainer className="FormInputContainer">
+                <Input
+                    className="DateInput"
+                    id="endDateInput"
+                    type="date"
+                    label="End Date"
+                />
+            </InlineInputContainer>
             <Form onSubmit={onSubmit} id="ChartForm">
                 <InlineInputContainer className="FormInputContainer">
                     <Checkbox
