@@ -25,27 +25,14 @@ const DisplayData = () => {
                 const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/headers/sanitized/${params.headId}`);
 
                 setHead(res.data);
+                setLoading(false);
             } catch (err) {
                 console.error(err.response ? err.response : err.message);
             }
         }
 
-        const _fetchData = async () => {
-            try {
-                const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/data/headId/${params.headId}`);
-
-                setData(res.data);
-                console.table(res.data);
-                setLoading(false);
-            } catch (err) {
-                console.error(err.message ? err.message : err.response);
-            }
-        }
-
         setLoading(true);
         _fetchHead();
-        setLoading(false);
-        // _fetchData();
     }, [head.headId, params.headId, params.headType]);
 
     const formatPage = () => {
