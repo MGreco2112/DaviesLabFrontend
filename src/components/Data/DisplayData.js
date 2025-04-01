@@ -60,8 +60,16 @@ const DisplayData = () => {
     }
 
     const fetchDataRange = async () => {
-        const startDate = document.getElementById("startDateInput").value;
-        const endDate = document.getElementById("endDateInput").value;
+        let startDate = document.getElementById("startDateInput").value;
+        let endDate = document.getElementById("endDateInput").value;
+
+        if (startDate === "") {
+            startDate = head.startTime;
+        }
+
+        if (endDate === "") {
+            endDate = head.endTime;
+        }
         
         if (startDate !== "" && endDate !== "") {
             
@@ -78,7 +86,7 @@ const DisplayData = () => {
             }
 
             return await _getData();
-        }    
+        }
         
     }
 
