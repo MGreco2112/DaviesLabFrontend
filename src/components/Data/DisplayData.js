@@ -14,7 +14,6 @@ const DisplayData = () => {
     const params = useParams();
 
     const [head, setHead] = useState({});
-    const [data, setData] = useState([]);
     const [chartExists, setChartExists] = useState(false);
     const [loading, setLoading] = useState(true);
 
@@ -60,7 +59,7 @@ const DisplayData = () => {
 
     }
 
-    const fetchDataRange = () => {
+    const fetchDataRange = async () => {
         const startDate = document.getElementById("startDateInput").value;
         const endDate = document.getElementById("endDateInput").value;
         
@@ -72,13 +71,13 @@ const DisplayData = () => {
                 
                     console.log(res.data);
                 
-                    setData(res.data);
+                    return res.data;
                 } catch (err) {
                     console.error(err.response ? err.response : err.message);
                 }
             }
 
-            _getData();
+            return await _getData();
         }    
         
     }
@@ -103,24 +102,22 @@ const DisplayData = () => {
         return dataValues;
     }
 
-    const onFormSubmit = () => {
+    const onFormSubmit = async () => {
         const dataValues = buildDataNames();
-        fetchDataRange();
+        const dataSet = await fetchDataRange();
         
 
         if (dataValues.length > 0) {
             
-            console.log(data);
-            
-            if (data.length > 0) {
-                createChart(dataValues);
+            if (dataSet.length > 0) {
+                createChart(dataValues, dataSet);
             }
         } else {
            alert("ERROR: No Selection Made");
         }
     }
 
-    const createChart = (dataValues) => {
+    const createChart = (dataValues, dataSet) => {
         //place main page Container into variable to append elements to it
         const container = document.getElementById("PageContainer");
         //create Canvas element to hold new Chart once instantiated
@@ -133,7 +130,7 @@ const DisplayData = () => {
             //data obj to contain data within chart
             data: {
                 //label property for labels on bottom of chart
-                labels: data.map(row => row.date),
+                labels: dataSet.map(row => row.date),
                 //datasets array to hold each dataset to be displayed within chart
                     //this is initialized to empty, as contents are generated via user interaction with Form
                 datasets: []
@@ -147,7 +144,7 @@ const DisplayData = () => {
                 //label for dataset name
                 label: dataValues[i].label,
                 //map data in data object by the value of the checkbox selected by the User in the form
-                data: data.map(row => row[dataValues[i].data])
+                data: dataSet.map(row => row[dataValues[i].data])
             }
 
             //push each temp obj into the datasets array of the data object inside the chartData object
