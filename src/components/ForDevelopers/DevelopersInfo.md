@@ -3,6 +3,15 @@
 
 HTTP Routes and JSON Response formatting to expect from your calls
 
+### Returned Datatypes
+
+Strings, Integers, Doubles, Date, LocalDateTime
+
+Date Format: {YYYY}-{MM}-{DD}
+LocalDateTime Format: {YYYY}-{MM}-{DD}T{HH}:{MM}:{SS}
+
+These types return as String format despite being formatted as Date/LocalDateTime Objects on the Server
+
 ## Get Basic Lander By Name
 
 Return Lander JSON without any Sensor Information
