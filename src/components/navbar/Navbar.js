@@ -6,7 +6,7 @@ const Navbar = () => {
     return (
         <Fragment>
         <div style={{
-            backgroundColor: '#9EEBFA',
+            backgroundColor: '#FFA500',
             position: "fixed",
             width: "100%",
             zIndex: 9999,
