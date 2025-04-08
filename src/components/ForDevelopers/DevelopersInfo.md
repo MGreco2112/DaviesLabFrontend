@@ -3,11 +3,31 @@
 
 HTTP Routes and JSON Response formatting to expect from your calls
 
+## Get Basic Lander By Name
+
+Return Lander JSON without any Sensor Information
+
+```HTTP
+http://${api_host_address}/api/developers/basic_lander/id/${asdb_lander_id}
+```
+
+Response: Lander
+
+```JSON
+{
+    "deploymentDateAndTime": "2023-09-14T00:00:00",
+    "recoveryDateAndTime": "2024-09-07T18:34:00",
+    "asdblanderID": "NF2306_20230914_03",
+    "landerPlatform": "URILND01",
+    "asdbrovdiveID": "NF2306_20230914_02"
+}
+```
+
 ## Get CTD Info VIA Lander ID 
 Return Header and Data Set from CTD of specified Lander
 
 ```HTTP
-http://${api_host_address}/api/developers/lander/id/${lander_id}/ctd
+http://${api_host_address}/api/developers/lander/id/${asdb_lander_id}/ctd
 ```
 
 Response: CTD Header -> CTD Data Set
@@ -66,7 +86,7 @@ Response: CTD Header -> CTD Data Set
 Return Header and Data Set from DO of specified Lander
 
 ```HTTP
-http://${api_host_address}/api/developers/lander/id/${lander_id}/do
+http://${api_host_address}/api/developers/lander/id/${asdb_lander_id}/do
 ```
 
 Response: DO Header -> DO Data Set
@@ -122,7 +142,7 @@ Response: DO Header -> DO Data Set
 Return Header and Data Set from FLNTU of specified Lander
 
 ```HTTP
-http://${api_host_address}/api/developers/lander/id/{lander_id}/flntu
+http://${api_host_address}/api/developers/lander/id/{asdb_lander_id}/flntu
 ```
 
 Response: FLNTU Header -> FLNTU Data Set
@@ -177,7 +197,7 @@ Response: FLNTU Header -> FLNTU Data Set
 Return complete Lander JSON by Lander Name Query 
 
 ```HTTP
-http://${api_host_address}/api/developers/lander/id/${lander_id}
+http://${api_host_address}/api/developers/full_lander/id/${asdb_lander_id}
 ```
 
 Response: Lander -> Sensor Header -> Sensor Data
