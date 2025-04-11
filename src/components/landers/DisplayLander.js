@@ -34,15 +34,15 @@ const DisplayLander = () => {
     }, [lander.asdblanderID]);
 
     const ctdNav = () => {
-        navigate(`/landers/data/ctd/${lander.ctdheads[0].headID}`);
+        navigate(`/landers/data/ctd/${lander.ctdhead.headID}`);
     }
 
     const doNav = () => {
-        navigate(`/landers/data/do/${lander.doheads[0].headID}`);
+        navigate(`/landers/data/do/${lander.dohead.headID}`);
     }
 
     const flntuNav = () => {
-        navigate(`/landers/data/flntu/${lander.flntuheads[0].headID}`);
+        navigate(`/landers/data/flntu/${lander.flntuhead.headID}`);
     }
 
     const formatPage = () => {
@@ -50,29 +50,29 @@ const DisplayLander = () => {
             <Container className="LandersContainer">
                 <p>Lander ID: {lander.asdblanderID}</p>
                 {
-                    lander.ctdheads.length !== 0
+                    lander.ctdhead
                     ?
-                    <p>CTD Header ID: {lander.ctdheads[0].headID}</p>
+                    <p>CTD Header ID: {lander.ctdhead.headID}</p>
                     :
                     null
                 }
                 {
-                    lander.doheads.length !== 0
+                    lander.dohead
                     ?
-                    <p>DO Header ID: {lander.doheads[0].headID}</p>
+                    <p>DO Header ID: {lander.dohead.headID}</p>
                     :
                     null
                 }
                 {
-                    lander.flntuheads.length !== 0
+                    lander.flntuhead
                     ?
-                    <p>FLNTU Header ID: {lander.flntuheads[0].headID}</p>
+                    <p>FLNTU Header ID: {lander.flntuhead.headID}</p>
                     :
                     null
                 }
                 <div id="ButtonDiv">
                     {
-                        lander.ctdheads.length !== 0
+                        lander.ctdhead
                         ?
                         <Button 
                             id="LanderButton"
@@ -82,7 +82,7 @@ const DisplayLander = () => {
                         null
                     }
                     {
-                        lander.doheads.length !== 0
+                        lander.dohead
                         ?
                         <Button 
                             id="LanderButton"
@@ -92,7 +92,7 @@ const DisplayLander = () => {
                         null
                     }
                     {
-                        lander.flntuheads.length !== 0
+                        lander.flntuhead
                         ?
                         <Button 
                             id="LanderButton"
