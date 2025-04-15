@@ -345,7 +345,7 @@ Response: Lander -> Sensor Header -> Sensor Data
                 "turbMFTU": -0.09,
                 "chlAUgL": 0.02,
                 "headID": 2
-            },
+            }
         ]
     }
 }
