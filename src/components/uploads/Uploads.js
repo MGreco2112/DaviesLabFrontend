@@ -56,16 +56,10 @@ const Uploads = () => {
 
                     let paramName = "";
 
-                    if (routeValue === "header/test") {
+                    if (routeValue === "header") {
                         paramName = "processedHead";
                     } else {
                         paramName = "processedFile";
-                    }
-
-                    if (routeValue === "dynamic") {
-                        routeValue = `combined/${landerValue}`;
-                    } else if (routeValue === "data") {
-                        routeValue = `data/${landerValue}`;
                     }
                     
             
@@ -75,7 +69,7 @@ const Uploads = () => {
                         state.selectedFile.name
                     );
                     
-                    const res = await axios.post(`${apiHostURL}/api/processed/${sensorValue}/upload_csv/${routeValue}`, formData);
+                    const res = await axios.post(`${apiHostURL}/api/processed/${sensorValue}/upload_csv/${routeValue}/${landerValue}`, formData);
 
                     console.table(res.data);
 
@@ -143,9 +137,9 @@ const Uploads = () => {
                 <label htmlFor="route">Select File Type:</label>
                 <select name="route" id="route">
                     <option value=""></option>
-                    <option value="header/test">Head</option>
+                    <option value="header">Head</option>
                     <option value="data">Data</option>
-                    <option value="dynamic">Combined</option>
+                    <option value="combined">Combined</option>
                 </select>
             </div>
             <div>
