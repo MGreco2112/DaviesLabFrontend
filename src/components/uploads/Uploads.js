@@ -64,7 +64,10 @@ const Uploads = () => {
 
                     if (routeValue === "dynamic") {
                         routeValue = `combined/${landerValue}`;
+                    } else if (routeValue === "data") {
+                        routeValue = `data/${landerValue}`;
                     }
+                    
             
                     formData.append(
                         paramName,
@@ -141,7 +144,7 @@ const Uploads = () => {
                 <select name="route" id="route">
                     <option value=""></option>
                     <option value="header/test">Head</option>
-                    <option value="test">Data</option>
+                    <option value="data">Data</option>
                     <option value="dynamic">Combined</option>
                 </select>
             </div>

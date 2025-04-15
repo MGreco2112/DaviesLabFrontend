@@ -63,11 +63,11 @@ const DisplayData = () => {
         let startDate = document.getElementById("startDateInput").value;
         let endDate = document.getElementById("endDateInput").value;
 
-        if (startDate === "") {
+        if (startDate === "" && head.startTime !== null) {
             startDate = head.startTime;
         }
 
-        if (endDate === "") {
+        if (endDate === "" && head.endTime !== null) {
             endDate = head.endTime;
         }
         
@@ -77,6 +77,8 @@ const DisplayData = () => {
                 try {
                     const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/data/headId/${head.headID}/startDate/${startDate}/endDate/${endDate}`);
                 
+                    console.log(`${apiHostURL}/api/processed/${params.headType}/data/headId/${head.headID}/startDate/${startDate}/endDate/${endDate}`);
+
                     console.log(res.data);
                 
                     return res.data;
@@ -86,6 +88,8 @@ const DisplayData = () => {
             }
 
             return await _getData();
+        } else {
+            alert("Invalid Date Range Entered");
         }
         
     }
@@ -117,7 +121,7 @@ const DisplayData = () => {
 
         if (dataValues.length > 0) {
             
-            if (dataSet.length > 0) {
+            if (dataSet && dataSet.length > 0) {
                 createChart(dataValues, dataSet);
             }
         } else {
