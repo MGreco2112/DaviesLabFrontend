@@ -4,7 +4,7 @@ import BorderCard from "../common/BorderCard";
 import CustomizeDOChartForm from "./CustomizeDOChartForm";
 
 const DOHeadData = (props) => {
-    const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measModel, burstTime, burstCount, intervalData, sampleCount, startTime, endTime, depAdiRho, coefDate, ch1, ch2, ch3, buzzerEN, buzzerInterval, comment, sensorType2, buzzerNumber, depM, setSal, filmNo, dataPointCount} = props.header;
+    const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measModel, burstTime, burstCnt, intervalData, sampleCnt, startTime, endTime, depAdiRho, coefDate, ch1, ch2, ch3, buzzerEN, buzzerInterval, comment, sensorType2, buzzerNumber, depM, setSal, filmNo, dataPointCount} = props.header;
 
     const {enabled, onSubmit} = props.form;
 
@@ -21,9 +21,9 @@ const DOHeadData = (props) => {
                 <p>Pre Heat: {preHeat}</p>
                 <p>Meas Model: {measModel}</p>
                 <p>Burst Time: {burstTime}</p>
-                <p>Burst Count: {burstCount}</p>
+                <p>Burst Count: {burstCnt}</p>
                 <p>Interval: {intervalData}</p>
-                <p>Sample Count: {sampleCount}</p>
+                <p>Sample Count: {sampleCnt}</p>
                 <p>Start Time: {startTime}</p>
                 <p>End Time: {endTime}</p>
                 <p>Dep Adi Rho: {depAdiRho}</p>

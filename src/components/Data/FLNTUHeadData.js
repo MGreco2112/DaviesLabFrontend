@@ -4,7 +4,7 @@ import BorderCard from "../common/BorderCard";
 import CustomizeFLNTUChartForm from "./CustomizeFLNTUChartForm";
 
 const FLNTUHeadData = (props) => {
-    const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measMode, burstTime, burstCount, intervalData, wiperInterval, sampleCnt, startTime, endTime, chla, chlb, coefDate, ch1, ch2, ch3, ch4, buzzerEn, buzzerInterval, comment, sensorType2, buzzerNumber, dataPointCount} = props.header;
+    const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measMode, burstTime, burstCnt, intervalData, wiperInterval, sampleCnt, startTime, endTime, chla, chlb, coefDate, ch1, ch2, ch3, ch4, buzzerEN, buzzerInterval, comment, sensorType2, buzzerNumber, dataPointCount} = props.header;
 
     const {enabled, onSubmit} = props.form;
 
@@ -20,7 +20,7 @@ const FLNTUHeadData = (props) => {
                 <p>Pre Heat: {preHeat}</p>
                 <p>Meas Mode: {measMode}</p>
                 <p>Burst Time: {burstTime}</p>
-                <p>Burst Count: {burstCount}</p>
+                <p>Burst Count: {burstCnt}</p>
                 <p>Interval: {intervalData}</p>
                 <p>Wiper Interval: {wiperInterval}</p>
                 <p>Sample Count: {sampleCnt}</p>
@@ -33,7 +33,7 @@ const FLNTUHeadData = (props) => {
                 <p>Channel 2: {ch2}</p>
                 <p>Channel 3: {ch3}</p>
                 <p>Channel 4: {ch4}</p>
-                <p>Buzzer EN: {buzzerEn}</p>
+                <p>Buzzer EN: {buzzerEN}</p>
                 <p>Buzzer Interval: {buzzerInterval}</p>
                 <p>Comment: {comment}</p>
                 <p>Sensor Type 2: {sensorType2}</p>

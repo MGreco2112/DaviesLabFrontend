@@ -25,7 +25,7 @@ const DisplayData = () => {
         const _fetchHead = async () => {
             try {
                 const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/headers/sanitized/${params.headId}`);
-
+                
                 setHead(res.data);
                 setLoading(false);
             } catch (err) {
