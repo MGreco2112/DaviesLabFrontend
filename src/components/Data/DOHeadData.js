@@ -4,7 +4,7 @@ import BorderCard from "../common/BorderCard";
 import CustomizeDOChartForm from "./CustomizeDOChartForm";
 
 const DOHeadData = (props) => {
-    const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measModel, burstTime, burstCount, intervalData, sampleCount, startTime, endTime, depAdiRho, coefDate, ch1, ch2, ch3, buzzerEN, buzzerInterval, comment, sensorType2, buzzerNumber, depM, setSal, filmNo} = props.header;
+    const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measModel, burstTime, burstCount, intervalData, sampleCount, startTime, endTime, depAdiRho, coefDate, ch1, ch2, ch3, buzzerEN, buzzerInterval, comment, sensorType2, buzzerNumber, depM, setSal, filmNo, dataPointCount} = props.header;
 
     const {enabled, onSubmit} = props.form;
 
@@ -39,12 +39,17 @@ const DOHeadData = (props) => {
                 <p>Dep M: {depM}</p>
                 <p>Set Sal: {setSal}</p>
                 <p>Film Number: {filmNo}</p>
+                <p>Data Points: {dataPointCount}</p>
             </BorderCard>
             {
-                enabled
+                enabled && dataPointCount > 0
                 ?
                 <CustomizeDOChartForm onSubmit={onSubmit}/>
                 :
+                    enabled && dataPointCount <= 0
+                    ?
+                    <h2>No Data Available To Chart</h2>
+                    :
                 null
             }
         </Container>

@@ -4,7 +4,7 @@ import BorderCard from "../common/BorderCard";
 import CustomizeFLNTUChartForm from "./CustomizeFLNTUChartForm";
 
 const FLNTUHeadData = (props) => {
-    const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measMode, burstTime, burstCount, intervalData, wiperInterval, sampleCnt, startTime, endTime, chla, chlb, coefDate, ch1, ch2, ch3, ch4, buzzerEn, buzzerInterval, comment, sensorType2, buzzerNumber} = props.header;
+    const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measMode, burstTime, burstCount, intervalData, wiperInterval, sampleCnt, startTime, endTime, chla, chlb, coefDate, ch1, ch2, ch3, ch4, buzzerEn, buzzerInterval, comment, sensorType2, buzzerNumber, dataPointCount} = props.header;
 
     const {enabled, onSubmit} = props.form;
 
@@ -38,13 +38,18 @@ const FLNTUHeadData = (props) => {
                 <p>Comment: {comment}</p>
                 <p>Sensor Type 2: {sensorType2}</p>
                 <p>Buzzer Number: {buzzerNumber}</p>
+                <p>Data Points: {dataPointCount}</p>
             </BorderCard>
             {
-                enabled
+                enabled && dataPointCount > 0
                 ?
                 <CustomizeFLNTUChartForm onSubmit={onSubmit}/>
                 :
-                false
+                    enabled && dataPointCount <= 0
+                    ?
+                    <h2>No Data Available To Chart</h2>
+                    :
+                null
             }
         </Container>
     );

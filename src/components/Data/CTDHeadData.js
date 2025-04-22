@@ -4,7 +4,7 @@ import BorderCard from "../common/BorderCard";
 import CustomizeCTDChartForm from "./CustomizeCTDChartForm";
 
 const CTDHeadData = (props) => {
-    const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measMode, burstTime, burstCnt, intervalData, sampleCnt, startTime, endTime, depAdiRho, eca, ecb, ecdeg, eccoef, coefDate, ch1, ch2, ch3, ch4, buzzerEN, buzzerInterval, comment, sensorType2, buzzerNumber, depM, condDepB} = props.header;
+    const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measMode, burstTime, burstCnt, intervalData, sampleCnt, startTime, endTime, depAdiRho, eca, ecb, ecdeg, eccoef, coefDate, ch1, ch2, ch3, ch4, buzzerEN, buzzerInterval, comment, sensorType2, buzzerNumber, depM, condDepB, dataPointCount} = props.header;
 
     const {enabled, onSubmit} = props.form;
     
@@ -43,12 +43,17 @@ const CTDHeadData = (props) => {
                 <p>Buzzer Number: {buzzerNumber}</p>
                 <p>DepM: {depM}</p>
                 <p>CondDepB: {condDepB}</p>
+                <p>Data Points: {dataPointCount}</p>
             </BorderCard>
             {
-                enabled
+                enabled && dataPointCount > 0
                 ?
                 <CustomizeCTDChartForm onSubmit={onSubmit}/>
                 :
+                    enabled && dataPointCount <= 0
+                    ?
+                    <h2>No Data Available To Chart</h2>
+                    :
                 null
             }
         </Container>
