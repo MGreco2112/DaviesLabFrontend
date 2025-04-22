@@ -76,6 +76,7 @@ const Uploads = () => {
                     alert("Success!");
                 } catch (err) {
                     console.error(err.message ? err.message : err.response);
+                    alert((err.message ? err.message : err.response) + (err.response.data ? "\n" + err.response.data : ""));
                 }
 
             } else {
@@ -101,9 +102,12 @@ const Uploads = () => {
         } else {
             return (
                 <Container className="uploadsContainer">
-                    <h4>Upload CSV Data from Lander Sensors</h4>
-                    <p>Combined will Post to Server</p>
-                    <p>Other options will only return data to the Console</p>
+                    <h3>Upload CSV Data from Lander Sensors</h3>
+                    <h4>UPLOAD INSTRUCTIONS:</h4>
+                    <p>1) Select Lander from Menu</p>
+                    <p>2) Select desired sensor from Menu</p>
+                    <p>3) Select upload file type contents (Header Only, Data Points Only, or Combined Header w/ Data Points)</p>
+                    <p>4) Click Submit and wait for message</p>
                 </Container>
             );
         }
