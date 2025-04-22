@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { apiHostURL } from "../../config";
 import Container from "../common/Container";
+import Button from "../common/Button";
 import DOHeadData from "./DOHeadData";
 import CTDHeadData from "./CTDHeadData";
 import FLNTUHeadData from "./FLNTUHeadData";
@@ -11,6 +13,7 @@ import "./Data.css";
 
 
 const DisplayData = () => {
+    const navigate = useNavigate();
     const params = useParams();
 
     const [head, setHead] = useState({});
@@ -34,6 +37,10 @@ const DisplayData = () => {
         _fetchHead();
     }, [head.headId, params.headId, params.headType]);
 
+    const returnToLander = () => {
+        navigate(`/landers/${head.landerID}`);
+    }
+
     const formatPage = () => {
         let headInfo = <h1>Unable To Load Header</h1>
 
@@ -53,6 +60,7 @@ const DisplayData = () => {
 
         return (
             <Container>
+                <Button id="LanderButton" onClick={returnToLander}>Return to Lander</Button>
                 {headInfo}
             </Container>
         );
