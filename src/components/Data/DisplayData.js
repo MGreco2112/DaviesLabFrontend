@@ -30,6 +30,7 @@ const DisplayData = () => {
                 setLoading(false);
             } catch (err) {
                 console.error(err.response ? err.response : err.message);
+                setLoading(false);
             }
         }
 
