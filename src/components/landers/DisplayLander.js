@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Container from "../common/Container";
+import BorderCard from "../common/BorderCard";
 import Button from "../common/Button";
 import "./Landers.css";
 import { useParams } from "react-router-dom";
@@ -48,7 +49,7 @@ const DisplayLander = () => {
     const formatPage = () => {
         return (
             <Container className="LandersContainer">
-                <p>Lander ID: {lander.asdblanderID}</p>
+                <strong>Lander ID: {lander.asdblanderID}</strong>
                 {
                     lander.ctdhead
                     ?
@@ -115,7 +116,9 @@ const DisplayLander = () => {
                 loading ?
                     <p>FETCHING LANDER...</p>
                     :
-                    formatPage()
+                    <BorderCard>
+                        {formatPage()}
+                    </BorderCard>
             }
         </Container>
     );

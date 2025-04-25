@@ -71,8 +71,23 @@ const Uploads = () => {
                     
                     const res = await axios.post(`${apiHostURL}/api/processed/${sensorValue}/upload_csv/${routeValue}/${landerValue}`, formData);
 
-                    console.table(res.data);
+                    //TODO get this progress bar working
+                    // if (routeValue === "data") {
+                    //     console.log(res.data);
 
+                    //     const progressObject = await res.data;
+
+                    //     let uploadedData = 0;
+
+                    //     while (uploadedData < progressObject.totalUploads) {
+                    //         uploadedData = await _checkUploadStatus(sensorValue, progressObject.headID);
+
+                    //         console.log(uploadedData / progressObject.totalUploads + "%");
+                            
+                    //     }
+                    // }
+
+                    
                     alert("Success!");
                 } catch (err) {
                     console.error(err.message ? err.message : err.response);
@@ -85,6 +100,16 @@ const Uploads = () => {
 
         } else {
             alert("No File Selected!");
+        }
+    }
+
+    const _checkUploadStatus = async (sensorValue, headID) => {
+        try {
+            const res = await axios.get(`${apiHostURL}/api/processed/${sensorValue}/data/count/${headID}`);
+
+            return res.data;
+        } catch (err) {
+            alert(err.message ? err.message : err.response);
         }
     }
 
@@ -108,6 +133,7 @@ const Uploads = () => {
                     <p>2) Select desired sensor from Menu</p>
                     <p>3) Select upload file type contents (Header Only, Data Points Only, or Combined Header w/ Data Points)</p>
                     <p>4) Click Submit and wait for message</p>
+                    <p>If an Error occurs, check sensor and type of file and dropdown selections</p>
                 </Container>
             );
         }
