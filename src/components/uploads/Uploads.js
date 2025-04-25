@@ -71,22 +71,6 @@ const Uploads = () => {
                     
                     const res = await axios.post(`${apiHostURL}/api/processed/${sensorValue}/upload_csv/${routeValue}/${landerValue}`, formData);
 
-                    //TODO get this progress bar working
-                    // if (routeValue === "data") {
-                    //     console.log(res.data);
-
-                    //     const progressObject = await res.data;
-
-                    //     let uploadedData = 0;
-
-                    //     while (uploadedData < progressObject.totalUploads) {
-                    //         uploadedData = await _checkUploadStatus(sensorValue, progressObject.headID);
-
-                    //         console.log(uploadedData / progressObject.totalUploads + "%");
-                            
-                    //     }
-                    // }
-
                     
                     alert("Success!");
                 } catch (err) {
