@@ -68,24 +68,27 @@ const Uploads = () => {
                         state.selectedFile,
                         state.selectedFile.name
                     );
+
+                    let url = `${apiHostURL}/api/processed/${sensorValue}/upload_csv/${routeValue}/${landerValue}`;
+
+                    if (routeValue === "data") {
+                        url = `${apiHostURL}/api/processed/${sensorValue}/upload_csv/test/callback/${landerValue}`;
+                    }
                     
-                    const res = await axios.post(`${apiHostURL}/api/processed/${sensorValue}/upload_csv/${routeValue}/${landerValue}`, formData);
+                    const res = await axios.post(url, formData);
 
-                    //TODO get this progress bar working
-                    // if (routeValue === "data") {
-                    //     console.log(res.data);
+                    // TODO get this progress bar working
+                    if (routeValue === "data" && sensorValue === "ctd") {
+                        console.table(res.data);
 
-                    //     const progressObject = await res.data;
+                        const postRes = await axios.post(`${apiHostURL}/api/processed/${sensorValue}/upload_csv/test/callback/save/${res.data.headID}`, {"data": res.data.data}, {onUploadProgress: ProgressEvent =>  {
+                            const percentCompleted = Math.round((ProgressEvent.loaded * 100) / ProgressEvent.total);
+    console.log(`Upload progress: ${percentCompleted}%`);
+                        }})
 
-                    //     let uploadedData = 0;
-
-                    //     while (uploadedData < progressObject.totalUploads) {
-                    //         uploadedData = await _checkUploadStatus(sensorValue, progressObject.headID);
-
-                    //         console.log(uploadedData / progressObject.totalUploads + "%");
-                            
-                    //     }
-                    // }
+                        console.log(postRes.data);
+                        
+                    }
 
                     
                     alert("Success!");
