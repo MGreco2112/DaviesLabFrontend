@@ -15,6 +15,7 @@ const Uploads = () => {
 
     const [landers, setLanders] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [processTimeSeconds, setProcessTimeSeconds] = useState(0);
 
     useEffect(() => {
         const _getAllLanders = async () => {
@@ -37,6 +38,10 @@ const Uploads = () => {
         setState({
             selectedFile: event.target.files[0]
         });
+
+        const processTime = ((event.target.files[0].size / 111) * 5) / 1_000;
+        setProcessTimeSeconds(processTime);
+
     }
 
     const onLanderClick = () => {
@@ -51,6 +56,7 @@ const Uploads = () => {
         if (state.selectedFile) {
 
             if (sensorValue !== "" && routeValue !== "" && landerValue !== "") {
+
                 try {
                     const formData = new FormData();
 
@@ -61,6 +67,9 @@ const Uploads = () => {
                     } else {
                         paramName = "processedFile";
                     }
+
+                    updateMessage();
+                    setInterval(updateMessage(), 5_000);
                     
             
                     formData.append(
@@ -68,30 +77,9 @@ const Uploads = () => {
                         state.selectedFile,
                         state.selectedFile.name
                     );
-
-                    let url = `${apiHostURL}/api/processed/${sensorValue}/upload_csv/${routeValue}/${landerValue}`;
-
-                    if (routeValue === "data") {
-                        url = `${apiHostURL}/api/processed/${sensorValue}/upload_csv/test/callback/${landerValue}`;
-                    }
                     
-                    const res = await axios.post(url, formData);
+                    const res = await axios.post(`${apiHostURL}/api/processed/${sensorValue}/upload_csv/${routeValue}/${landerValue}`, formData);
 
-                    // TODO get this progress bar working
-                    if (routeValue === "data" && sensorValue === "ctd") {
-                        console.table(res.data);
-
-                        const postRes = await axios.post(`${apiHostURL}/api/processed/${sensorValue}/upload_csv/test/callback/save/${res.data.headID}`, {"data": res.data.data}, {onUploadProgress: ProgressEvent =>  {
-                            const percentCompleted = Math.round((ProgressEvent.loaded * 100) / ProgressEvent.total);
-    console.log(`Upload progress: ${percentCompleted}%`);
-                        }})
-
-                        console.log(postRes.data);
-                        
-                    }
-
-                    
-                    alert("Success!");
                 } catch (err) {
                     console.error(err.message ? err.message : err.response);
                     alert((err.message ? err.message : err.response) + (err.response.data ? "\n" + err.response.data : ""));
@@ -106,21 +94,27 @@ const Uploads = () => {
         }
     }
 
-    const _checkUploadStatus = async (sensorValue, headID) => {
-        try {
-            const res = await axios.get(`${apiHostURL}/api/processed/${sensorValue}/data/count/${headID}`);
+    const updateMessage = () => {
+        const infoDiv = document.getElementById("fileDataDiv");
+        const minutes = Math.floor((processTimeSeconds % 3600) / 60);
+        const seconds = Math.round(processTimeSeconds % 60);
+        
+        console.log(minutes);
+        console.log(seconds);
+        
+        
 
-            return res.data;
-        } catch (err) {
-            alert(err.message ? err.message : err.response);
-        }
+        infoDiv.innerText = `Time Remaining: ${minutes}:${seconds}`
+
+        setProcessTimeSeconds(processTimeSeconds - 30);
+        
     }
 
     const fileData = () => {
 
         if (state.selectedFile) {
             return (
-                <div>
+                <div id="fileDataDiv">
                     <h2>File Details:</h2>
                     <p>File Name: {state.selectedFile.name}</p>
 
