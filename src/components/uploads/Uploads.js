@@ -37,6 +37,7 @@ const Uploads = () => {
         setState({
             selectedFile: event.target.files[0]
         });
+
     }
 
     const onLanderClick = () => {
@@ -47,10 +48,20 @@ const Uploads = () => {
         const sensorValue = document.getElementById("sensor").value;
         let routeValue = document.getElementById("route").value;
         const landerValue = document.getElementById("lander").value;
+        const uploadButton = document.getElementById("uploadButton");
         
         if (state.selectedFile) {
 
+            const processTime = ((state.selectedFile.size / 111) * 5) / 1_000;
+        
+            var timeProcessObject = {
+                pageElement: document.getElementById("fileDataDiv"),
+                totalTimeInSeconds: processTime
+            }
+    
+
             if (sensorValue !== "" && routeValue !== "" && landerValue !== "") {
+
                 try {
                     const formData = new FormData();
 
@@ -62,7 +73,10 @@ const Uploads = () => {
                         paramName = "processedFile";
                     }
                     
-            
+
+                    uploadButton.disabled = true;
+                    const intervalID =  setInterval(updateMessage, 1_000, timeProcessObject);
+                    
                     formData.append(
                         paramName,
                         state.selectedFile,
@@ -71,10 +85,12 @@ const Uploads = () => {
                     
                     const res = await axios.post(`${apiHostURL}/api/processed/${sensorValue}/upload_csv/${routeValue}/${landerValue}`, formData);
 
-                    
-                    alert("Success!");
+                    clearInterval(intervalID);
+                    timeProcessObject.pageElement.innerText = "Upload Completed!";
+                    uploadButton.disabled = false;
                 } catch (err) {
                     console.error(err.message ? err.message : err.response);
+                    uploadButton.disabled = false;
                     alert((err.message ? err.message : err.response) + (err.response.data ? "\n" + err.response.data : ""));
                 }
 
@@ -87,21 +103,28 @@ const Uploads = () => {
         }
     }
 
-    const _checkUploadStatus = async (sensorValue, headID) => {
-        try {
-            const res = await axios.get(`${apiHostURL}/api/processed/${sensorValue}/data/count/${headID}`);
+    const updateMessage = (timeProcessObject) => {
+        const minutes = Math.floor((timeProcessObject.totalTimeInSeconds % 3600) / 60);
+        const seconds = Math.round(timeProcessObject.totalTimeInSeconds % 60);
+        
+        console.log(minutes);
+        console.log(seconds);
 
-            return res.data;
-        } catch (err) {
-            alert(err.message ? err.message : err.response);
+        if (timeProcessObject.totalTimeInSeconds > 0) {
+            timeProcessObject.pageElement.innerText = `Time Remaining: ${minutes}:${seconds}`
+        } else {
+            timeProcessObject.pageElement.innerText = "Finishing up. . .";
         }
+
+        timeProcessObject.totalTimeInSeconds -= 1;
+        
     }
 
     const fileData = () => {
 
         if (state.selectedFile) {
             return (
-                <div>
+                <div id="fileDataDiv">
                     <h2>File Details:</h2>
                     <p>File Name: {state.selectedFile.name}</p>
 
@@ -158,7 +181,7 @@ const Uploads = () => {
             </div>
             <div>
                 <input type="file" onChange={onFileChange}/>
-                <button onClick={onFileUpload}>Upload!</button>
+                <button id="uploadButton" onClick={onFileUpload}>Upload!</button>
             </div>
             {fileData()}
         </Container>
