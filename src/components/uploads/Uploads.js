@@ -26,6 +26,7 @@ const Uploads = () => {
                 setLoading(false);
             } catch (err) {
                 console.error(err.message ? err.message : err.response);
+                document.getElementById("mainBodyContainer").innerText = "Error Retrieving Landers";
             }
         }
 
@@ -51,12 +52,11 @@ const Uploads = () => {
         const uploadButton = document.getElementById("uploadButton");
         
         if (state.selectedFile) {
-
-            const processTime = ((state.selectedFile.size / 111) * 5) / 1_000;
         
-            var timeProcessObject = {
+            const timeProcessObject = {
                 pageElement: document.getElementById("fileDataDiv"),
-                totalTimeInSeconds: processTime
+                sensorValue: sensorValue,
+                landerValue: landerValue
             }
     
 
@@ -75,7 +75,7 @@ const Uploads = () => {
                     
 
                     uploadButton.disabled = true;
-                    const intervalID =  setInterval(updateMessage, 1_000, timeProcessObject);
+                    const intervalID = setInterval(updateMessage, 1_000, timeProcessObject);
                     
                     formData.append(
                         paramName,
@@ -83,16 +83,17 @@ const Uploads = () => {
                         state.selectedFile.name
                     );
                     
-                    const res = await axios.post(`${apiHostURL}/api/processed/${sensorValue}/upload_csv/${routeValue}/${landerValue}`, formData);
+                    await axios.post(`${apiHostURL}/api/processed/${sensorValue}/upload_csv/${routeValue}/${landerValue}`, formData);
 
                     clearInterval(intervalID);
                     timeProcessObject.pageElement.innerText = "Upload Completed!";
-                    uploadButton.disabled = false;
+                    
                 } catch (err) {
                     console.error(err.message ? err.message : err.response);
-                    uploadButton.disabled = false;
                     alert((err.message ? err.message : err.response) + (err.response.data ? "\n" + err.response.data : ""));
                 }
+
+                uploadButton.disabled = false;
 
             } else {
                 alert("No Sensor or Upload Type Selected!");
@@ -103,20 +104,23 @@ const Uploads = () => {
         }
     }
 
-    const updateMessage = (timeProcessObject) => {
-        const minutes = Math.floor((timeProcessObject.totalTimeInSeconds % 3600) / 60);
-        const seconds = Math.round(timeProcessObject.totalTimeInSeconds % 60);
-        
-        console.log(minutes);
-        console.log(seconds);
+    const updateMessage = async (timeProcessObject) => {
 
-        if (timeProcessObject.totalTimeInSeconds > 0) {
-            timeProcessObject.pageElement.innerText = `Time Remaining: ${minutes}:${seconds}`
-        } else {
-            timeProcessObject.pageElement.innerText = "Finishing up. . .";
+        try {
+            const res = await axios.get(`${apiHostURL}/api/processed/${timeProcessObject.sensorValue}/data/count/${timeProcessObject.landerValue}`);
+
+            console.table(res.data);
+
+            if (res.data.isPercentage) { //TODO: update this to a progress bar
+                timeProcessObject.pageElement.innerText = `Upload Progress: ${Math.round(res.data.percentage * 100)}%`;
+            } else { //TODO: add elif for timeProcessObject to contain the header information for percentages between this and the else
+                timeProcessObject.pageElement.innerText = `Files Uploaded: ${res.data.fileCount}`;
+            }
+
+            
+        } catch (err) {
+            console.error(err.response ? err.response : err.message);
         }
-
-        timeProcessObject.totalTimeInSeconds -= 1;
         
     }
 
@@ -189,8 +193,12 @@ const Uploads = () => {
     }
 
     return (
-        <Container className="uploadsContainer">
-            {loading ? <h1>loading...</h1> : formatPage()}
+        <Container className="uploadsContainer" id="mainBodyContainer">
+            {
+                loading 
+                ? <h1>loading...</h1> 
+                : formatPage()
+            }
         </Container>
     );
 }
