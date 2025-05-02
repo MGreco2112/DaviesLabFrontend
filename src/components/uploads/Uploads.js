@@ -75,7 +75,10 @@ const Uploads = () => {
                     
 
                     uploadButton.disabled = true;
-                    const intervalID = setInterval(updateMessage, 1_000, timeProcessObject);
+                    let intervalID = null;
+                    if (routeValue !== "header") {
+                        intervalID = setInterval(updateMessage, 1_000, timeProcessObject);
+                    }
                     
                     formData.append(
                         paramName,
@@ -85,7 +88,9 @@ const Uploads = () => {
                     
                     await axios.post(`${apiHostURL}/api/processed/${sensorValue}/upload_csv/${routeValue}/${landerValue}`, formData);
 
-                    clearInterval(intervalID);
+                    if (intervalID) {
+                        clearInterval(intervalID);
+                    }
                     if (document.getElementById("uploadProgressBar")) {
                         document.getElementById("progressPercentage").innerText = "Upload Progress: 100%";
                         document.getElementById("uploadProgressBar").value = 1;
@@ -123,7 +128,7 @@ const Uploads = () => {
                     const progressMessage = document.createElement("p");
                     progressMessage.id = "progressPercentage";
                     progressMessage.innerText = `Upload Progress: ${Math.round(res.data.percentage * 100)}%`
-                    
+
                     timeProcessObject.pageElement.innerHTML = "";
                     timeProcessObject.pageElement.appendChild(progressMessage);
                     timeProcessObject.pageElement.appendChild(progressBar);
