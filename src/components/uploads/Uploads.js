@@ -86,7 +86,12 @@ const Uploads = () => {
                     await axios.post(`${apiHostURL}/api/processed/${sensorValue}/upload_csv/${routeValue}/${landerValue}`, formData);
 
                     clearInterval(intervalID);
-                    timeProcessObject.pageElement.innerText = "Upload Completed!";
+                    if (document.getElementById("uploadProgressBar")) {
+                        document.getElementById("progressPercentage").innerText = "Upload Progress: 100%";
+                        document.getElementById("uploadProgressBar").value = 1;
+                    } else {
+                        timeProcessObject.pageElement.innerText = "Upload Completed!";
+                    }
                     
                 } catch (err) {
                     console.error(err.message ? err.message : err.response);
@@ -109,10 +114,25 @@ const Uploads = () => {
         try {
             const res = await axios.get(`${apiHostURL}/api/processed/${timeProcessObject.sensorValue}/data/count/${timeProcessObject.landerValue}`);
 
-            console.table(res.data);
+            if (res.data.isPercentage) {
+                if (!document.getElementById("uploadProgressBar")) {
+                    const progressBar = document.createElement('progress');
+                    progressBar.id = "uploadProgressBar";
+                    progressBar.value = null;
 
-            if (res.data.isPercentage) { //TODO: update this to a progress bar
-                timeProcessObject.pageElement.innerText = `Upload Progress: ${Math.round(res.data.percentage * 100)}%`;
+                    const progressMessage = document.createElement("p");
+                    progressMessage.id = "progressPercentage";
+                    progressMessage.innerText = `Upload Progress: ${Math.round(res.data.percentage * 100)}%`
+                    
+                    timeProcessObject.pageElement.innerHTML = "";
+                    timeProcessObject.pageElement.appendChild(progressMessage);
+                    timeProcessObject.pageElement.appendChild(progressBar);
+                } else {
+                    document.getElementById("progressPercentage").innerText = `Upload Progress: ${Math.round(res.data.percentage * 100)}%`;
+                    document.getElementById("uploadProgressBar").value = res.data.percentage;
+                }
+
+                
             } else { //TODO: add elif for timeProcessObject to contain the header information for percentages between this and the else
                 timeProcessObject.pageElement.innerText = `Files Uploaded: ${res.data.fileCount}`;
             }
@@ -185,6 +205,8 @@ const Uploads = () => {
             </div>
             <div>
                 <input type="file" onChange={onFileChange}/>
+            </div>
+            <div>
                 <button id="uploadButton" onClick={onFileUpload}>Upload!</button>
             </div>
             {fileData()}
