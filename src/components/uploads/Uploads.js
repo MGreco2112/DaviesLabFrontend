@@ -79,7 +79,7 @@ const Uploads = () => {
                     uploadButton.disabled = true;
                     let intervalID = null;
                     if (routeValue !== "header") {
-                        intervalID = setInterval(updateMessage, 1_000, timeProcessObject);
+                        intervalID = setInterval(updateMessage, 15_000, timeProcessObject);
                     }
                     
                     formData.append(
@@ -129,13 +129,13 @@ const Uploads = () => {
 
                     const progressMessage = document.createElement("p");
                     progressMessage.id = "progressPercentage";
-                    progressMessage.innerText = `Upload Progress: ${Math.round(res.data.percentage * 100)}%`
+                    progressMessage.innerText = `Upload Progress: ${Math.trunc(res.data.percentage * 100)}%`
 
                     timeProcessObject.pageElement.innerHTML = "";
                     timeProcessObject.pageElement.appendChild(progressMessage);
                     timeProcessObject.pageElement.appendChild(progressBar);
                 } else {
-                    document.getElementById("progressPercentage").innerText = `Upload Progress: ${Math.round(res.data.percentage * 100)}%`;
+                    document.getElementById("progressPercentage").innerText = `Upload Progress: ${Math.trunc(res.data.percentage * 100)}%`;
                     document.getElementById("uploadProgressBar").value = res.data.percentage;
                 }
 
@@ -155,6 +155,10 @@ const Uploads = () => {
         const route = document.getElementById("route");
         const sensor = document.getElementById("sensor").value;
         const appendDiv = document.getElementById("FileSelectDiv");
+        
+        if (document.getElementById("PercentageInfoDiv")) {
+            appendDiv.removeChild(document.getElementById("PercentageInfoDiv"));
+        }
 
         if (route.value === "data") {
             let lander;
@@ -165,6 +169,7 @@ const Uploads = () => {
                     lander = landers[i];
 
                     const percentageInfoDiv = document.createElement("div");
+                    percentageInfoDiv.id = "PercentageInfoDiv";
                     const startDateInput = document.createElement("input");
                     const endDateInput = document.createElement("input");
                     const burstCountInput = document.createElement("input");
@@ -202,8 +207,7 @@ const Uploads = () => {
                 }
             }
             
-        }        
-        
+        }
     }
 
     const fileData = () => {
