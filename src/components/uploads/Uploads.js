@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Container from "../common/Container";
 import {apiHostURL} from "../../config";
 import Button from "../common/Button";
+import Input from "../common/Input";
 import "./Uploads.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -153,6 +154,7 @@ const Uploads = () => {
     const onRouteChange = () => {
         const route = document.getElementById("route");
         const sensor = document.getElementById("sensor").value;
+        const appendDiv = document.getElementById("FileSelectDiv");
 
         if (route.value === "data") {
             let lander;
@@ -160,22 +162,35 @@ const Uploads = () => {
 
             for (let i = 0; i < landers.length; i++) {
                 if (landers[i].asdblanderID === selLander) {
+                    lander = landers[i];
+
+                    const percentageInfoDiv = document.createElement("div");
+                    const startDateInput = document.createElement("input");
+                    const endDateInput = document.createElement("input");
+                    const burstCountInput = document.createElement("input");
+                    const burstTimeInput = document.createElement("input");
+
+                    percentageInfoDiv.appendChild(startDateInput);
+                    percentageInfoDiv.appendChild(endDateInput);
+                    percentageInfoDiv.appendChild(burstCountInput);
+                    percentageInfoDiv.appendChild(burstTimeInput);
+
                     switch (sensor) {
                         case "ctd": {
-                            if (lander.ctdhead) {
-
+                            if (!lander.ctdhead) {
+                                appendDiv.appendChild(percentageInfoDiv);
                             }
                             break;
                         }
                         case "do": {
-                            if (lander.dohead) {
-
+                            if (!lander.dohead) {
+                                appendDiv.appendChild(percentageInfoDiv);
                             }
                             break;
                         }
                         case "flntu": {
-                            if (lander.flntuhead) {
-
+                            if (!lander.flntuhead) {
+                                appendDiv.appendChild(percentageInfoDiv);
                             }
                             break;
                         }
@@ -222,9 +237,9 @@ const Uploads = () => {
         return (
             <Container className="uploadsContainer">
             <h1>CSV Upload</h1>
-            <div>
+            <div id="LanderSelectDiv">
                 <label>Select a Lander:</label>
-                <select name="lander" id="lander">
+                <select onChange={onRouteChange} name="lander" id="lander">
                     <option value=""></option>
                     {landers.map( option => { return <option value={option.asdblanderID} key={option.asdblanderID}>{option.asdblanderID}</option>})}
                 </select>
@@ -232,16 +247,16 @@ const Uploads = () => {
             <Button
                     onClick={onLanderClick}
                 >Add Lander</Button>
-            <div>
+            <div id="SensorSelectDiv">
                 <label htmlFor="sensor">Select a Sensor:</label>
-                <select name="sensor" id="sensor">
+                <select onChange={onRouteChange} name="sensor" id="sensor">
                     <option value=""></option>
                     <option value="ctd">CTD</option>
                     <option value="do">DO</option>
                     <option value="flntu">FLNTU</option>
                 </select>
             </div>
-            <div>
+            <div id="RouteSelectDiv">
                 <label htmlFor="route">Select File Type:</label>
                 <select onChange={onRouteChange} name="route" id="route">
                     <option value=""></option>
@@ -250,10 +265,10 @@ const Uploads = () => {
                     <option value="combined">Combined</option>
                 </select>
             </div>
-            <div>
+            <div id="FileSelectDiv">
                 <input type="file" onChange={onFileChange}/>
             </div>
-            <div>
+            <div id="UploadButtonDiv">
                 <button id="uploadButton" onClick={onFileUpload}>Upload!</button>
             </div>
             {fileData()}
