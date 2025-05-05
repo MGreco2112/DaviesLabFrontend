@@ -14,6 +14,7 @@ const Uploads = () => {
     });
 
     const [landers, setLanders] = useState([]);
+    const [dateRange, setDateRange] = useState({});
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -123,7 +124,7 @@ const Uploads = () => {
                 if (!document.getElementById("uploadProgressBar")) {
                     const progressBar = document.createElement('progress');
                     progressBar.id = "uploadProgressBar";
-                    progressBar.value = null;
+                    progressBar.value = res.data.percentage;
 
                     const progressMessage = document.createElement("p");
                     progressMessage.id = "progressPercentage";
@@ -146,6 +147,47 @@ const Uploads = () => {
         } catch (err) {
             console.error(err.response ? err.response : err.message);
         }
+        
+    }
+
+    const onRouteChange = () => {
+        const route = document.getElementById("route");
+        const sensor = document.getElementById("sensor").value;
+
+        if (route.value === "data") {
+            let lander;
+            const selLander = document.getElementById("lander").value;
+
+            for (let i = 0; i < landers.length; i++) {
+                if (landers[i].asdblanderID === selLander) {
+                    switch (sensor) {
+                        case "ctd": {
+                            if (lander.ctdhead) {
+
+                            }
+                            break;
+                        }
+                        case "do": {
+                            if (lander.dohead) {
+
+                            }
+                            break;
+                        }
+                        case "flntu": {
+                            if (lander.flntuhead) {
+
+                            }
+                            break;
+                        }
+                        default: {
+
+                        }
+                        return;
+                    }
+                }
+            }
+            
+        }        
         
     }
 
@@ -201,7 +243,7 @@ const Uploads = () => {
             </div>
             <div>
                 <label htmlFor="route">Select File Type:</label>
-                <select name="route" id="route">
+                <select onChange={onRouteChange} name="route" id="route">
                     <option value=""></option>
                     <option value="header">Head</option>
                     <option value="data">Data</option>
