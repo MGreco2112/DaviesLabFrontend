@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import Container from "../common/Container";
 import {apiHostURL} from "../../config";
 import Button from "../common/Button";
-import Input from "../common/Input";
 import "./Uploads.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import HeaderDataForm from "./HeaderDataForm";
 
 const Uploads = () => {
     const navigate = useNavigate();
@@ -15,8 +15,14 @@ const Uploads = () => {
     });
 
     const [landers, setLanders] = useState([]);
-    const [dateRange, setDateRange] = useState({});
+    const [dateRange, setDateRange] = useState({
+        burstTime: "",
+        burstCnt: "",
+        startTime: "",
+        endTime: ""
+    });
     const [loading, setLoading] = useState(true);
+    const [displayForm, setDisplayForm] = useState(false);
 
     useEffect(() => {
         const _getAllLanders = async () => {
@@ -40,7 +46,6 @@ const Uploads = () => {
         setState({
             selectedFile: event.target.files[0]
         });
-
     }
 
     const onLanderClick = () => {
@@ -79,7 +84,8 @@ const Uploads = () => {
                     uploadButton.disabled = true;
                     let intervalID = null;
                     if (routeValue !== "header") {
-                        intervalID = setInterval(updateMessage, 15_000, timeProcessObject);
+                        updateMessage(timeProcessObject);
+                        intervalID = setInterval(updateMessage, 1_000, timeProcessObject);
                     }
                     
                     formData.append(
@@ -120,8 +126,10 @@ const Uploads = () => {
 
         try {
             const res = await axios.get(`${apiHostURL}/api/processed/${timeProcessObject.sensorValue}/data/count/${timeProcessObject.landerValue}`);
+            
+            console.table(res.data);
 
-            if (res.data.isPercentage) {
+            if (res.data.isPercentage && !displayForm) {
                 if (!document.getElementById("uploadProgressBar")) {
                     const progressBar = document.createElement('progress');
                     progressBar.id = "uploadProgressBar";
@@ -140,7 +148,41 @@ const Uploads = () => {
                 }
 
                 
-            } else { //TODO: add elif for timeProcessObject to contain the header information for percentages between this and the else
+            } else if (dateRange.burstCnt !== "" && dateRange.burstTime !== "" && dateRange.startTime !== "" && dateRange.endTime !== "") {
+                if (!timeProcessObject.estimatedTotal) {
+                    const getTotals = await axios.post(`${apiHostURL}/api/processed/${timeProcessObject.sensorValue}/data/count/headless`, dateRange);
+
+                    console.table(getTotals.data);
+
+                    timeProcessObject.estimatedTotal = getTotals.data.numberOfFiles;
+                } else {
+
+                    console.log(res.data.fileCount);
+                    console.log(timeProcessObject.estimatedTotal);
+                    
+                    console.log(res.data.fileCount / timeProcessObject.estimatedTotal);
+                    
+                    
+                    if (!document.getElementById("uploadProgressBar")) {
+                        // timeProcessObject.pageElement = document.getElementById("headerDataDiv");
+
+                        const progressBar = document.createElement('progress');
+                        progressBar.id = "uploadProgressBar";
+                        progressBar.value = Math.trunc((res.data.fileCount / timeProcessObject.estimatedTotal));
+    
+                        const progressMessage = document.createElement("p");
+                        progressMessage.id = "progressPercentage";
+                        progressMessage.innerText = `Upload Progress: ${Math.trunc((res.data.fileCount / timeProcessObject.estimatedTotal) * 100)}%`
+    
+                        timeProcessObject.pageElement.innerHTML = "";
+                        timeProcessObject.pageElement.appendChild(progressMessage);
+                        timeProcessObject.pageElement.appendChild(progressBar);
+                    } else {
+                        document.getElementById("progressPercentage").innerText = `Upload Progress: ${Math.trunc((res.data.fileCount / timeProcessObject.estimatedTotal) * 100)}%`;
+                        document.getElementById("uploadProgressBar").value = (res.data.fileCount / timeProcessObject.estimatedTotal);
+                    }
+                }
+            } else {
                 timeProcessObject.pageElement.innerText = `Files Uploaded: ${res.data.fileCount}`;
             }
 
@@ -154,55 +196,61 @@ const Uploads = () => {
     const onRouteChange = () => {
         const route = document.getElementById("route");
         const sensor = document.getElementById("sensor").value;
-        const appendDiv = document.getElementById("FileSelectDiv");
+        const selLander = document.getElementById("lander").value;
         
-        if (document.getElementById("PercentageInfoDiv")) {
-            appendDiv.removeChild(document.getElementById("PercentageInfoDiv"));
+        if (document.getElementById("headerDataForm")) {
+            setDisplayForm(false);
         }
 
-        if (route.value === "data") {
+        if (selLander !== "" && sensor !== "" && route.value === "data") {
             let lander;
-            const selLander = document.getElementById("lander").value;
 
             for (let i = 0; i < landers.length; i++) {
                 if (landers[i].asdblanderID === selLander) {
                     lander = landers[i];
 
-                    const percentageInfoDiv = document.createElement("div");
-                    percentageInfoDiv.id = "PercentageInfoDiv";
-                    const startDateInput = document.createElement("input");
-                    const endDateInput = document.createElement("input");
-                    const burstCountInput = document.createElement("input");
-                    const burstTimeInput = document.createElement("input");
-
-                    percentageInfoDiv.appendChild(startDateInput);
-                    percentageInfoDiv.appendChild(endDateInput);
-                    percentageInfoDiv.appendChild(burstCountInput);
-                    percentageInfoDiv.appendChild(burstTimeInput);
+                    setDateRange({
+                        burstTime: "",
+                        burstCnt: "",
+                        startTime: "",
+                        endTime: ""
+                    });
 
                     switch (sensor) {
                         case "ctd": {
                             if (!lander.ctdhead) {
-                                appendDiv.appendChild(percentageInfoDiv);
+                                
+                                setDisplayForm(true);
+                            } else {
+                                
+                                setDisplayForm(false);
                             }
                             break;
                         }
                         case "do": {
                             if (!lander.dohead) {
-                                appendDiv.appendChild(percentageInfoDiv);
+                                
+                                setDisplayForm(true);
+                            } else {
+                                
+                                setDisplayForm(false);
                             }
                             break;
                         }
                         case "flntu": {
                             if (!lander.flntuhead) {
-                                appendDiv.appendChild(percentageInfoDiv);
+                                
+                                setDisplayForm(true);
+                            } else {
+                                
+                                setDisplayForm(false);
                             }
                             break;
                         }
                         default: {
-
+                            console.log("Invalid Selection");
+                            
                         }
-                        return;
                     }
                 }
             }
@@ -229,6 +277,7 @@ const Uploads = () => {
                     <p>1) Select Lander from Menu</p>
                     <p>2) Select desired sensor from Menu</p>
                     <p>3) Select upload file type contents (Header Only, Data Points Only, or Combined Header w/ Data Points)</p>
+                    <p>   For Data without an uploaded Header, fill out the form to be provided a completion estimate during uploading</p>
                     <p>4) Click Submit and wait for message</p>
                     <p>If an Error occurs, check sensor and type of file and dropdown selections</p>
                 </Container>
@@ -271,6 +320,14 @@ const Uploads = () => {
             </div>
             <div id="FileSelectDiv">
                 <input type="file" onChange={onFileChange}/>
+            </div>
+            <div id="headerDataDiv">
+            {   displayForm
+                ?
+                <HeaderDataForm header={dateRange} updateRange={setDateRange} id="headerDataForm" className="uploadsContainer"/>
+                :
+                null
+            }
             </div>
             <div id="UploadButtonDiv">
                 <button id="uploadButton" onClick={onFileUpload}>Upload!</button>
