@@ -27,6 +27,8 @@ const Input = (props) => {
         multiple={props.multiple}
         disabled={props.disabled}
         autoComplete={props.autoComplete}
+        min={props.min}
+        max={props.max}
       />
     </Fragment>
   );

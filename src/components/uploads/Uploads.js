@@ -5,6 +5,7 @@ import Button from "../common/Button";
 import "./Uploads.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import HeaderDataForm from "./HeaderDataForm";
 
 const Uploads = () => {
     const navigate = useNavigate();
@@ -14,7 +15,14 @@ const Uploads = () => {
     });
 
     const [landers, setLanders] = useState([]);
+    const [dateRange, setDateRange] = useState({
+        burstTime: "",
+        burstCnt: "",
+        startTime: "",
+        endTime: ""
+    });
     const [loading, setLoading] = useState(true);
+    const [displayForm, setDisplayForm] = useState(false);
 
     useEffect(() => {
         const _getAllLanders = async () => {
@@ -26,6 +34,7 @@ const Uploads = () => {
                 setLoading(false);
             } catch (err) {
                 console.error(err.message ? err.message : err.response);
+                document.getElementById("mainBodyContainer").innerText = "Error Retrieving Landers";
             }
         }
 
@@ -37,7 +46,6 @@ const Uploads = () => {
         setState({
             selectedFile: event.target.files[0]
         });
-
     }
 
     const onLanderClick = () => {
@@ -51,12 +59,11 @@ const Uploads = () => {
         const uploadButton = document.getElementById("uploadButton");
         
         if (state.selectedFile) {
-
-            const processTime = ((state.selectedFile.size / 111) * 5) / 1_000;
         
-            var timeProcessObject = {
+            const timeProcessObject = {
                 pageElement: document.getElementById("fileDataDiv"),
-                totalTimeInSeconds: processTime
+                sensorValue: sensorValue,
+                landerValue: landerValue
             }
     
 
@@ -75,7 +82,11 @@ const Uploads = () => {
                     
 
                     uploadButton.disabled = true;
-                    const intervalID =  setInterval(updateMessage, 1_000, timeProcessObject);
+                    let intervalID = null;
+                    if (routeValue !== "header") {
+                        updateMessage(timeProcessObject);
+                        intervalID = setInterval(updateMessage, 1_000, timeProcessObject);
+                    }
                     
                     formData.append(
                         paramName,
@@ -83,16 +94,24 @@ const Uploads = () => {
                         state.selectedFile.name
                     );
                     
-                    const res = await axios.post(`${apiHostURL}/api/processed/${sensorValue}/upload_csv/${routeValue}/${landerValue}`, formData);
+                    await axios.post(`${apiHostURL}/api/processed/${sensorValue}/upload_csv/${routeValue}/${landerValue}`, formData);
 
-                    clearInterval(intervalID);
-                    timeProcessObject.pageElement.innerText = "Upload Completed!";
-                    uploadButton.disabled = false;
+                    if (intervalID) {
+                        clearInterval(intervalID);
+                    }
+                    if (document.getElementById("uploadProgressBar")) {
+                        document.getElementById("progressPercentage").innerText = "Upload Progress: 100%";
+                        document.getElementById("uploadProgressBar").value = 1;
+                    } else {
+                        timeProcessObject.pageElement.innerText = "Upload Completed!";
+                    }
+                    
                 } catch (err) {
                     console.error(err.message ? err.message : err.response);
-                    uploadButton.disabled = false;
                     alert((err.message ? err.message : err.response) + (err.response.data ? "\n" + err.response.data : ""));
                 }
+
+                uploadButton.disabled = false;
 
             } else {
                 alert("No Sensor or Upload Type Selected!");
@@ -103,21 +122,140 @@ const Uploads = () => {
         }
     }
 
-    const updateMessage = (timeProcessObject) => {
-        const minutes = Math.floor((timeProcessObject.totalTimeInSeconds % 3600) / 60);
-        const seconds = Math.round(timeProcessObject.totalTimeInSeconds % 60);
-        
-        console.log(minutes);
-        console.log(seconds);
+    const updateMessage = async (timeProcessObject) => {
 
-        if (timeProcessObject.totalTimeInSeconds > 0) {
-            timeProcessObject.pageElement.innerText = `Time Remaining: ${minutes}:${seconds}`
-        } else {
-            timeProcessObject.pageElement.innerText = "Finishing up. . .";
+        try {
+            const res = await axios.get(`${apiHostURL}/api/processed/${timeProcessObject.sensorValue}/data/count/${timeProcessObject.landerValue}`);
+            
+            console.table(res.data);
+
+            if (res.data.isPercentage && !displayForm) {
+                if (!document.getElementById("uploadProgressBar")) {
+                    const progressBar = document.createElement('progress');
+                    progressBar.id = "uploadProgressBar";
+                    progressBar.value = res.data.percentage;
+
+                    const progressMessage = document.createElement("p");
+                    progressMessage.id = "progressPercentage";
+                    progressMessage.innerText = `Upload Progress: ${Math.trunc(res.data.percentage * 100)}%`
+
+                    timeProcessObject.pageElement.innerHTML = "";
+                    timeProcessObject.pageElement.appendChild(progressMessage);
+                    timeProcessObject.pageElement.appendChild(progressBar);
+                } else {
+                    document.getElementById("progressPercentage").innerText = `Upload Progress: ${Math.trunc(res.data.percentage * 100)}%`;
+                    document.getElementById("uploadProgressBar").value = res.data.percentage;
+                }
+
+                
+            } else if (dateRange.burstCnt !== "" && dateRange.burstTime !== "" && dateRange.startTime !== "" && dateRange.endTime !== "") {
+                if (!timeProcessObject.estimatedTotal) {
+                    const getTotals = await axios.post(`${apiHostURL}/api/processed/${timeProcessObject.sensorValue}/data/count/headless`, dateRange);
+
+                    console.table(getTotals.data);
+
+                    timeProcessObject.estimatedTotal = getTotals.data.numberOfFiles;
+                } else {
+
+                    console.log(res.data.fileCount);
+                    console.log(timeProcessObject.estimatedTotal);
+                    
+                    console.log(res.data.fileCount / timeProcessObject.estimatedTotal);
+                    
+                    
+                    if (!document.getElementById("uploadProgressBar")) {
+                        // timeProcessObject.pageElement = document.getElementById("headerDataDiv");
+
+                        const progressBar = document.createElement('progress');
+                        progressBar.id = "uploadProgressBar";
+                        progressBar.value = Math.trunc((res.data.fileCount / timeProcessObject.estimatedTotal));
+    
+                        const progressMessage = document.createElement("p");
+                        progressMessage.id = "progressPercentage";
+                        progressMessage.innerText = `Upload Progress: ${Math.trunc((res.data.fileCount / timeProcessObject.estimatedTotal) * 100)}%`
+    
+                        timeProcessObject.pageElement.innerHTML = "";
+                        timeProcessObject.pageElement.appendChild(progressMessage);
+                        timeProcessObject.pageElement.appendChild(progressBar);
+                    } else {
+                        document.getElementById("progressPercentage").innerText = `Upload Progress: ${Math.trunc((res.data.fileCount / timeProcessObject.estimatedTotal) * 100)}%`;
+                        document.getElementById("uploadProgressBar").value = (res.data.fileCount / timeProcessObject.estimatedTotal);
+                    }
+                }
+            } else {
+                timeProcessObject.pageElement.innerText = `Files Uploaded: ${res.data.fileCount}`;
+            }
+
+            
+        } catch (err) {
+            console.error(err.response ? err.response : err.message);
+        }
+        
+    }
+
+    const onRouteChange = () => {
+        const route = document.getElementById("route");
+        const sensor = document.getElementById("sensor").value;
+        const selLander = document.getElementById("lander").value;
+        
+        if (document.getElementById("headerDataForm")) {
+            setDisplayForm(false);
         }
 
-        timeProcessObject.totalTimeInSeconds -= 1;
-        
+        if (selLander !== "" && sensor !== "" && route.value === "data") {
+            let lander;
+
+            for (let i = 0; i < landers.length; i++) {
+                if (landers[i].asdblanderID === selLander) {
+                    lander = landers[i];
+
+                    setDateRange({
+                        burstTime: "",
+                        burstCnt: "",
+                        startTime: "",
+                        endTime: ""
+                    });
+
+                    switch (sensor) {
+                        case "ctd": {
+                            if (!lander.ctdhead) {
+                                
+                                setDisplayForm(true);
+                            } else {
+                                
+                                setDisplayForm(false);
+                            }
+                            break;
+                        }
+                        case "do": {
+                            if (!lander.dohead) {
+                                
+                                setDisplayForm(true);
+                            } else {
+                                
+                                setDisplayForm(false);
+                            }
+                            break;
+                        }
+                        case "flntu": {
+                            if (!lander.flntuhead) {
+                                
+                                setDisplayForm(true);
+                            } else {
+                                
+                                setDisplayForm(false);
+                            }
+                            break;
+                        }
+                        default: {
+                            console.log("Invalid Selection");
+                            
+                        }
+                    }
+                }
+            }
+            
+        }
     }
 
     const fileData = () => {
@@ -139,6 +277,7 @@ const Uploads = () => {
                     <p>1) Select Lander from Menu</p>
                     <p>2) Select desired sensor from Menu</p>
                     <p>3) Select upload file type contents (Header Only, Data Points Only, or Combined Header w/ Data Points)</p>
+                    <p>   For Data without an uploaded Header, fill out the form to be provided a completion estimate during uploading</p>
                     <p>4) Click Submit and wait for message</p>
                     <p>If an Error occurs, check sensor and type of file and dropdown selections</p>
                 </Container>
@@ -151,9 +290,9 @@ const Uploads = () => {
         return (
             <Container className="uploadsContainer">
             <h1>CSV Upload</h1>
-            <div>
+            <div id="LanderSelectDiv">
                 <label>Select a Lander:</label>
-                <select name="lander" id="lander">
+                <select onChange={onRouteChange} name="lander" id="lander">
                     <option value=""></option>
                     {landers.map( option => { return <option value={option.asdblanderID} key={option.asdblanderID}>{option.asdblanderID}</option>})}
                 </select>
@@ -161,26 +300,36 @@ const Uploads = () => {
             <Button
                     onClick={onLanderClick}
                 >Add Lander</Button>
-            <div>
+            <div id="SensorSelectDiv">
                 <label htmlFor="sensor">Select a Sensor:</label>
-                <select name="sensor" id="sensor">
+                <select onChange={onRouteChange} name="sensor" id="sensor">
                     <option value=""></option>
                     <option value="ctd">CTD</option>
                     <option value="do">DO</option>
                     <option value="flntu">FLNTU</option>
                 </select>
             </div>
-            <div>
+            <div id="RouteSelectDiv">
                 <label htmlFor="route">Select File Type:</label>
-                <select name="route" id="route">
+                <select onChange={onRouteChange} name="route" id="route">
                     <option value=""></option>
                     <option value="header">Head</option>
                     <option value="data">Data</option>
                     <option value="combined">Combined</option>
                 </select>
             </div>
-            <div>
+            <div id="FileSelectDiv">
                 <input type="file" onChange={onFileChange}/>
+            </div>
+            <div id="headerDataDiv">
+            {   displayForm
+                ?
+                <HeaderDataForm header={dateRange} updateRange={setDateRange} id="headerDataForm" className="uploadsContainer"/>
+                :
+                null
+            }
+            </div>
+            <div id="UploadButtonDiv">
                 <button id="uploadButton" onClick={onFileUpload}>Upload!</button>
             </div>
             {fileData()}
@@ -189,8 +338,12 @@ const Uploads = () => {
     }
 
     return (
-        <Container className="uploadsContainer">
-            {loading ? <h1>loading...</h1> : formatPage()}
+        <Container className="uploadsContainer" id="mainBodyContainer">
+            {
+                loading 
+                ? <h1>loading...</h1> 
+                : formatPage()
+            }
         </Container>
     );
 }
