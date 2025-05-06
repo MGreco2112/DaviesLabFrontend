@@ -85,7 +85,7 @@ const Uploads = () => {
                     let intervalID = null;
                     if (routeValue !== "header") {
                         updateMessage(timeProcessObject);
-                        intervalID = setInterval(updateMessage, 1_000, timeProcessObject);
+                        intervalID = setInterval(updateMessage, 5_000, timeProcessObject);
                     }
                     
                     formData.append(
@@ -152,19 +152,10 @@ const Uploads = () => {
                 if (!timeProcessObject.estimatedTotal) {
                     const getTotals = await axios.post(`${apiHostURL}/api/processed/${timeProcessObject.sensorValue}/data/count/headless`, dateRange);
 
-                    console.table(getTotals.data);
-
                     timeProcessObject.estimatedTotal = getTotals.data.numberOfFiles;
                 } else {
-
-                    console.log(res.data.fileCount);
-                    console.log(timeProcessObject.estimatedTotal);
-                    
-                    console.log(res.data.fileCount / timeProcessObject.estimatedTotal);
-                    
                     
                     if (!document.getElementById("uploadProgressBar")) {
-                        // timeProcessObject.pageElement = document.getElementById("headerDataDiv");
 
                         const progressBar = document.createElement('progress');
                         progressBar.id = "uploadProgressBar";
