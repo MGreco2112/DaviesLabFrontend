@@ -11,10 +11,11 @@ const Uploads = () => {
     const navigate = useNavigate();
 
     const [state, setState] = useState({
-        selectedFile: null
+        selectedFile: null,
+        isUploading: false,
+        landers: [],
+        showDisplayForm: false
     });
-
-    const [landers, setLanders] = useState([]);
     const [dateRange, setDateRange] = useState({
         burstTime: "",
         burstCnt: "",
@@ -22,7 +23,6 @@ const Uploads = () => {
         endTime: ""
     });
     const [loading, setLoading] = useState(true);
-    const [displayForm, setDisplayForm] = useState(false);
 
     useEffect(() => {
         const _getAllLanders = async () => {
@@ -30,7 +30,11 @@ const Uploads = () => {
                 const res = await axios.get(`${apiHostURL}/api/landers/all`);
 
                 console.table(res.data);
-                setLanders(res.data);
+
+                setState({
+                    ...state,
+                    landers: res.data
+                });
                 setLoading(false);
             } catch (err) {
                 console.error(err.message ? err.message : err.response);
@@ -44,6 +48,7 @@ const Uploads = () => {
 
     const onFileChange = (event) => {
         setState({
+            ...state,
             selectedFile: event.target.files[0]
         });
     }
@@ -55,15 +60,17 @@ const Uploads = () => {
     const onFileUpload = async () => {
         const sensorValue = document.getElementById("sensor").value;
         let routeValue = document.getElementById("route").value;
-        const landerValue = document.getElementById("lander").value;
+        const landerValue = JSON.parse(document.getElementById("lander").value);
         const uploadButton = document.getElementById("uploadButton");
+
+        console.table(landerValue.asdblanderID);
         
         if (state.selectedFile) {
         
             const timeProcessObject = {
                 pageElement: document.getElementById("fileDataDiv"),
                 sensorValue: sensorValue,
-                landerValue: landerValue
+                landerValue: landerValue.asdblanderID
             }
     
 
@@ -82,7 +89,7 @@ const Uploads = () => {
                     
 
                     uploadButton.disabled = true;
-                    let intervalID = null;
+                    var intervalID = null;
                     if (routeValue !== "header") {
                         updateMessage(timeProcessObject);
                         intervalID = setInterval(updateMessage, 5_000, timeProcessObject);
@@ -94,7 +101,7 @@ const Uploads = () => {
                         state.selectedFile.name
                     );
                     
-                    await axios.post(`${apiHostURL}/api/processed/${sensorValue}/upload_csv/${routeValue}/${landerValue}`, formData);
+                    await axios.post(`${apiHostURL}/api/processed/${sensorValue}/upload_csv/${routeValue}/${landerValue.asdblanderID}`, formData);
 
                     if (intervalID) {
                         clearInterval(intervalID);
@@ -109,6 +116,9 @@ const Uploads = () => {
                 } catch (err) {
                     console.error(err.message ? err.message : err.response);
                     alert((err.message ? err.message : err.response) + (err.response.data ? "\n" + err.response.data : ""));
+                    if (intervalID) {
+                        clearInterval(intervalID);
+                    }
                 }
 
                 uploadButton.disabled = false;
@@ -125,23 +135,18 @@ const Uploads = () => {
     const updateMessage = async (timeProcessObject) => {
 
         try {
-            const res = await axios.get(`${apiHostURL}/api/processed/${timeProcessObject.sensorValue}/data/count/${timeProcessObject.landerValue}`);
+
+            if (!state.showDisplayForm) {
+                const res = await axios.get(`${apiHostURL}/api/processed/${timeProcessObject.sensorValue}/data/count/${timeProcessObject.landerValue}`);
             
-            console.table(res.data);
+                console.table(res.data);
 
-            if (res.data.isPercentage && !displayForm) {
                 if (!document.getElementById("uploadProgressBar")) {
-                    const progressBar = document.createElement('progress');
-                    progressBar.id = "uploadProgressBar";
-                    progressBar.value = res.data.percentage;
 
-                    const progressMessage = document.createElement("p");
-                    progressMessage.id = "progressPercentage";
-                    progressMessage.innerText = `Upload Progress: ${Math.trunc(res.data.percentage * 100)}%`
-
-                    timeProcessObject.pageElement.innerHTML = "";
-                    timeProcessObject.pageElement.appendChild(progressMessage);
-                    timeProcessObject.pageElement.appendChild(progressBar);
+                    setState({
+                        ...state,
+                        isUploading: true
+                    });
                 } else {
                     document.getElementById("progressPercentage").innerText = `Upload Progress: ${Math.trunc(res.data.percentage * 100)}%`;
                     document.getElementById("uploadProgressBar").value = res.data.percentage;
@@ -157,26 +162,25 @@ const Uploads = () => {
                     
                     if (!document.getElementById("uploadProgressBar")) {
 
-                        const progressBar = document.createElement('progress');
-                        progressBar.id = "uploadProgressBar";
-                        progressBar.value = Math.trunc((res.data.fileCount / timeProcessObject.estimatedTotal));
-    
-                        const progressMessage = document.createElement("p");
-                        progressMessage.id = "progressPercentage";
-                        progressMessage.innerText = `Upload Progress: ${Math.trunc((res.data.fileCount / timeProcessObject.estimatedTotal) * 100)}%`
-    
-                        timeProcessObject.pageElement.innerHTML = "";
-                        timeProcessObject.pageElement.appendChild(progressMessage);
-                        timeProcessObject.pageElement.appendChild(progressBar);
+                        setState({
+                            ...state,
+                            isUploading: true
+                        });
                     } else {
+                        const res = await axios.get(`${apiHostURL}/api/processed/${timeProcessObject.sensorValue}/data/count/${timeProcessObject.landerValue}`);
+            
+                        console.table(res.data);
+
                         document.getElementById("progressPercentage").innerText = `Upload Progress: ${Math.trunc((res.data.fileCount / timeProcessObject.estimatedTotal) * 100)}%`;
                         document.getElementById("uploadProgressBar").value = (res.data.fileCount / timeProcessObject.estimatedTotal);
                     }
                 }
             } else {
-                timeProcessObject.pageElement.innerText = `Files Uploaded: ${res.data.fileCount}`;
+                setState({
+                    ...state,
+                    isUploading: true
+                });
             }
-
             
         } catch (err) {
             console.error(err.response ? err.response : err.message);
@@ -187,63 +191,84 @@ const Uploads = () => {
     const onRouteChange = () => {
         const route = document.getElementById("route");
         const sensor = document.getElementById("sensor").value;
-        const selLander = document.getElementById("lander").value;
+        const selLander = JSON.parse(document.getElementById("lander").value);
         
         if (document.getElementById("headerDataForm")) {
-            setDisplayForm(false);
+            setState({
+                ...state,
+                showDisplayForm: false,
+                isUploading: false
+            });
+        } else {
+            setState({
+                ...state,
+                isUploading: false
+            });
         }
 
         if (selLander !== "" && sensor !== "" && route.value === "data") {
-            let lander;
+        
+            setDateRange({
+                burstTime: "",
+                burstCnt: "",
+                startTime: "",
+                endTime: ""
+            });
 
-            for (let i = 0; i < landers.length; i++) {
-                if (landers[i].asdblanderID === selLander) {
-                    lander = landers[i];
-
-                    setDateRange({
-                        burstTime: "",
-                        burstCnt: "",
-                        startTime: "",
-                        endTime: ""
-                    });
-
-                    switch (sensor) {
-                        case "ctd": {
-                            if (!lander.ctdhead) {
+            switch (sensor) {
+                case "ctd": {
+                    if (!selLander.ctdhead) {
+                        
+                        setState({
+                            ...state,
+                            showDisplayForm: true
+                        });
+                    } else {
                                 
-                                setDisplayForm(true);
-                            } else {
-                                
-                                setDisplayForm(false);
-                            }
-                            break;
-                        }
-                        case "do": {
-                            if (!lander.dohead) {
-                                
-                                setDisplayForm(true);
-                            } else {
-                                
-                                setDisplayForm(false);
-                            }
-                            break;
-                        }
-                        case "flntu": {
-                            if (!lander.flntuhead) {
-                                
-                                setDisplayForm(true);
-                            } else {
-                                
-                                setDisplayForm(false);
-                            }
-                            break;
-                        }
-                        default: {
-                            console.log("Invalid Selection");
-                            
-                        }
+                        setState({
+                            ...state,
+                            showDisplayForm: false
+                        });
                     }
+                    break;
                 }
+                case "do": {
+                    if (!selLander.dohead) {
+                       
+                        setState({
+                            ...state,
+                            showDisplayForm: true
+                        });
+                    } else {
+                                
+                        setState({
+                            ...state,
+                            showDisplayForm: false
+                        });
+                    }
+                    break;
+                }
+                case "flntu": {
+                    if (!selLander.flntuhead) {
+                        
+                        setState({
+                            ...state,
+                            showDisplayForm: true
+                        });
+                    } else {
+                                
+                        setState({
+                            ...state,
+                            showDisplayForm: false
+                        });
+                    }
+                    break;
+                }
+                default: {
+                    console.log("Invalid Selection");
+                            
+                }
+                    
             }
             
         }
@@ -252,14 +277,23 @@ const Uploads = () => {
     const fileData = () => {
 
         if (state.selectedFile) {
-            return (
-                <div id="fileDataDiv">
-                    <h2>File Details:</h2>
-                    <p>File Name: {state.selectedFile.name}</p>
-
-                    <p>File Type: {state.selectedFile.type}</p>
-                </div>
-            );
+            if (state.isUploading) {
+                return (
+                    <div id="progressBarDiv">
+                        <p id="progressPercentage">Upload Progress: 0%</p>
+                        <progress id="uploadProgressBar" value={null}/>
+                    </div>
+                )
+            } else {
+                return (
+                    <div id="fileDataDiv">
+                        <h2>File Details:</h2>
+                        <p>File Name: {state.selectedFile.name}</p>
+    
+                        <p>File Type: {state.selectedFile.type}</p>
+                    </div>
+                );
+            }
         } else {
             return (
                 <Container className="uploadsContainer">
@@ -285,7 +319,7 @@ const Uploads = () => {
                 <label>Select a Lander:</label>
                 <select onChange={onRouteChange} name="lander" id="lander">
                     <option value=""></option>
-                    {landers.map( option => { return <option value={option.asdblanderID} key={option.asdblanderID}>{option.asdblanderID}</option>})}
+                    {state.landers.map( option => { return <option value={JSON.stringify(option)} key={option.asdblanderID}>{option.asdblanderID}</option>})}
                 </select>
             </div>
             <Button
@@ -313,7 +347,7 @@ const Uploads = () => {
                 <input type="file" onChange={onFileChange}/>
             </div>
             <div id="headerDataDiv">
-            {   displayForm
+            {   state.showDisplayForm
                 ?
                 <HeaderDataForm header={dateRange} updateRange={setDateRange} id="headerDataForm" className="uploadsContainer"/>
                 :
