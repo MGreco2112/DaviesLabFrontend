@@ -17,7 +17,7 @@ These types return as String format despite being formatted as Date/LocalDateTim
 Return Lander JSON without any Sensor Information
 
 ```HTTP
-http://51.81.243.39:8080/api/developers/basic_lander/id/${asdb_lander_id}
+https://tsdb.marecotec.io:8080/api/developers/basic_lander/id/${asdb_lander_id}
 ```
 
 Response: Lander
@@ -36,7 +36,7 @@ Response: Lander
 Return Header and Data Set from CTD of specified Lander
 
 ```HTTP
-http://51.81.243.39:8080/api/developers/lander/id/${asdb_lander_id}/ctd
+https://tsdb.marecotec.io:8080/api/developers/lander/id/${asdb_lander_id}/ctd
 ```
 
 Response: CTD Header -> CTD Data Set
@@ -95,7 +95,7 @@ Response: CTD Header -> CTD Data Set
 Return Header and Data Set from DO of specified Lander
 
 ```HTTP
-http://51.81.243.39:8080/api/developers/lander/id/${asdb_lander_id}/do
+https://tsdb.marecotec.io:8080/api/developers/lander/id/${asdb_lander_id}/do
 ```
 
 Response: DO Header -> DO Data Set
@@ -151,7 +151,7 @@ Response: DO Header -> DO Data Set
 Return Header and Data Set from FLNTU of specified Lander
 
 ```HTTP
-http://51.81.243.39:8080/api/developers/lander/id/{asdb_lander_id}/flntu
+https://tsdb.marecotec.io:8080/api/developers/lander/id/{asdb_lander_id}/flntu
 ```
 
 Response: FLNTU Header -> FLNTU Data Set
@@ -206,7 +206,7 @@ Response: FLNTU Header -> FLNTU Data Set
 Return complete Lander JSON by Lander Name Query 
 
 ```HTTP
-http://51.81.243.39:8080/api/developers/full_lander/id/${asdb_lander_id}
+https://tsdb.marecotec.io:8080/api/developers/full_lander/id/${asdb_lander_id}
 ```
 
 Response: Lander -> Sensor Header -> Sensor Data
