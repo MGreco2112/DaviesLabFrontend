@@ -17,7 +17,7 @@ These types return as String format despite being formatted as Date/LocalDateTim
 Return Lander JSON without any Sensor Information
 
 ```HTTP
-https://tsdb.marecotec.io:8080/api/developers/basic_lander/id/${asdb_lander_id}
+https://desmophyllum.marecotec.com:8444/api/developers/basic_lander/id/${asdb_lander_id}
 ```
 
 Response: Lander
@@ -36,7 +36,7 @@ Response: Lander
 Return Header and Data Set from CTD of specified Lander
 
 ```HTTP
-https://tsdb.marecotec.io:8080/api/developers/lander/id/${asdb_lander_id}/ctd
+https://desmophyllum.marecotec.com:8444/api/developers/lander/id/${asdb_lander_id}/ctd
 ```
 
 Response: CTD Header -> CTD Data Set
@@ -95,7 +95,7 @@ Response: CTD Header -> CTD Data Set
 Return Header and Data Set from DO of specified Lander
 
 ```HTTP
-https://tsdb.marecotec.io:8080/api/developers/lander/id/${asdb_lander_id}/do
+https://desmophyllum.marecotec.com:8444/api/developers/lander/id/${asdb_lander_id}/do
 ```
 
 Response: DO Header -> DO Data Set
@@ -151,7 +151,7 @@ Response: DO Header -> DO Data Set
 Return Header and Data Set from FLNTU of specified Lander
 
 ```HTTP
-https://tsdb.marecotec.io:8080/api/developers/lander/id/{asdb_lander_id}/flntu
+https://desmophyllum.marecotec.com:8444/api/developers/lander/id/{asdb_lander_id}/flntu
 ```
 
 Response: FLNTU Header -> FLNTU Data Set
@@ -206,7 +206,7 @@ Response: FLNTU Header -> FLNTU Data Set
 Return complete Lander JSON by Lander Name Query 
 
 ```HTTP
-https://tsdb.marecotec.io:8080/api/developers/full_lander/id/${asdb_lander_id}
+https://desmophyllum.marecotec.com:8444/api/developers/full_lander/id/${asdb_lander_id}
 ```
 
 Response: Lander -> Sensor Header -> Sensor Data
