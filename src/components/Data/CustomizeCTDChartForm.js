@@ -63,7 +63,6 @@ const CustomizeCTDChartForm = (props) => {
                 <Container id="ButtonContainer">
                     <Button 
                         id="SubmitButton" 
-                        disabled={document.getElementById("SensorChart")}
                     >Create Chart</Button>
                 </Container>
             </Form>

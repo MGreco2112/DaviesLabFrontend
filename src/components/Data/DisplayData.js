@@ -69,6 +69,8 @@ const DisplayData = () => {
     }
 
     const fetchDataRange = async () => {
+        document.getElementById("SubmitButton").disabled = true;
+        document.getElementById("SubmitButton").innerText = "Loading Chart";
         let startDate = document.getElementById("startDateInput").value;
         let endDate = document.getElementById("endDateInput").value;
 
@@ -131,10 +133,13 @@ const DisplayData = () => {
         if (dataValues.length > 0) {
             
             if (dataSet && dataSet.length > 0) {
+                
                 createChart(dataValues, dataSet);
             }
         } else {
-           alert("ERROR: No Selection Made");
+            document.getElementById("SubmitButton").disabled = false;
+            document.getElementById("SubmitButton").innerText = "Create Chart";
+            alert("ERROR: No Selection Made");
         }
     }
 
