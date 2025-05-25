@@ -37,3 +37,7 @@
 .FormInputContainer {
     width: 0%!important;
 }
+
+#PageContainer, #DataPageContainer, #FormatPageContainer {
+    min-height: 0em!important;
+}

@@ -264,6 +264,20 @@ const Uploads = () => {
                     }
                     break;
                 }
+                case "albex_ctd": {
+                    if (!selLander.albexCTDHead) {
+                        setState({
+                            ...state,
+                            showDisplayForm: true
+                        });
+                    } else {
+                        setState({
+                            ...state,
+                            showDisplayForm: false
+                        });
+                    }
+                    break;
+                }
                 default: {
                     console.log("Invalid Selection");
                             
@@ -332,6 +346,7 @@ const Uploads = () => {
                     <option value="ctd">CTD</option>
                     <option value="do">DO</option>
                     <option value="flntu">FLNTU</option>
+                    <option value="albex_ctd">ALBEX CTD</option>
                 </select>
             </div>
             <div id="RouteSelectDiv">

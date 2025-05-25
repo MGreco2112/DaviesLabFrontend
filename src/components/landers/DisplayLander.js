@@ -46,6 +46,10 @@ const DisplayLander = () => {
         navigate(`/landers/data/flntu/${lander.flntuhead.headID}`);
     }
 
+    const albexNav = () => {
+        navigate(`/landers/data/albex_ctd/${lander.albexCTDHead.headID}`);
+    }
+
     const formatPage = () => {
         return (
             <Container className="LandersContainer">
@@ -68,6 +72,13 @@ const DisplayLander = () => {
                     lander.flntuhead
                     ?
                     <p>FLNTU Header ID: {lander.flntuhead.headID}</p>
+                    :
+                    null
+                }
+                {
+                    lander.albexCTDHead
+                    ?
+                    <p>ALBEX CTD Header ID: {lander.albexCTDHead.headID}</p>
                     :
                     null
                 }
@@ -99,6 +110,16 @@ const DisplayLander = () => {
                             id="LanderButton"
                             onClick={flntuNav}
                         >FLNTU Data</Button>
+                        :
+                        null
+                    }
+                    {
+                        lander.albexCTDHead
+                        ?
+                        <Button
+                            id="LanderButton"
+                            onClick={albexNav}
+                        >ALBEX CTD Data</Button>
                         :
                         null
                     }

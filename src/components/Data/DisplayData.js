@@ -10,6 +10,7 @@ import FLNTUHeadData from "./FLNTUHeadData";
 import Chart from "chart.js/auto";
 import axios from "axios";
 import "./Data.css";
+import ALBEXHeadData from "./ALBEXHeadData";
 
 
 const DisplayData = () => {
@@ -27,6 +28,7 @@ const DisplayData = () => {
                 const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/headers/sanitized/${params.headId}`);
                 
                 setHead(res.data);
+                console.table(res.data);
                 setLoading(false);
             } catch (err) {
                 console.error(err.response ? err.response : err.message);
@@ -56,11 +58,13 @@ const DisplayData = () => {
             headInfo = <DOHeadData header={head} id="PageContainer" form={formProps}/>
         } else if (params.headType === "flntu") {
             headInfo = <FLNTUHeadData header={head} id="PageContainer" form={formProps}/>
+        } else if (params.headType === "albex_ctd") {
+            headInfo = <ALBEXHeadData header={head} id="PageContainer" form={formProps}/>
         }
 
 
         return (
-            <Container>
+            <Container id="FormatPageContainer">
                 <Button id="LanderButton" onClick={returnToLander}>Return to Lander</Button>
                 {headInfo}
             </Container>
@@ -69,11 +73,9 @@ const DisplayData = () => {
     }
 
     const fetchDataRange = async () => {
-        document.getElementById("SubmitButton").disabled = true;
-        document.getElementById("SubmitButton").innerText = "Loading Chart";
         let startDate = document.getElementById("startDateInput").value;
         let endDate = document.getElementById("endDateInput").value;
-
+        
         if (startDate === "" && head.startTime !== null) {
             startDate = head.startTime;
         }
@@ -82,19 +84,21 @@ const DisplayData = () => {
             endDate = head.endTime;
         }
         
-        if (startDate !== "" && endDate !== "") {
+        
+        if (startDate !== undefined || endDate !== undefined) {
+
+            document.getElementById("SubmitButton").disabled = true;
+            document.getElementById("SubmitButton").innerText = "Loading Chart";
             
             const _getData = async () => {
                 try {
                     const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/data/headId/${head.headID}/startDate/${startDate}/endDate/${endDate}`);
                 
-                    console.log(`${apiHostURL}/api/processed/${params.headType}/data/headId/${head.headID}/startDate/${startDate}/endDate/${endDate}`);
-
-                    console.log(res.data);
-                
                     return res.data;
                 } catch (err) {
                     console.error(err.response ? err.response : err.message);
+                    document.getElementById("SubmitButton").disabled = false;
+                    document.getElementById("SubmitButton").innerText = "Create Chart";
                 }
             }
 
@@ -126,6 +130,7 @@ const DisplayData = () => {
     }
 
     const onFormSubmit = async () => {
+
         const dataValues = buildDataNames();
         const dataSet = await fetchDataRange();
         
@@ -190,7 +195,7 @@ const DisplayData = () => {
     
 
     return (
-        <Container>
+        <Container id="DataPageContainer">
             {
                 loading
                 ?
