@@ -151,7 +151,7 @@ Response: DO Header -> DO Data Set
 Return Header and Data Set from FLNTU of specified Lander
 
 ```HTTP
-https://desmophyllum.marecotec.com:8444/api/developers/lander/id/{asdb_lander_id}/flntu
+https://desmophyllum.marecotec.com:8444/api/developers/lander/id/${asdb_lander_id}/flntu
 ```
 
 Response: FLNTU Header -> FLNTU Data Set
@@ -206,7 +206,7 @@ Response: FLNTU Header -> FLNTU Data Set
 Return Header and Data Set from ALBEX CTD of specified Lander
 
 ```HTTP
-https://desmophyllum.marecotec.com:8444/api/developers/lander/id/Test_Lander/albex_ctd
+https://desmophyllum.marecotec.com:8444/api/developers/lander/id/${asdb_lander_id}/albex_ctd
 ```
 
 Response: FLNTU Header -> FLNTU Data Set
