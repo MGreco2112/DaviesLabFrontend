@@ -201,6 +201,38 @@ Response: FLNTU Header -> FLNTU Data Set
 }
 ```
 
+## Get ALBEX CTD Info VIA Lander ID
+
+Return Header and Data Set from ALBEX CTD of specified Lander
+
+```HTTP
+https://desmophyllum.marecotec.com:8444/api/developers/lander/id/Test_Lander/albex_ctd
+```
+
+Response: FLNTU Header -> FLNTU Data Set
+
+```JSON
+{
+    "data": [
+        {
+            "date": "2024-09-24T22:45:00",
+            "id": 4127,
+            "flag": 0,
+            "headID": 5,
+            "salinity": 34.9796,
+            "temperature": 4.3501,
+            "oxygen_ml_l": 4.627,
+            "oxygenSat_percent": 64.4,
+            "turbidity_ntu": 0.0516,
+            "chla_ug_ml": -0.0018,
+            "pressure_db": 1390.285
+        }
+        ],
+    "headID": 5,
+    "landerID": "Test_Lander"
+}
+```
+
 ## Get Complete Lander By Name
 
 Return complete Lander JSON by Lander Name Query 
@@ -345,6 +377,25 @@ Response: Lander -> Sensor Header -> Sensor Data
                 "turbMFTU": -0.09,
                 "chlAUgL": 0.02,
                 "headID": 2
+            }
+        ]
+    },
+    "albexHead": {
+        "headID": 5,
+        "landerID": "NF2306_20230914_03",
+        "data": [
+            {
+                "date": "2025-04-01T00:45:00",
+                "id": 8641,
+                "flag": 0,
+                "headID": 5,
+                "salinity": 34.9803,
+                "temperature": 4.3527,
+                "oxygen_ml_l": 4.613,
+                "oxygenSat_percent": 64.21,
+                "turbidity_ntu": 0.369,
+                "chla_ug_ml": 0.0014,
+                "pressure_db": 1390.327
             }
         ]
     }
