@@ -209,7 +209,7 @@ Return Header and Data Set from ALBEX CTD of specified Lander
 https://desmophyllum.marecotec.com:8444/api/developers/lander/id/${asdb_lander_id}/albex_ctd
 ```
 
-Response: FLNTU Header -> FLNTU Data Set
+Response: ALBEX CTD Header -> ALBEX CTD Data Set
 
 ```JSON
 {
@@ -230,6 +230,77 @@ Response: FLNTU Header -> FLNTU Data Set
         ],
     "headID": 5,
     "landerID": "Test_Lander"
+}
+```
+
+## Get ADCP Info VIA Lander ID
+
+Return Header and Data Set from ADCP of specified Lander
+
+```HTTP
+https://desmophyllum.marecotec.com:8444/api/developers/lander/id/${asdb_lander_id}/adcp
+```
+
+Response: ADCP Header -> ADCP Data Set
+
+```JSON
+{
+    "data": [
+        {
+            "id": 24,
+            "date": "2022-08-27T15:55:00",
+            "headID": 1,
+            "speed7_4_0m": 0.146,
+            "speed8_4_5m": 0.178,
+            "pitch": 5.1,
+            "temperature": 4.35,
+            "analogIn2": 0.0,
+            "speed1_1_0m": 0.117,
+            "speed3_2_0m": 0.129,
+            "speed2_1_5m": 0.134,
+            "battery": 13.4,
+            "pressure": 1395.817,
+            "speed5_3_0m": 0.147,
+            "speed9_5_0m": 0.225,
+            "speed10_5_5m": 0.175,
+            "speed11_6_0m": 0.207,
+            "speed4_2_5m": 0.139,
+            "heading": 66.5,
+            "roll": 0.5,
+            "analogIn1": 0.0,
+            "speed6_3_5m": 0.152,
+            "dir15_8_0m": 182.98,
+            "dir3_2_0m": 117.76,
+            "speed12_6_5m": 0.227,
+            "dir2_1_5m": 117.52,
+            "dir6_3_5m": 118.76,
+            "dir9_5_0m": 116.11,
+            "speed18_9_5m": 0.145,
+            "speed14_7_5m": 0.081,
+            "dir14_7_5m": 109.56,
+            "speed17_9_0m": 0.317,
+            "dir19_10_0m": 297.78,
+            "dir12_6_5m": 85.45,
+            "dir7_4_0m": 113.76,
+            "speed20_10_5m": 0.157,
+            "dir1_1_0m": 122.47,
+            "speed13_7_0m": 0.259,
+            "dir4_2_5m": 117.85,
+            "dir10_5_5m": 113.2,
+            "dir11_6_0m": 111.85,
+            "dir8_4_5m": 116.28,
+            "dir13_7_0m": 141.58,
+            "dir16_8_5m": 117.28,
+            "dir5_3_0m": 120.76,
+            "speed19_10_0m": 0.105,
+            "speed15_8_0m": 0.211,
+            "speed16_8_5m": 0.107,
+            "dir17_9_0m": 105.0,
+            "dir18_9_5m": 57.95
+        }
+    ],
+    "headID": 1,
+    "landerID": "NF2306_20230914_03"
 }
 ```
 
@@ -398,6 +469,64 @@ Response: Lander -> Sensor Header -> Sensor Data
                 "pressure_db": 1390.327
             }
         ]
+    },
+    "adcphead": {
+        "data": [
+            {
+                "id": 49,
+                "date": "2022-08-27T18:00:00",
+                "headID": 1,
+                "speed7_4_0m": 0.165,
+                "speed8_4_5m": 0.157,
+                "pitch": 5.1,
+                "temperature": 4.34,
+                "analogIn2": 0.0,
+                "speed1_1_0m": 0.12,
+                "speed3_2_0m": 0.144,
+                "speed2_1_5m": 0.124,
+                "battery": 13.3,
+                "pressure": 1395.712,
+                "speed5_3_0m": 0.145,
+                "speed9_5_0m": 0.207,
+                "speed10_5_5m": 0.145,
+                "speed11_6_0m": 0.131,
+                "speed4_2_5m": 0.145,
+                "heading": 66.8,
+                "roll": 0.5,
+                "analogIn1": 0.0,
+                "speed6_3_5m": 0.14,
+                "dir15_8_0m": 162.88,
+                "dir3_2_0m": 109.95,
+                "speed12_6_5m": 0.204,
+                "dir2_1_5m": 107.85,
+                "dir6_3_5m": 115.29,
+                "dir9_5_0m": 119.92,
+                "speed18_9_5m": 0.089,
+                "speed14_7_5m": 0.205,
+                "dir14_7_5m": 108.17,
+                "speed17_9_0m": 0.115,
+                "dir19_10_0m": 172.92,
+                "dir12_6_5m": 176.07,
+                "dir7_4_0m": 114.7,
+                "speed20_10_5m": 0.314,
+                "dir1_1_0m": 111.0,
+                "speed13_7_0m": 0.282,
+                "dir4_2_5m": 113.2,
+                "dir10_5_5m": 106.43,
+                "dir11_6_0m": 149.34,
+                "dir8_4_5m": 116.89,
+                "dir13_7_0m": 91.62,
+                "dir16_8_5m": 100.99,
+                "dir5_3_0m": 114.8,
+                "speed19_10_0m": 0.162,
+                "speed15_8_0m": 0.207,
+                "speed16_8_5m": 0.173,
+                "dir17_9_0m": 102.09,
+                "dir18_9_5m": 165.03
+            }
+        ],
+        "headID": 1,
+        "landerID": "NF2306_20230914_03"
     }
 }
 ```

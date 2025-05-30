@@ -11,6 +11,7 @@ import Chart from "chart.js/auto";
 import axios from "axios";
 import "./Data.css";
 import ALBEXHeadData from "./ALBEXHeadData";
+import ADCPHeadData from "./ADCPHeadData";
 
 
 const DisplayData = () => {
@@ -60,6 +61,8 @@ const DisplayData = () => {
             headInfo = <FLNTUHeadData header={head} id="PageContainer" form={formProps}/>
         } else if (params.headType === "albex_ctd") {
             headInfo = <ALBEXHeadData header={head} id="PageContainer" form={formProps}/>
+        } else if (params.headType === "adcp") {
+            headInfo = <ADCPHeadData header={head} id="PageContainer" form={formProps}/>
         }
 
 
@@ -140,6 +143,10 @@ const DisplayData = () => {
             if (dataSet && dataSet.length > 0) {
                 
                 createChart(dataValues, dataSet);
+            } else {
+                document.getElementById("SubmitButton").disabled = false;
+                document.getElementById("SubmitButton").innerText = "Create Chart";
+                alert("No Data Returned");
             }
         } else {
             document.getElementById("SubmitButton").disabled = false;

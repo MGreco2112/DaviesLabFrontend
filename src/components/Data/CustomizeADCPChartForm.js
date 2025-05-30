@@ -8,10 +8,9 @@ import Button from "../common/Button";
 
 const CustomizeALBEXCTDChartForm = (props) => {
     const {onSubmit} = props;
-
     return (
         <Container id="FormContainer">
-            <h1>ALBEX CTD Chart Options</h1>
+            <h1>ADCP Chart Options</h1>
             <InlineInputContainer className="FormInputContainer">
                 <Input
                     className="DateInput"
@@ -32,10 +31,38 @@ const CustomizeALBEXCTDChartForm = (props) => {
                 <InlineInputContainer className="FormInputContainer">
                     <Checkbox
                         className="dataCheckbox"
-                        name="salinity"
-                        label="Salinity"
-                        id="salinity"
-                        value="salinity"
+                        name="battery"
+                        label="Battery"
+                        id="battery"
+                        value="battery"
+                    />
+                    <Checkbox
+                        className="dataCheckbox"
+                        name="heading"
+                        label="Heading"
+                        id="heading"
+                        value="heading"
+                    />
+                    <Checkbox
+                        className="dataCheckbox"
+                        name="pitch"
+                        label="Pitch"
+                        id="pitch"
+                        value="pitch"
+                    />
+                    <Checkbox
+                        className="dataCheckbox"
+                        name="roll"
+                        label="Roll"
+                        id="roll"
+                        value="roll"
+                    />
+                    <Checkbox
+                        className="dataCheckbox"
+                        name="pressure"
+                        label="Pressure"
+                        id="pressure"
+                        value="pressure"
                     />
                     <Checkbox
                         className="dataCheckbox"
@@ -44,57 +71,15 @@ const CustomizeALBEXCTDChartForm = (props) => {
                         id="temperature"
                         value="temperature"
                     />
-                    <Checkbox
-                        className="dataCheckbox"
-                        name="oxygen_ml_l"
-                        label="Oxygen (ML/L)"
-                        id="oxygen_ml_l"
-                        value="oxygen_ml_l"
-                    />
-                    <Checkbox
-                        className="dataCheckbox"
-                        name="oxygenSat_percent"
-                        label="Oxygen Saturation (%)"
-                        id="oxygenSat_percent"
-                        value="oxygenSat_percent"
-                    />
-                    <Checkbox
-                        className="dataCheckbox"
-                        name="turbidity_ntu"
-                        label="Turbidity (NTU)"
-                        id="turbidity_ntu"
-                        value="turbidity_ntu"
-                    />
-                    <Checkbox
-                        className="dataCheckbox"
-                        name="chla_ug_ml"
-                        label="CHLA (UG/ML)"
-                        id="chla_ug_ml"
-                        value="chla_ug_ml"
-                    />
-                    <Checkbox
-                        className="dataCheckbox"
-                        name="pressure_db"
-                        label="Pressure (DB)"
-                        id="pressure_db"
-                        value="pressure_db"
-                    />
-                    <Checkbox
-                        className="dataCheckbox"
-                        name="flag"
-                        label="Flag"
-                        id="flag"
-                        value="flag"
-                    />
                 </InlineInputContainer>
                 <Container id="ButtonContainer">
-                    <Button 
-                        id="SubmitButton" 
+                    <Button
+                        id="SubmitButton"
                     >Create Chart</Button>
                 </Container>
             </Form>
         </Container>
-    )
+    );
 }
 
 export default CustomizeALBEXCTDChartForm;

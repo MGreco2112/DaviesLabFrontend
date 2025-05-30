@@ -278,6 +278,19 @@ const Uploads = () => {
                     }
                     break;
                 }
+                case "adcp": {
+                    if (!selLander.adcphead) {
+                        setState({
+                            ...state,
+                            showDisplayForm: true
+                        });
+                    } else {
+                        setState({
+                            ...state,
+                            showDisplayForm: false
+                        });
+                    }
+                }
                 default: {
                     console.log("Invalid Selection");
                             
@@ -347,6 +360,7 @@ const Uploads = () => {
                     <option value="do">DO</option>
                     <option value="flntu">FLNTU</option>
                     <option value="albex_ctd">ALBEX CTD</option>
+                    <option value="adcp">ADCP</option>
                 </select>
             </div>
             <div id="RouteSelectDiv">

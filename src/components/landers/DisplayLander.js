@@ -50,6 +50,10 @@ const DisplayLander = () => {
         navigate(`/landers/data/albex_ctd/${lander.albexCTDHead.headID}`);
     }
 
+    const adcpNav = () => {
+        navigate(`/landers/data/adcp/${lander.adcphead.headID}`)
+    }
+
     const formatPage = () => {
         return (
             <Container className="LandersContainer">
@@ -79,6 +83,13 @@ const DisplayLander = () => {
                     lander.albexCTDHead
                     ?
                     <p>ALBEX CTD Header ID: {lander.albexCTDHead.headID}</p>
+                    :
+                    null
+                }
+                {
+                    lander.adcphead
+                    ?
+                    <p>ADCP Header ID: {lander.adcphead.headID}</p>
                     :
                     null
                 }
@@ -120,6 +131,16 @@ const DisplayLander = () => {
                             id="LanderButton"
                             onClick={albexNav}
                         >ALBEX CTD Data</Button>
+                        :
+                        null
+                    }
+                    {
+                        lander.adcphead
+                        ?
+                        <Button
+                            id="LanderButton"
+                            onClick={adcpNav}
+                        >ADCP Data</Button>
                         :
                         null
                     }
