@@ -290,6 +290,7 @@ const Uploads = () => {
                             showDisplayForm: false
                         });
                     }
+                    break;
                 }
                 default: {
                     console.log("Invalid Selection");
