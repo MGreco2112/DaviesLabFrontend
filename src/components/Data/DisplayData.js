@@ -224,7 +224,7 @@ const DisplayData = () => {
         const link = document.createElement('a')
         link.setAttribute('href', objUrl)
         link.setAttribute('download', `${params.headType}.csv`)
-        link.textContent = 'Click to Download'
+        link.textContent = 'Click to Download .CSV'
 
         document.getElementById("PageContainer").append(link);
     }
