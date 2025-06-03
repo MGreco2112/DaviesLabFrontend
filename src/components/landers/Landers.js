@@ -23,7 +23,7 @@ const Landers = () => {
                 const res = await axios.get(`${apiHostURL}/api/landers/all`);
 
                 setLoading(false);
-                console.table(res.data);
+                // console.table(res.data);
                 setLanders(res.data);
             } catch (err) {
                 console.error(err.response ? err.response.data : err.response.message);

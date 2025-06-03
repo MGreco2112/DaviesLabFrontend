@@ -24,7 +24,7 @@ const DisplayLander = () => {
 
                 setLander(res.data);
                 setLoading(false);
-                console.table(res.data);
+                // console.table(res.data);
             } catch (err) {
                 console.error(err.message ? err.message : err.response);
             }

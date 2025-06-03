@@ -63,7 +63,7 @@ const Uploads = () => {
         const landerValue = JSON.parse(document.getElementById("lander").value);
         const uploadButton = document.getElementById("uploadButton");
 
-        console.table(landerValue.asdblanderID);
+        // console.table(landerValue.asdblanderID);
         
         if (state.selectedFile) {
         
@@ -139,7 +139,7 @@ const Uploads = () => {
             if (!state.showDisplayForm) {
                 const res = await axios.get(`${apiHostURL}/api/processed/${timeProcessObject.sensorValue}/data/count/${timeProcessObject.landerValue}`);
             
-                console.table(res.data);
+                // console.table(res.data);
 
                 if (!document.getElementById("uploadProgressBar")) {
 
@@ -169,7 +169,7 @@ const Uploads = () => {
                     } else {
                         const res = await axios.get(`${apiHostURL}/api/processed/${timeProcessObject.sensorValue}/data/count/${timeProcessObject.landerValue}`);
             
-                        console.table(res.data);
+                        // console.table(res.data);
 
                         document.getElementById("progressPercentage").innerText = `Upload Progress: ${Math.trunc((res.data.fileCount / timeProcessObject.estimatedTotal) * 100)}%`;
                         document.getElementById("uploadProgressBar").value = (res.data.fileCount / timeProcessObject.estimatedTotal);

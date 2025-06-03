@@ -29,7 +29,7 @@ const DisplayData = () => {
                 const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/headers/sanitized/${params.headId}`);
                 
                 setHead(res.data);
-                console.table(res.data);
+                // console.table(res.data);
                 setLoading(false);
             } catch (err) {
                 console.error(err.response ? err.response : err.message);
@@ -127,7 +127,7 @@ const DisplayData = () => {
             }
         }
 
-        console.table(dataValues);
+        // console.table(dataValues);
 
         return dataValues;
     }

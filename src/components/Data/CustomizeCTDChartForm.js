@@ -9,7 +9,6 @@ import Button from "../common/Button";
 const CustomizeCTDChartForm = (props) => {
     const {onSubmit} = props;
 
-
     return (
         <Container id="FormContainer">
             <h1>CTD Chart Options</h1>
