@@ -198,6 +198,35 @@ const DisplayData = () => {
         setChartExists(true);
         //add chart canvas to element on page
         container.appendChild(canvas);
+        createCSV(dataSet);
+    }
+
+    const createCSV = (data) => {
+
+        const titleKeys = Object.keys(data[0]);
+        const exportData = [];
+
+        exportData.push(titleKeys);
+
+        data.forEach(dataPoint => {
+            exportData.push(Object.values(dataPoint))
+        });
+
+        let csvContent = '';
+
+        exportData.forEach(dataPoint => {
+            csvContent += dataPoint.join(",") + "\n"
+        });
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8,' })
+        const objUrl = URL.createObjectURL(blob)
+
+        const link = document.createElement('a')
+        link.setAttribute('href', objUrl)
+        link.setAttribute('download', `${params.headType}.csv`)
+        link.textContent = 'Click to Download'
+
+        document.getElementById("PageContainer").append(link);
     }
     
 

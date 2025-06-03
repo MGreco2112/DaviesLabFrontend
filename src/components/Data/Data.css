@@ -1,4 +1,4 @@
-#DataButton, #SubmitButton, #LanderButton {
+#DataButton, #SubmitButton, #LanderButton, #CsvButton {
     align-self: center;
     background-color: #3343f2;
     margin-left: 5px;
@@ -38,6 +38,6 @@
     width: 0%!important;
 }
 
-#PageContainer, #DataPageContainer, #FormatPageContainer {
+#PageContainer, #DataPageContainer, #FormatPageContainer, #ChartComponentContainer {
     min-height: 0em!important;
 }
