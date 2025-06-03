@@ -45,6 +45,8 @@ const CustomizeCTDChartForm = (props) => {
                         id="sal"
                         value="sal"
                     />
+                </InlineInputContainer>
+                <InlineInputContainer className="FormInputContainer">
                     <Checkbox
                         className="dataCheckbox"
                         name="Cond Ms Cm"

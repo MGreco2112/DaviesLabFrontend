@@ -51,6 +51,8 @@ const CustomizeDOChartForm = (props) => {
                         id="weissDoMgL"
                         value="weissDoMgL"
                     />
+                </InlineInputContainer>
+                <InlineInputContainer className="FormInputContainer">
                     <Checkbox
                         className="dataCheckbox"
                         name="Batt V"

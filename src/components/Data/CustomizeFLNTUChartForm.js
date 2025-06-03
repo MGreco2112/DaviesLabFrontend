@@ -44,6 +44,8 @@ const CustomizeFLNTUChartForm = (props) => {
                         id="chlFluPPB"
                         value="chlFluPPB"
                     />
+                </InlineInputContainer>
+                <InlineInputContainer className="FormInputContainer">
                     <Checkbox
                         className="dataCheckbox"
                         name="Chl AU gL"

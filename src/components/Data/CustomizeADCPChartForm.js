@@ -19,7 +19,7 @@ const CustomizeALBEXCTDChartForm = (props) => {
                     label="Start Date"
                 />
             </InlineInputContainer>
-                        <InlineInputContainer className="FormInputContainer">
+            <InlineInputContainer className="FormInputContainer">
                 <Input
                     className="DateInput"
                     id="endDateInput"
@@ -50,6 +50,8 @@ const CustomizeALBEXCTDChartForm = (props) => {
                         id="pitch"
                         value="pitch"
                     />
+                </InlineInputContainer>
+                <InlineInputContainer className="FormInputContainer">
                     <Checkbox
                         className="dataCheckbox"
                         name="roll"
