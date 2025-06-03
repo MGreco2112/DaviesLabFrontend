@@ -29,7 +29,7 @@ const Uploads = () => {
             try {
                 const res = await axios.get(`${apiHostURL}/api/landers/all`);
 
-                console.table(res.data);
+                // console.table(res.data);
 
                 setState({
                     ...state,
