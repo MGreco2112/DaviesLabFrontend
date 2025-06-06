@@ -16,7 +16,6 @@ const Uploads = () => {
         startTime: "",
         endTime: ""
     });
-    const [loading, setLoading] = useState(true);
     const [pageState, setPageState] = useState({
         state: {
             selectedFile: null,
