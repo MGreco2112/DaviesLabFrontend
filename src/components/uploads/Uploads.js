@@ -10,12 +10,6 @@ import HeaderDataForm from "./HeaderDataForm";
 const Uploads = () => {
     const navigate = useNavigate();
 
-    const [state, setState] = useState({
-        selectedFile: null,
-        isUploading: false,
-        landers: [],
-        showDisplayForm: false
-    });
     const [dateRange, setDateRange] = useState({
         burstTime: "",
         burstCnt: "",
@@ -23,33 +17,55 @@ const Uploads = () => {
         endTime: ""
     });
     const [loading, setLoading] = useState(true);
+    const [pageState, setPageState] = useState({
+        state: {
+            selectedFile: null,
+            isUploading: false,
+            landers: [],
+            showDisplayForm: false
+        },
+        dateRange: {
+            burstTime: "",
+            burstCnt: "",
+            startTime: "",
+            endTime: ""
+        },
+        loading: true
+    });
 
     useEffect(() => {
         const _getAllLanders = async () => {
             try {
                 const res = await axios.get(`${apiHostURL}/api/landers/all`);
 
-                // console.table(res.data);
-
-                setState({
-                    ...state,
-                    landers: res.data
+                setPageState({
+                    ...pageState,
+                    state: {
+                        ...pageState.state,
+                        landers: res.data
+                    },
+                    loading: false
                 });
-                setLoading(false);
             } catch (err) {
                 console.error(err.message ? err.message : err.response);
                 document.getElementById("mainBodyContainer").innerText = "Error Retrieving Landers";
             }
         }
 
-        setLoading(true);
+        setPageState({
+            ...pageState,
+            loading: true
+        });
         _getAllLanders();
     }, []);
 
     const onFileChange = (event) => {
-        setState({
-            ...state,
-            selectedFile: event.target.files[0]
+        setPageState({
+            ...pageState,
+            state: {
+                ...pageState.state,
+                selectedFile: event.target.files[0]
+            }
         });
     }
 
@@ -62,10 +78,8 @@ const Uploads = () => {
         let routeValue = document.getElementById("route").value;
         const landerValue = JSON.parse(document.getElementById("lander").value);
         const uploadButton = document.getElementById("uploadButton");
-
-        // console.table(landerValue.asdblanderID);
         
-        if (state.selectedFile) {
+        if (pageState.state.selectedFile) {
         
             const timeProcessObject = {
                 pageElement: document.getElementById("fileDataDiv"),
@@ -97,8 +111,8 @@ const Uploads = () => {
                     
                     formData.append(
                         paramName,
-                        state.selectedFile,
-                        state.selectedFile.name
+                        pageState.state.selectedFile,
+                        pageState.state.selectedFile.name
                     );
                     
                     await axios.post(`${apiHostURL}/api/processed/${sensorValue}/upload_csv/${routeValue}/${landerValue.asdblanderID}`, formData);
@@ -136,16 +150,19 @@ const Uploads = () => {
 
         try {
 
-            if (!state.showDisplayForm) {
+            if (!pageState.state.showDisplayForm) {
                 const res = await axios.get(`${apiHostURL}/api/processed/${timeProcessObject.sensorValue}/data/count/${timeProcessObject.landerValue}`);
             
                 // console.table(res.data);
 
                 if (!document.getElementById("uploadProgressBar")) {
 
-                    setState({
-                        ...state,
-                        isUploading: true
+                    setPageState({
+                        ...pageState,
+                        state: {
+                            ...pageState.state,
+                            isUploading: true
+                        }
                     });
                 } else {
                     document.getElementById("progressPercentage").innerText = `Upload Progress: ${Math.trunc(res.data.percentage * 100)}%`;
@@ -162,9 +179,12 @@ const Uploads = () => {
                     
                     if (!document.getElementById("uploadProgressBar")) {
 
-                        setState({
-                            ...state,
-                            isUploading: true
+                        setPageState({
+                            ...pageState,
+                            state: {
+                                ...pageState.state,
+                                isUploading: true
+                            }
                         });
                     } else {
                         const res = await axios.get(`${apiHostURL}/api/processed/${timeProcessObject.sensorValue}/data/count/${timeProcessObject.landerValue}`);
@@ -176,9 +196,13 @@ const Uploads = () => {
                     }
                 }
             } else {
-                setState({
-                    ...state,
-                    isUploading: true
+
+                setPageState({
+                    ...pageState,
+                    state: {
+                        ...pageState.state,
+                        isUploading: true
+                    }
                 });
             }
             
@@ -194,100 +218,145 @@ const Uploads = () => {
         const selLander = JSON.parse(document.getElementById("lander").value);
         
         if (document.getElementById("headerDataForm")) {
-            setState({
-                ...state,
-                showDisplayForm: false,
-                isUploading: false
+
+            setPageState({
+                ...pageState,
+                state: {
+                    ...pageState.state,
+                    showDisplayForm: false,
+                    isUploading: false
+                }
             });
         } else {
-            setState({
-                ...state,
-                isUploading: false
+
+            setPageState({
+                ...pageState,
+                state: {
+                    ...pageState.state,
+                    isUploading: false
+                }
             });
         }
 
         if (selLander !== "" && sensor !== "" && route.value === "data") {
         
-            setDateRange({
-                burstTime: "",
-                burstCnt: "",
-                startTime: "",
-                endTime: ""
+            setPageState({
+                ...pageState,
+                dateRange: {
+                    burstTime: "",
+                    burstCnt: "",
+                    startTime: "",
+                    endTime: ""
+                }
             });
 
             switch (sensor) {
                 case "ctd": {
                     if (!selLander.ctdhead) {
                         
-                        setState({
-                            ...state,
-                            showDisplayForm: true
+                        setPageState({
+                            ...pageState,
+                            state: {
+                                ...pageState.state,
+                                showDisplayForm: true
+                            }
                         });
                     } else {
-                                
-                        setState({
-                            ...state,
-                            showDisplayForm: false
+
+                        setPageState({
+                            ...pageState,
+                            state: {
+                                ...pageState.state,
+                                showDisplayForm: false
+                            }
                         });
                     }
                     break;
                 }
                 case "do": {
                     if (!selLander.dohead) {
-                       
-                        setState({
-                            ...state,
-                            showDisplayForm: true
+
+                        setPageState({
+                            ...pageState,
+                            state: {
+                                ...pageState.state,
+                                showDisplayForm: true
+                            }
                         });
                     } else {
-                                
-                        setState({
-                            ...state,
-                            showDisplayForm: false
+
+                        setPageState({
+                            ...pageState,
+                            state: {
+                                ...pageState.state,
+                                showDisplayForm: false
+                            }
                         });
                     }
                     break;
                 }
                 case "flntu": {
                     if (!selLander.flntuhead) {
-                        
-                        setState({
-                            ...state,
-                            showDisplayForm: true
+
+                        setPageState({
+                            ...pageState,
+                            state: {
+                                ...pageState.state,
+                                showDisplayForm: true
+                            }
                         });
                     } else {
-                                
-                        setState({
-                            ...state,
-                            showDisplayForm: false
+
+                        setPageState({
+                            ...pageState,
+                            state: {
+                                ...pageState.state,
+                                showDisplayForm: false
+                            }
                         });
                     }
                     break;
                 }
                 case "albex_ctd": {
                     if (!selLander.albexCTDHead) {
-                        setState({
-                            ...state,
-                            showDisplayForm: true
+
+                        setPageState({
+                            ...pageState,
+                            state: {
+                                ...pageState.state,
+                                showDisplayForm: true
+                            }
                         });
                     } else {
-                        setState({
-                            ...state,
-                            showDisplayForm: false
+
+                        setPageState({
+                            ...pageState,
+                            state: {
+                                ...pageState.state,
+                                showDisplayForm: false
+                            }
                         });
                     }
                     break;
                 }
                 case "adcp": {
                     if (!selLander.adcphead) {
-                        setState({
-                            ...state,
-                            showDisplayForm: true
+
+                        setPageState({
+                            ...pageState,
+                            state: {
+                                ...pageState.state,
+                                showDisplayForm: true
+                            }
                         });
                     } else {
-                        setState({
-                            ...state,
-                            showDisplayForm: false
+
+                        setPageState({
+                            ...pageState,
+                            state: {
+                                ...pageState.state,
+                                showDisplayForm: false
+                            }
                         });
                     }
                     break;
@@ -304,8 +373,8 @@ const Uploads = () => {
 
     const fileData = () => {
 
-        if (state.selectedFile) {
-            if (state.isUploading) {
+        if (pageState.state.selectedFile) {
+            if (pageState.state.isUploading) {
                 return (
                     <div id="progressBarDiv">
                         <p id="progressPercentage">Upload Progress: 0%</p>
@@ -316,9 +385,9 @@ const Uploads = () => {
                 return (
                     <div id="fileDataDiv">
                         <h2>File Details:</h2>
-                        <p>File Name: {state.selectedFile.name}</p>
+                        <p>File Name: {pageState.state.selectedFile.name}</p>
     
-                        <p>File Type: {state.selectedFile.type}</p>
+                        <p>File Type: {pageState.state.selectedFile.type}</p>
                     </div>
                 );
             }
@@ -348,7 +417,7 @@ const Uploads = () => {
                     <label>Select a Lander:</label>
                     <select onChange={onRouteChange} name="lander" id="lander">
                         <option value=""></option>
-                        {state.landers.map( option => { return <option value={JSON.stringify(option)} key={option.asdblanderID}>{option.asdblanderID}</option>})}
+                        {pageState.state.landers.map( option => { return <option value={JSON.stringify(option)} key={option.asdblanderID}>{option.asdblanderID}</option>})}
                     </select>
                 </div>
 
@@ -385,7 +454,7 @@ const Uploads = () => {
                 </div>
 
                 <div id="headerDataDiv">
-                {   state.showDisplayForm
+                {   pageState.state.showDisplayForm
                     ?
                     <HeaderDataForm header={dateRange} updateRange={setDateRange} id="headerDataForm" className="uploadsContainer"/>
                     :
@@ -409,7 +478,7 @@ const Uploads = () => {
     return (
         <Container className="uploadsContainer" id="mainBodyContainer">
             {
-                loading 
+                pageState.loading 
                 ?
                 <h1>loading...</h1> 
                 :

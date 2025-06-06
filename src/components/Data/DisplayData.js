@@ -18,9 +18,11 @@ const DisplayData = () => {
     const navigate = useNavigate();
     const params = useParams();
 
-    const [head, setHead] = useState({});
-    const [chartExists, setChartExists] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [pageState, setPageState] = useState({
+        chartExists: false,
+        head: {},
+        loading: true
+    });
 
     useEffect(() => {
 
@@ -28,41 +30,50 @@ const DisplayData = () => {
             try {
                 const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/headers/sanitized/${params.headId}`);
                 
-                setHead(res.data);
-                // console.table(res.data);
-                setLoading(false);
+                setPageState({
+                    ...pageState,
+                    head: res.data,
+                    loading: false
+                });
             } catch (err) {
                 console.error(err.response ? err.response : err.message);
-                setLoading(false);
+
+                setPageState({
+                    ...pageState,
+                    loading: false
+                });
             }
         }
 
-        setLoading(true);
+        setPageState({
+            ...pageState,
+            loading: true
+        });
         _fetchHead();
-    }, [head.headId, params.headId, params.headType]);
+    }, [pageState.head.headId, params.headId, params.headType]);
 
     const returnToLander = () => {
-        navigate(`/landers/${head.landerID}`);
+        navigate(`/landers/${pageState.head.landerID}`);
     }
 
     const formatPage = () => {
         let headInfo = <h1>Unable To Load Header</h1>
 
         const formProps = {
-            enabled: !chartExists,
+            enabled: !pageState.chartExists,
             onSubmit: onFormSubmit
         }
 
         if (params.headType === "ctd") {
-            headInfo = <CTDHeadData header={head} id="PageContainer" form={formProps}/>
+            headInfo = <CTDHeadData header={pageState.head} id="PageContainer" form={formProps}/>
         } else if (params.headType === "do") {
-            headInfo = <DOHeadData header={head} id="PageContainer" form={formProps}/>
+            headInfo = <DOHeadData header={pageState.head} id="PageContainer" form={formProps}/>
         } else if (params.headType === "flntu") {
-            headInfo = <FLNTUHeadData header={head} id="PageContainer" form={formProps}/>
+            headInfo = <FLNTUHeadData header={pageState.head} id="PageContainer" form={formProps}/>
         } else if (params.headType === "albex_ctd") {
-            headInfo = <ALBEXHeadData header={head} id="PageContainer" form={formProps}/>
+            headInfo = <ALBEXHeadData header={pageState.head} id="PageContainer" form={formProps}/>
         } else if (params.headType === "adcp") {
-            headInfo = <ADCPHeadData header={head} id="PageContainer" form={formProps}/>
+            headInfo = <ADCPHeadData header={pageState.head} id="PageContainer" form={formProps}/>
         }
 
 
@@ -79,12 +90,12 @@ const DisplayData = () => {
         let startDate = document.getElementById("startDateInput").value;
         let endDate = document.getElementById("endDateInput").value;
         
-        if (startDate === "" && head.startTime !== null) {
-            startDate = head.startTime;
+        if (startDate === "" && pageState.head.startTime !== null) {
+            startDate = pageState.head.startTime;
         }
 
-        if (endDate === "" && head.endTime !== null) {
-            endDate = head.endTime;
+        if (endDate === "" && pageState.head.endTime !== null) {
+            endDate = pageState.head.endTime;
         }
         
         
@@ -95,7 +106,7 @@ const DisplayData = () => {
             
             const _getData = async () => {
                 try {
-                    const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/data/headId/${head.headID}/startDate/${startDate}/endDate/${endDate}`);
+                    const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/data/headId/${pageState.head.headID}/startDate/${startDate}/endDate/${endDate}`);
                 
                     return res.data;
                 } catch (err) {
@@ -126,8 +137,6 @@ const DisplayData = () => {
                 dataValues.push(tempObj);
             }
         }
-
-        // console.table(dataValues);
 
         return dataValues;
     }
@@ -195,9 +204,13 @@ const DisplayData = () => {
         //set ID of canvas element for CSS purposes
         canvas.id="SensorChart";
         //flip boolean flag, used to disable button that renders chart
-        setChartExists(true);
+        setPageState({
+            ...pageState,
+            chartExists: true
+        });
         //add chart canvas to element on page
         container.appendChild(canvas);
+        //call function to generate both .csv file and download link
         createCSV(dataSet);
     }
 
@@ -223,7 +236,7 @@ const DisplayData = () => {
 
         const link = document.createElement('a')
         link.setAttribute('href', objUrl)
-        link.setAttribute('download', `${params.headType}.csv`)
+        link.setAttribute('download', `${pageState.head.landerID}_${params.headType}.csv`)
         link.textContent = 'Click to Download .CSV'
 
         document.getElementById("PageContainer").append(link);
@@ -233,7 +246,7 @@ const DisplayData = () => {
     return (
         <Container id="DataPageContainer">
             {
-                loading
+                pageState.loading
                 ?
                 <h1>Fetching Data...</h1>
                 :

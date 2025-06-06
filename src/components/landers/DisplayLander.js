@@ -12,90 +12,95 @@ const DisplayLander = () => {
     const params = useParams();
     const navigate = useNavigate();
 
-    const [lander, setLander] = useState({
-        asdblanderID: params.id
+    const [pageState, setPageState] = useState({
+        lander: {asdblanderID: params.id},
+        loading: true
     });
-    const [loading, setLoading] = useState(true);
     
     useEffect(() => {
         const _fetchLander = async () => {
             try {
-                const res = await axios.get(`${apiHostURL}/api/landers/${lander.asdblanderID}`);
+                const res = await axios.get(`${apiHostURL}/api/landers/${pageState.lander.asdblanderID}`);
 
-                setLander(res.data);
-                setLoading(false);
-                // console.table(res.data);
+                setPageState({
+                    ...pageState,
+                    lander: res.data,
+                    loading: false
+                });
             } catch (err) {
                 console.error(err.message ? err.message : err.response);
             }
         }
     
-        setLoading(true);
+        setPageState({
+            ...pageState,
+            loading: true
+        });
         _fetchLander();
-    }, [lander.asdblanderID]);
+    }, [pageState.lander.asdblanderID]);
 
     const ctdNav = () => {
-        navigate(`/landers/data/ctd/${lander.ctdhead.headID}`);
+        navigate(`/landers/data/ctd/${pageState.lander.ctdhead.headID}`);
     }
 
     const doNav = () => {
-        navigate(`/landers/data/do/${lander.dohead.headID}`);
+        navigate(`/landers/data/do/${pageState.lander.dohead.headID}`);
     }
 
     const flntuNav = () => {
-        navigate(`/landers/data/flntu/${lander.flntuhead.headID}`);
+        navigate(`/landers/data/flntu/${pageState.lander.flntuhead.headID}`);
     }
 
     const albexNav = () => {
-        navigate(`/landers/data/albex_ctd/${lander.albexCTDHead.headID}`);
+        navigate(`/landers/data/albex_ctd/${pageState.lander.albexCTDHead.headID}`);
     }
 
     const adcpNav = () => {
-        navigate(`/landers/data/adcp/${lander.adcphead.headID}`)
+        navigate(`/landers/data/adcp/${pageState.lander.adcphead.headID}`)
     }
 
     const formatPage = () => {
         return (
             <Container className="LandersContainer">
-                <strong>Lander ID: {lander.asdblanderID}</strong>
+                <strong>Lander ID: {pageState.lander.asdblanderID}</strong>
                 {
-                    lander.ctdhead
+                    pageState.lander.ctdhead
                     ?
-                    <p>CTD Header ID: {lander.ctdhead.headID}</p>
+                    <p>CTD Header ID: {pageState.lander.ctdhead.headID}</p>
                     :
                     null
                 }
                 {
-                    lander.dohead
+                    pageState.lander.dohead
                     ?
-                    <p>DO Header ID: {lander.dohead.headID}</p>
+                    <p>DO Header ID: {pageState.lander.dohead.headID}</p>
                     :
                     null
                 }
                 {
-                    lander.flntuhead
+                    pageState.lander.flntuhead
                     ?
-                    <p>FLNTU Header ID: {lander.flntuhead.headID}</p>
+                    <p>FLNTU Header ID: {pageState.lander.flntuhead.headID}</p>
                     :
                     null
                 }
                 {
-                    lander.albexCTDHead
+                    pageState.lander.albexCTDHead
                     ?
-                    <p>ALBEX CTD Header ID: {lander.albexCTDHead.headID}</p>
+                    <p>ALBEX CTD Header ID: {pageState.lander.albexCTDHead.headID}</p>
                     :
                     null
                 }
                 {
-                    lander.adcphead
+                    pageState.lander.adcphead
                     ?
-                    <p>ADCP Header ID: {lander.adcphead.headID}</p>
+                    <p>ADCP Header ID: {pageState.lander.adcphead.headID}</p>
                     :
                     null
                 }
                 <div id="ButtonDiv">
                     {
-                        lander.ctdhead
+                        pageState.lander.ctdhead
                         ?
                         <Button 
                             id="LanderButton"
@@ -105,7 +110,7 @@ const DisplayLander = () => {
                         null
                     }
                     {
-                        lander.dohead
+                        pageState.lander.dohead
                         ?
                         <Button 
                             id="LanderButton"
@@ -115,7 +120,7 @@ const DisplayLander = () => {
                         null
                     }
                     {
-                        lander.flntuhead
+                        pageState.lander.flntuhead
                         ?
                         <Button 
                             id="LanderButton"
@@ -125,7 +130,7 @@ const DisplayLander = () => {
                         null
                     }
                     {
-                        lander.albexCTDHead
+                        pageState.lander.albexCTDHead
                         ?
                         <Button
                             id="LanderButton"
@@ -135,7 +140,7 @@ const DisplayLander = () => {
                         null
                     }
                     {
-                        lander.adcphead
+                        pageState.lander.adcphead
                         ?
                         <Button
                             id="LanderButton"
@@ -155,7 +160,7 @@ const DisplayLander = () => {
     return(
         <Container className="LandersContainer">
             {
-                loading ?
+                pageState.loading ?
                     <p>FETCHING LANDER...</p>
                     :
                     <BorderCard>
