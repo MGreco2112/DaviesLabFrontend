@@ -7,11 +7,15 @@ const HeaderDataForm = (props) => {
     const setChange = props.updateRange;
     const id = props.id;
     const className = props.className;
+    const state = props.state;
 
     const onChange = (e) => {
         setChange({
-            ...props.header,
-            [e.target.id]: e.target.value
+            ...state,
+            dateRange: {
+                ...state.dateRange,
+                [e.target.id]: e.target.value
+            }
         });
     }
     

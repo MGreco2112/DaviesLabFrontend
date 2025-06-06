@@ -449,7 +449,7 @@ const Uploads = () => {
                 <div id="headerDataDiv">
                 {   pageState.state.showDisplayForm
                     ?
-                    <HeaderDataForm header={pageState.dateRange} updateRange={setPageState} id="headerDataForm" className="uploadsContainer"/>
+                    <HeaderDataForm header={pageState.dateRange} state={pageState} updateRange={setPageState} id="headerDataForm" className="uploadsContainer"/>
                     :
                     null
                 }
