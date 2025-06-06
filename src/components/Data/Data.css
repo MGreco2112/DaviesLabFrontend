@@ -44,7 +44,8 @@
 }
 
 #ChartForm {
-    max-height: 35vh!important;
+    min-height: 25vh!important;
+    max-height: 45vh!important;
     padding-top: 5vh!important;
 }
 

@@ -5,7 +5,7 @@ import "./Data.css";
 import CustomizeALBEXCTDChartForm from "./CustomizeALBEXCTDChartForm";
 
 const ALBEXHeadData = (props) => {
-    const {headID, dataPointCount} = props.header;
+    const {headID, startTime, endTime, dataPointCount} = props.header;
     const {enabled, onSubmit} = props.form;
 
     return (
@@ -13,6 +13,8 @@ const ALBEXHeadData = (props) => {
             <h1>ALBEX CTD Data</h1>
             <BorderCard>
                 <h1>ALBEX CTD Head ID: {headID}</h1>
+                <p>Deployment Date: {startTime}</p>
+                <p>Recovery Date: {endTime}</p>
                 <p>Data Points: {dataPointCount}</p>
             </BorderCard>
             {

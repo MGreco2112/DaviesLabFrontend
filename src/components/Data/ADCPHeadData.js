@@ -5,7 +5,7 @@ import "./Data.css";
 import CustomizeADCPChartForm from "./CustomizeADCPChartForm.js";
 
 const ADCPHeadData = (props) => {
-    const {headID, dataPointCount} = props.header;
+    const {headID, startTime, endTime, dataPointCount} = props.header;
     const {enabled, onSubmit} = props.form;
 
     return (
@@ -13,6 +13,8 @@ const ADCPHeadData = (props) => {
             <h1>ADCP Data</h1>
             <BorderCard>
                 <h1>ADCP Head ID: {headID}</h1>
+                <p>Deployment Date: {startTime}</p>
+                <p>Recovery Date: {endTime}</p>
                 <p>Data Points: {dataPointCount}</p>
             </BorderCard>
             {
