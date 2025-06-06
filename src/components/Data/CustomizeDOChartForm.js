@@ -18,6 +18,7 @@ const CustomizeDOChartForm = (props) => {
                     id="startDateInput"
                     type="date"
                     label="Start Date"
+                    labelID="StartDateLabel"
                 />
             </InlineInputContainer>
             <InlineInputContainer className="FormInputContainer">
@@ -26,12 +27,14 @@ const CustomizeDOChartForm = (props) => {
                     id="endDateInput"
                     type="date"
                     label="End Date"
+                    labelID="EndDateLabel"
                 />
             </InlineInputContainer>
             <Form onSubmit={onSubmit} id="ChartForm">
                 <InlineInputContainer className="FormInputContainer">
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="Temp Degrees (C)"
                         label="Temp Degrees (C)"
                         id="tempDegC"
@@ -39,6 +42,7 @@ const CustomizeDOChartForm = (props) => {
                     />
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="DO"
                         label="DO"
                         id="do"
@@ -46,6 +50,7 @@ const CustomizeDOChartForm = (props) => {
                     />
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="Weiss Do Mg L"
                         label="Weiss Do Mg L"
                         id="weissDoMgL"
@@ -55,6 +60,7 @@ const CustomizeDOChartForm = (props) => {
                 <InlineInputContainer className="FormInputContainer">
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="Batt V"
                         label="Batt V"
                         id="battV"
@@ -62,6 +68,7 @@ const CustomizeDOChartForm = (props) => {
                     />
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="GG DO Mg L"
                         label="GG DO Mg L"
                         id="ggdomgL"
@@ -69,6 +76,7 @@ const CustomizeDOChartForm = (props) => {
                     />
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="BK DO Mg L"
                         label="BK DO Mg L"
                         id="bkdomgL"

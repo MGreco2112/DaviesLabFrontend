@@ -3,7 +3,7 @@ import Container from "./Container";
 
 const Checkbox = (props) => {
     return(
-        <Container style={{minHeight: "fitContent"}}>
+        <Container id={props.divId} className={props.divClassName}>
             <input
                 style={{...props.style}}
                 type="checkbox"

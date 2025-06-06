@@ -5,6 +5,7 @@ const Input = (props) => {
     <Fragment>
       <label
         htmlFor={props.id}
+        id={props.labelID}
       >
         {props.label}
       </label>

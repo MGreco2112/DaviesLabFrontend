@@ -18,6 +18,7 @@ const CustomizeFLNTUChartForm = (props) => {
                     id="startDateInput"
                     type="date"
                     label="Start Date"
+                    labelID="StartDateLabel"
                 />
             </InlineInputContainer>
             <InlineInputContainer className="FormInputContainer">
@@ -26,12 +27,14 @@ const CustomizeFLNTUChartForm = (props) => {
                     id="endDateInput"
                     type="date"
                     label="End Date"
+                    labelID="EndDateLabel"
                 />
             </InlineInputContainer>
             <Form onSubmit={onSubmit} id="ChartForm">
                 <InlineInputContainer className="FormInputContainer">
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="Temp Degrees (C)"
                         label = "Temp Degrees (C)"
                         id="tempDegC"
@@ -39,6 +42,7 @@ const CustomizeFLNTUChartForm = (props) => {
                     />
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="Chl Flu PPB"
                         label = "Chl Flu PPB"
                         id="chlFluPPB"
@@ -48,6 +52,7 @@ const CustomizeFLNTUChartForm = (props) => {
                 <InlineInputContainer className="FormInputContainer">
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="Chl AU gL"
                         label = "Chl AU gL"
                         id="chlAUgL"
@@ -55,6 +60,7 @@ const CustomizeFLNTUChartForm = (props) => {
                     />
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="Turb MFTU"
                         label = "Turb MFTU"
                         id="turbMFTU"
@@ -62,6 +68,7 @@ const CustomizeFLNTUChartForm = (props) => {
                     />
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="Batt V"
                         label = "Batt V"
                         id="battV"

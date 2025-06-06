@@ -18,6 +18,7 @@ const CustomizeCTDChartForm = (props) => {
                     id="startDateInput"
                     type="date"
                     label="Start Date"
+                    labelID="StartDateLabel"
                 />
             </InlineInputContainer>
             <InlineInputContainer className="FormInputContainer">
@@ -26,12 +27,14 @@ const CustomizeCTDChartForm = (props) => {
                     id="endDateInput"
                     type="date"
                     label="End Date"
+                    labelID="EndDateLabel"
                 />
             </InlineInputContainer>
             <Form onSubmit={onSubmit} id="ChartForm">
                 <InlineInputContainer className="FormInputContainer">
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="Temp Degrees (C)"
                         label="Temp Degrees (C)"
                         id="tempDegC"
@@ -39,6 +42,7 @@ const CustomizeCTDChartForm = (props) => {
                     />
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="Sal"
                         label="Sal"
                         id="sal"
@@ -48,6 +52,7 @@ const CustomizeCTDChartForm = (props) => {
                 <InlineInputContainer className="FormInputContainer">
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="Cond Ms Cm"
                         label="Cond Ms Cm"
                         id="condMsCm"
@@ -55,6 +60,7 @@ const CustomizeCTDChartForm = (props) => {
                     />
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="Batt V"
                         label="Batt V"
                         id="battV"

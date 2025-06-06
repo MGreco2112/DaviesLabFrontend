@@ -18,6 +18,7 @@ const CustomizeALBEXCTDChartForm = (props) => {
                     id="startDateInput"
                     type="date"
                     label="Start Date"
+                    labelID="StartDateLabel"
                 />
             </InlineInputContainer>
                         <InlineInputContainer className="FormInputContainer">
@@ -26,12 +27,14 @@ const CustomizeALBEXCTDChartForm = (props) => {
                     id="endDateInput"
                     type="date"
                     label="End Date"
+                    labelID="EndDateLabel"
                 />
             </InlineInputContainer>
             <Form onSubmit={onSubmit} id="ChartForm">
                 <InlineInputContainer className="FormInputContainer">
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="salinity"
                         label="Salinity"
                         id="salinity"
@@ -39,6 +42,7 @@ const CustomizeALBEXCTDChartForm = (props) => {
                     />
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="temperature"
                         label="Temperature"
                         id="temperature"
@@ -46,6 +50,7 @@ const CustomizeALBEXCTDChartForm = (props) => {
                     />
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="oxygen_ml_l"
                         label="Oxygen (ML/L)"
                         id="oxygen_ml_l"
@@ -55,6 +60,7 @@ const CustomizeALBEXCTDChartForm = (props) => {
                 <InlineInputContainer className="FormInputContainer">
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="oxygenSat_percent"
                         label="Oxygen Saturation"
                         id="oxygenSat_percent"
@@ -62,6 +68,7 @@ const CustomizeALBEXCTDChartForm = (props) => {
                     />
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="turbidity_ntu"
                         label="Turbidity (NTU)"
                         id="turbidity_ntu"
@@ -69,6 +76,7 @@ const CustomizeALBEXCTDChartForm = (props) => {
                     />
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="chla_ug_ml"
                         label="CHLA (UG/ML)"
                         id="chla_ug_ml"
@@ -78,6 +86,7 @@ const CustomizeALBEXCTDChartForm = (props) => {
                 <InlineInputContainer className="FormInputContainer">
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="pressure_db"
                         label="Pressure (DB)"
                         id="pressure_db"
@@ -85,6 +94,7 @@ const CustomizeALBEXCTDChartForm = (props) => {
                     />
                     <Checkbox
                         className="dataCheckbox"
+                        divClassName="checkboxDiv"
                         name="flag"
                         label="Flag"
                         id="flag"

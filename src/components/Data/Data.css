@@ -34,8 +34,22 @@
     cursor: pointer!important;
 }
 
+.checkboxDiv {
+    height: 0em!important;
+    width: 0em!important;
+}
+
 .FormInputContainer {
     width: 0%!important;
+}
+
+#ChartForm {
+    max-height: 35vh!important;
+    padding-top: 5vh!important;
+}
+
+#EndDateLabel {
+    padding-right: 5px;
 }
 
 #PageContainer, #DataPageContainer, #FormatPageContainer, #ChartComponentContainer {
