@@ -10,12 +10,6 @@ import HeaderDataForm from "./HeaderDataForm";
 const Uploads = () => {
     const navigate = useNavigate();
 
-    const [dateRange, setDateRange] = useState({
-        burstTime: "",
-        burstCnt: "",
-        startTime: "",
-        endTime: ""
-    });
     const [pageState, setPageState] = useState({
         state: {
             selectedFile: null,
@@ -169,9 +163,9 @@ const Uploads = () => {
                 }
 
                 
-            } else if (dateRange.burstCnt !== "" && dateRange.burstTime !== "" && dateRange.startTime !== "" && dateRange.endTime !== "") {
+            } else if (pageState.dateRange.burstCnt !== "" && pageState.dateRange.burstTime !== "" && pageState.dateRange.startTime !== "" && pageState.dateRange.endTime !== "") {
                 if (!timeProcessObject.estimatedTotal) {
-                    const getTotals = await axios.post(`${apiHostURL}/api/processed/${timeProcessObject.sensorValue}/data/count/headless`, dateRange);
+                    const getTotals = await axios.post(`${apiHostURL}/api/processed/${timeProcessObject.sensorValue}/data/count/headless`, pageState.dateRange);
 
                     timeProcessObject.estimatedTotal = getTotals.data.numberOfFiles;
                 } else {
@@ -455,7 +449,7 @@ const Uploads = () => {
                 <div id="headerDataDiv">
                 {   pageState.state.showDisplayForm
                     ?
-                    <HeaderDataForm header={dateRange} updateRange={setDateRange} id="headerDataForm" className="uploadsContainer"/>
+                    <HeaderDataForm header={pageState.dateRange} updateRange={setPageState} id="headerDataForm" className="uploadsContainer"/>
                     :
                     null
                 }
