@@ -10,11 +10,13 @@ import Lander from "./Lander";
 import "./Landers.css";
 
 const Landers = () => {
-    // Array State for Lander Objects
-    const [landers, setLanders] = useState([]);
-    // Loading State for holding page state while API call is made
-    const [loading, setLoading] = useState(true);
-    const [query, setQuery] = useState("");
+
+    const [pageState, setPageState] = useState({
+        landers: [],
+        loading: true,
+        query: "",
+    });
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,21 +24,28 @@ const Landers = () => {
             try {
                 const res = await axios.get(`${apiHostURL}/api/landers/all`);
 
-                setLoading(false);
-                // console.table(res.data);
-                setLanders(res.data);
+                setPageState({
+                    ...pageState,
+                    landers: res.data,
+                    loading: false
+                });
             } catch (err) {
                 console.error(err.response ? err.response.data : err.response.message);
             }
         }
-        setLoading(true);
+
+        setPageState({
+            ...pageState,
+            loading: true
+        });
+
         _getLanders();
     }, []);
 
     //Create Lander elements via iteration, return created elements
     const displayLanders = () => {
 
-        return landers.map(land => {
+        return pageState.landers.map(land => {
             return <Lander className="LanderCard" lander={land} key={land.asdblanderID} onSelect={onSelect}/>
         });
     }
@@ -46,7 +55,7 @@ const Landers = () => {
         return (
             <Container className="LandersContainer">
                 <InlineInputContainer className="inputContainer">
-                    <label htmlFor="searchSelect">Type of Search:</label>
+                    <label htmlFor="searchSelect" id="SearchLabel">Type of Search:</label>
                     <select id="searchSelect" onChange={onSelectChange}>
                         <option value=""></option>
                         <option value="landerId">Lander ID</option>
@@ -58,6 +67,7 @@ const Landers = () => {
                         name="searchInput"
                         id="searchInput"
                         onChange={onChange}
+                        disabled
                     />
                     <Button
                         onClick={onSubmit}
@@ -68,7 +78,11 @@ const Landers = () => {
     }
 
     const onChange = (e) => {
-        setQuery(e.target.value);
+        // setQuery(e.target.value);
+        setPageState({
+            ...pageState,
+            query: e.target.value
+        });
     }
 
     const onSelectChange = () => {
@@ -78,13 +92,16 @@ const Landers = () => {
         if (value === "landerId" || value === "") {
             if (value === "") {
                 inputElement.placeholder = "";
+                inputElement.disabled = true;
             } else {
                 inputElement.placeholder = "Enter Lander ID";
+                inputElement.disabled = false;
             }
 
             inputElement.type = "text";
         } else if (value === "date") {
             inputElement.type = "date";
+            inputElement.disabled = false;
         }
     }
 
@@ -95,11 +112,11 @@ const Landers = () => {
 
         switch (searchValue) {
             case "landerId": {
-                urlVal = `/api/landers/search/id/${query}`;
+                urlVal = `/api/landers/search/id/${pageState.query}`;
                 break;
             }
             case "date": {
-                urlVal = `/api/landers/search/date/${query}`;
+                urlVal = `/api/landers/search/date/${pageState.query}`;
                 break;
             }
             default: {
@@ -109,9 +126,16 @@ const Landers = () => {
         }
 
         try {
-            const res = await axios.get(`${apiHostURL}${urlVal}`);
-
-            setLanders(res.data);
+            if (searchValue !== "") {
+                const res = await axios.get(`${apiHostURL}${urlVal}`);
+    
+                setPageState({
+                    ...pageState,
+                    landers: res.data
+                });
+            } else {
+                alert("Enter A Search Query");
+            }
         } catch (err) {
             console.error(err.response ? err.response : err.message);
         }
@@ -125,7 +149,7 @@ const Landers = () => {
     return (
         <Container className="LandersContainer">
             <h1>Active Landers</h1>
-            { loading ? 
+            { pageState.loading ? 
                 <p>FETCHING DATA...</p>
                 :
                 <Container className="LandersContainer">

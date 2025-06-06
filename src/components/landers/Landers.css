@@ -1,3 +1,11 @@
+#SearchLabel {
+    padding-right: 10px;
+}
+
+#searchInput {
+    margin-right: 10px!important;
+}
+
 #ButtonDiv {
     display: flex;
     flex-direction: row;
