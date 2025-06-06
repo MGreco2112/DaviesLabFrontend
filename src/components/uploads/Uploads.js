@@ -342,53 +342,67 @@ const Uploads = () => {
 
         return (
             <Container className="uploadsContainer">
-            <h1>CSV Upload</h1>
-            <div id="LanderSelectDiv">
-                <label>Select a Lander:</label>
-                <select onChange={onRouteChange} name="lander" id="lander">
-                    <option value=""></option>
-                    {state.landers.map( option => { return <option value={JSON.stringify(option)} key={option.asdblanderID}>{option.asdblanderID}</option>})}
-                </select>
-            </div>
-            <Button
+                <h1>CSV Upload</h1>
+
+                <div id="LanderSelectDiv">
+                    <label>Select a Lander:</label>
+                    <select onChange={onRouteChange} name="lander" id="lander">
+                        <option value=""></option>
+                        {state.landers.map( option => { return <option value={JSON.stringify(option)} key={option.asdblanderID}>{option.asdblanderID}</option>})}
+                    </select>
+                </div>
+
+                <Button
+                    id="AddLanderButton"
+                    className="Button"
                     onClick={onLanderClick}
                 >Add Lander</Button>
-            <div id="SensorSelectDiv">
-                <label htmlFor="sensor">Select a Sensor:</label>
-                <select onChange={onRouteChange} name="sensor" id="sensor">
-                    <option value=""></option>
-                    <option value="ctd">CTD</option>
-                    <option value="do">DO</option>
-                    <option value="flntu">FLNTU</option>
-                    <option value="albex_ctd">ALBEX CTD</option>
-                    <option value="adcp">ADCP</option>
-                </select>
-            </div>
-            <div id="RouteSelectDiv">
-                <label htmlFor="route">Select File Type:</label>
-                <select onChange={onRouteChange} name="route" id="route">
-                    <option value=""></option>
-                    <option value="header">Head</option>
-                    <option value="data">Data</option>
-                    <option value="combined">Combined</option>
-                </select>
-            </div>
-            <div id="FileSelectDiv">
-                <input type="file" onChange={onFileChange}/>
-            </div>
-            <div id="headerDataDiv">
-            {   state.showDisplayForm
-                ?
-                <HeaderDataForm header={dateRange} updateRange={setDateRange} id="headerDataForm" className="uploadsContainer"/>
-                :
-                null
-            }
-            </div>
-            <div id="UploadButtonDiv">
-                <button id="uploadButton" onClick={onFileUpload}>Upload!</button>
-            </div>
-            {fileData()}
-        </Container>
+
+                <div id="SensorSelectDiv">
+                    <label htmlFor="sensor">Select a Sensor:</label>
+                    <select onChange={onRouteChange} name="sensor" id="sensor">
+                        <option value=""></option>
+                        <option value="ctd">CTD</option>
+                        <option value="do">DO</option>
+                        <option value="flntu">FLNTU</option>
+                        <option value="albex_ctd">ALBEX CTD</option>
+                        <option value="adcp">ADCP</option>
+                    </select>
+                </div>
+
+                <div id="RouteSelectDiv">
+                    <label htmlFor="route">Select File Type:</label>
+                    <select onChange={onRouteChange} name="route" id="route">
+                        <option value=""></option>
+                        <option value="header">Head</option>
+                        <option value="data">Data</option>
+                        <option value="combined">Combined</option>
+                    </select>
+                </div>
+
+                <div id="FileSelectDiv">
+                    <input id="UploadButton" type="file" onChange={onFileChange}/>
+                </div>
+
+                <div id="headerDataDiv">
+                {   state.showDisplayForm
+                    ?
+                    <HeaderDataForm header={dateRange} updateRange={setDateRange} id="headerDataForm" className="uploadsContainer"/>
+                    :
+                    null
+                }
+                </div>
+
+                <div id="UploadButtonDiv">
+                    <Button
+                        id="uploadButton"
+                        className="Button"
+                        onClick={onFileUpload}
+                    >Upload!</Button>
+                </div>
+
+                {fileData()}
+            </Container>
         );
     }
 
@@ -396,8 +410,10 @@ const Uploads = () => {
         <Container className="uploadsContainer" id="mainBodyContainer">
             {
                 loading 
-                ? <h1>loading...</h1> 
-                : formatPage()
+                ?
+                <h1>loading...</h1> 
+                :
+                formatPage()
             }
         </Container>
     );

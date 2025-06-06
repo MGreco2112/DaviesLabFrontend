@@ -1,3 +1,26 @@
 .uploadsContainer {
     min-height: 0vh!important;
 }
+
+.uploadsContainer p {
+    margin: 10px;
+}
+
+.Button {
+    align-self: center;
+    background-color: #3343f2;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: bold;
+    font-family: sans-serif;
+    cursor: pointer;
+}
+
+#UploadButton {
+    cursor: pointer;
+}
