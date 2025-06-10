@@ -6,7 +6,7 @@ import CustomizeADCPChartForm from "./CustomizeADCPChartForm.js";
 
 const ADCPHeadData = (props) => {
     const {headID, startTime, endTime, dataPointCount} = props.header;
-    const {enabled, onSubmit} = props.form;
+    const {enabled, onSubmit, csvButtonFunct} = props.form;
 
     return (
         <Container id={props.id}>
@@ -20,7 +20,7 @@ const ADCPHeadData = (props) => {
             {
                 enabled && dataPointCount > 0
                 ?
-                <CustomizeADCPChartForm onSubmit={onSubmit}/>
+                <CustomizeADCPChartForm onSubmit={onSubmit} csvFunct={csvButtonFunct}/>
                 :
                     enabled && dataPointCount <= 0
                     ?

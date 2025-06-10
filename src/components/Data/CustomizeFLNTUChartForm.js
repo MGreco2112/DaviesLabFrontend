@@ -5,9 +5,10 @@ import Input from "../common/Input";
 import Checkbox from "../common/Checkbox";
 import Button from "../common/Button";
 import InlineInputContainer from "../common/InlineInputContainer";
+import BorderCard from "../common/BorderCard";
 
 const CustomizeFLNTUChartForm = (props) => {
-    const {onSubmit} = props;
+    const {onSubmit, csvFunct} = props;
 
     return (
         <Container id="FormContainer">
@@ -82,6 +83,13 @@ const CustomizeFLNTUChartForm = (props) => {
                     >Create Chart</Button>
                 </Container>
             </Form>
+            <h1>Create Sensor CSV</h1>
+            <BorderCard id="CSVBorderCard" className="ChartBorder">
+                <Button
+                    id="CsvButton"
+                    onClick={csvFunct}
+                >Create CSV</Button>
+            </BorderCard>
         </Container>
     )
 }

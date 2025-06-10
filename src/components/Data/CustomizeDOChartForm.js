@@ -5,9 +5,10 @@ import Input from "../common/Input";
 import InlineInputContainer from "../common/InlineInputContainer";
 import Checkbox from "../common/Checkbox";
 import Button from "../common/Button";
+import BorderCard from "../common/BorderCard";
 
 const CustomizeDOChartForm = (props) => {
-    const {onSubmit} = props;
+    const {onSubmit, csvFunct} = props;
 
     return (
         <Container id="FormContainer">
@@ -90,6 +91,13 @@ const CustomizeDOChartForm = (props) => {
                     >Create Chart</Button>
                 </Container>
             </Form>
+            <h1>Create Sensor CSV</h1>
+            <BorderCard id="CSVBorderCard" className="ChartBorder">
+                <Button
+                    id="CsvButton"
+                    onClick={csvFunct}
+                >Create CSV</Button>
+            </BorderCard>
         </Container>
     )
 }

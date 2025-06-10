@@ -6,7 +6,7 @@ import CustomizeALBEXCTDChartForm from "./CustomizeALBEXCTDChartForm";
 
 const ALBEXHeadData = (props) => {
     const {headID, startTime, endTime, dataPointCount} = props.header;
-    const {enabled, onSubmit} = props.form;
+    const {enabled, onSubmit, csvButtonFunct} = props.form;
 
     return (
         <Container id={props.id}>
@@ -20,7 +20,7 @@ const ALBEXHeadData = (props) => {
             {
                 enabled && dataPointCount > 0
                 ?
-                <CustomizeALBEXCTDChartForm onSubmit={onSubmit}/>
+                <CustomizeALBEXCTDChartForm onSubmit={onSubmit} csvFunct={csvButtonFunct}/>
                 :
                     enabled && dataPointCount <= 0
                     ?

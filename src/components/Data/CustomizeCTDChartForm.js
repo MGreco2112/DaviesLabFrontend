@@ -5,9 +5,10 @@ import Input from "../common/Input";
 import InlineInputContainer from "../common/InlineInputContainer";
 import Checkbox from "../common/Checkbox";
 import Button from "../common/Button";
+import BorderCard from "../common/BorderCard";
 
 const CustomizeCTDChartForm = (props) => {
-    const {onSubmit} = props;
+    const {onSubmit, csvFunct} = props;
 
     return (
         <Container id="FormContainer">
@@ -24,10 +25,10 @@ const CustomizeCTDChartForm = (props) => {
             <InlineInputContainer className="FormInputContainer">
                 <Input
                     className="DateInput"
-                    id="endDateInput"
-                    type="date"
-                    label="End Date"
-                    labelID="EndDateLabel"
+                id="endDateInput"
+                type="date"
+                label="End Date"
+                labelID="EndDateLabel"
                 />
             </InlineInputContainer>
             <Form onSubmit={onSubmit} id="ChartForm">
@@ -73,6 +74,13 @@ const CustomizeCTDChartForm = (props) => {
                     >Create Chart</Button>
                 </Container>
             </Form>
+            <h1>Create Sensor CSV</h1>
+            <BorderCard id="CSVBorderCard" className="ChartBorder">
+                <Button
+                    id="CsvButton"
+                    onClick={csvFunct}
+                >Create CSV</Button>
+            </BorderCard>
         </Container>
     );
 }

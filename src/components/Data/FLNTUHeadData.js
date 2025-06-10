@@ -6,7 +6,7 @@ import CustomizeFLNTUChartForm from "./CustomizeFLNTUChartForm";
 const FLNTUHeadData = (props) => {
     const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measMode, burstTime, burstCnt, intervalData, wiperInterval, sampleCnt, startTime, endTime, chla, chlb, coefDate, ch1, ch2, ch3, ch4, buzzerEN, buzzerInterval, comment, sensorType2, buzzerNumber, dataPointCount} = props.header;
 
-    const {enabled, onSubmit} = props.form;
+    const {enabled, onSubmit, csvButtonFunct} = props.form;
 
     return (
         <Container id={props.id}>
@@ -43,7 +43,7 @@ const FLNTUHeadData = (props) => {
             {
                 enabled && dataPointCount > 0
                 ?
-                <CustomizeFLNTUChartForm onSubmit={onSubmit}/>
+                <CustomizeFLNTUChartForm onSubmit={onSubmit} csvFunct={csvButtonFunct}/>
                 :
                     enabled && dataPointCount <= 0
                     ?

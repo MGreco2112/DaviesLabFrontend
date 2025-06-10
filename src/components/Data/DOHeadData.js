@@ -6,7 +6,7 @@ import CustomizeDOChartForm from "./CustomizeDOChartForm";
 const DOHeadData = (props) => {
     const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measModel, burstTime, burstCnt, intervalData, sampleCnt, startTime, endTime, depAdiRho, coefDate, ch1, ch2, ch3, buzzerEN, buzzerInterval, comment, sensorType2, buzzerNumber, depM, setSal, filmNo, dataPointCount} = props.header;
 
-    const {enabled, onSubmit} = props.form;
+    const {enabled, onSubmit, csvButtonFunct} = props.form;
 
 
     return (
@@ -44,7 +44,7 @@ const DOHeadData = (props) => {
             {
                 enabled && dataPointCount > 0
                 ?
-                <CustomizeDOChartForm onSubmit={onSubmit}/>
+                <CustomizeDOChartForm onSubmit={onSubmit} csvFunct={csvButtonFunct}/>
                 :
                     enabled && dataPointCount <= 0
                     ?

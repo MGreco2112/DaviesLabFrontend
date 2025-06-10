@@ -61,7 +61,8 @@ const DisplayData = () => {
 
         const formProps = {
             enabled: !pageState.chartExists,
-            onSubmit: onFormSubmit
+            onSubmit: onFormSubmit,
+            csvButtonFunct: createCSVButton
         }
 
         if (params.headType === "ctd") {
@@ -212,6 +213,23 @@ const DisplayData = () => {
         container.appendChild(canvas);
         //call function to generate both .csv file and download link
         createCSV(dataSet);
+    }
+
+    const createCSVButton = async () => {
+        try {
+            document.getElementById("CsvButton").innerText = "Creating CSV...";
+            document.getElementById("CsvButton").disabled = true;
+
+            const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/data/headId/${params.headId}`);
+
+            createCSV(res.data);
+
+            document.getElementById("CsvButton").innerText = "Finished CSV";
+        } catch (err) {
+            document.getElementById("CsvButton").disabled = false;
+            document.getElementById("CsvButton").innerText = "Error Creating CSV"
+            console.error(err.message ? err.message : err.response);
+        }
     }
 
     const createCSV = (data) => {
