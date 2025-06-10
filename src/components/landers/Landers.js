@@ -8,6 +8,7 @@ import {apiHostURL} from "../../config";
 import { useNavigate } from "react-router-dom";
 import Lander from "./Lander";
 import "./Landers.css";
+import Splash from "../common/Splash";
 
 const Landers = () => {
 
@@ -153,8 +154,10 @@ const Landers = () => {
                 <p>FETCHING DATA...</p>
                 :
                 <Container className="LandersContainer">
-                    {populateSearchElement()}
-                    {displayLanders()}
+                    <Splash id="LanderSplash">
+                        {populateSearchElement()}
+                        {displayLanders()}
+                    </Splash>
                 </Container>
             }
         </Container>

@@ -4,8 +4,8 @@ const Splash = (props) => {
 
     return (
         <div style={{...defaultStyle,
-            ...props.style,
-            backgroundImage: `url(${props.image})`}}
+            ...props.style}}
+            id={props.id}
         >
             {props.children}
         </div>
@@ -13,8 +13,11 @@ const Splash = (props) => {
 }
 
 const defaultStyle = {
-    backgroundSize: 'cover',
-    height: '80vh',
+    display: "grid",
+    height: '60vh',
+    backgroundSize: "contain",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
