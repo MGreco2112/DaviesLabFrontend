@@ -61,3 +61,7 @@
     display: grid!important;
     align-items: center!important;
 }
+
+#LanderSplash {
+    background-image: url(/src/components/Home/Davies\ Lab\ Logo.jpg);
+}

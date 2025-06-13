@@ -154,10 +154,9 @@ const Landers = () => {
                 <p>FETCHING DATA...</p>
                 :
                 <Container className="LandersContainer">
-                    <Splash id="LanderSplash">
-                        {populateSearchElement()}
-                        {displayLanders()}
-                    </Splash>
+                    {populateSearchElement()}
+                    {displayLanders()}
+                    <Splash id="LanderSplash"/>
                 </Container>
             }
         </Container>

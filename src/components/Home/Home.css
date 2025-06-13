@@ -5,3 +5,7 @@
 #logo {
     height: 50vh!important;
 }
+
+#LanderSplash {
+    background-image: url(/src/components/Home/Davies\ Lab\ Logo.jpg);
+}

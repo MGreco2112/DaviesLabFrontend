@@ -6,6 +6,7 @@ import "./Uploads.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import HeaderDataForm from "./HeaderDataForm";
+import Splash from "../common/Splash";
 
 const Uploads = () => {
     const navigate = useNavigate();
@@ -464,6 +465,7 @@ const Uploads = () => {
                 </div>
 
                 {fileData()}
+                <Splash id="LanderSplash"/>
             </Container>
         );
     }

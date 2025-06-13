@@ -24,3 +24,7 @@
 #UploadButton {
     cursor: pointer;
 }
+
+#LanderSplash {
+    background-image: url(/src/components/Home/Davies\ Lab\ Logo.jpg);
+}

@@ -7,6 +7,7 @@ import "./Landers.css";
 import { useParams } from "react-router-dom";
 import { apiHostURL } from "../../config";
 import { useNavigate } from "react-router-dom";
+import Splash from "../common/Splash";
 
 const DisplayLander = () => {
     const params = useParams();
@@ -167,6 +168,7 @@ const DisplayLander = () => {
                         {formatPage()}
                     </BorderCard>
             }
+            <Splash id="LanderSplash"/>
         </Container>
     );
 }

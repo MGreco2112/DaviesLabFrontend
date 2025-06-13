@@ -12,6 +12,7 @@ import axios from "axios";
 import "./Data.css";
 import ALBEXHeadData from "./ALBEXHeadData";
 import ADCPHeadData from "./ADCPHeadData";
+import Splash from "../common/Splash";
 
 
 const DisplayData = () => {
@@ -82,6 +83,7 @@ const DisplayData = () => {
             <Container id="FormatPageContainer">
                 <Button id="LanderButton" onClick={returnToLander}>Return to Lander</Button>
                 {headInfo}
+                <Splash id="LanderSplash"/>
             </Container>
         );
 
@@ -269,6 +271,7 @@ const DisplayData = () => {
                 <h1>Fetching Data...</h1>
                 :
                 formatPage()
+                
             }
         </Container>
     );
