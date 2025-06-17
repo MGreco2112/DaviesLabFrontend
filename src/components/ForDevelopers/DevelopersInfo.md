@@ -68,7 +68,7 @@ Response: CTD Header -> Aligned CTD Data Set
     "measMode": 1,
     "preHeat": 1000,
     "burstTime": 30,
-    "coefDate": "3922-05-21",
+    "coefDate": "2022-04-21",
     "eca": 0,
     "endTime": "2024-09-07T20:00:00",
     "buzzerEN": 0,
@@ -127,7 +127,7 @@ Response: DO Header -> DO Data Set
     "delayTime": 0,
     "preHeat": 5000,
     "burstTime": 30,
-    "coefDate": "3922-06-18",
+    "coefDate": "2022-05-18",
     "endTime": "2024-09-07T20:30:00",
     "buzzerEN": 0,
     "landerID": "NF2306_20230914_03",
@@ -188,7 +188,7 @@ Response: FLNTU Header -> FLNTU Data Set
     "sondeNo": "0002",
     "sondeName": "ACLD-USB",
     "buzzerEN": 0,
-    "coefDate": "3920-11-01",
+    "coefDate": "2020-10-01",
     "ch4": 0.0,
     "ch3": -9.49318,
     "endTime": "2024-09-07T20:30:00",
@@ -311,7 +311,7 @@ Response: Lander -> Sensor Header -> Sensor Data
         "ch1": -5.513932,
         "buzzerNumber": 3,
         "buzzerInterval": 1,
-        "coefDate": "3922-05-21",
+        "coefDate": "2022-04-21",
         "data": [
             {
                 "date": "2023-09-14T14:00:00",
@@ -356,7 +356,7 @@ Response: Lander -> Sensor Header -> Sensor Data
         "ch1": -12.50806,
         "buzzerNumber": 3,
         "buzzerInterval": 1,
-        "coefDate": "3922-06-18",
+        "coefDate": "2022-05-18",
         "data": [
             {
                 "id": 38968,
@@ -384,7 +384,7 @@ Response: Lander -> Sensor Header -> Sensor Data
         "ch2": -4.943954,
         "burstTime": 30,
         "intervalData": 1000,
-        "coefDate": "3920-11-01",
+        "coefDate": "2020-10-01",
         "ch1": -6.422369,
         "measMode": 1,
         "delayTime": 0,
