@@ -38,34 +38,58 @@ const CustomizeCTDChartForm = (props) => {
                         divClassName="checkboxDiv"
                         name="Temp Degrees (C)"
                         label="Temp Degrees (C)"
-                        id="tempDegC"
-                        value="tempDegC"
+                        id="temperature_C"
+                        value="temperature_C"
                     />
                     <Checkbox
                         className="dataCheckbox"
                         divClassName="checkboxDiv"
-                        name="Sal"
-                        label="Sal"
-                        id="sal"
-                        value="sal"
+                        name="Oxygen Sat %"
+                        label="Oxygen Sat %"
+                        id="oxygen_Sat_Percent"
+                        value="oxygen_Sat_Percent"
+                    />
+                    <Checkbox
+                        className="dataCheckbox"
+                        divClassName="checkboxDiv"
+                        name="Pressure"
+                        label="Pressure"
+                        id="pressure"
+                        value="pressure"
+                    />
+                    <Checkbox
+                        className="dataCheckbox"
+                        divClassName="checkboxDiv"
+                        name="Oxygen (ML/L)"
+                        label="Oxygen (ML/L)"
+                        id="oxygen_ML_L"
+                        value="oxygen_ML_L"
                     />
                 </InlineInputContainer>
                 <InlineInputContainer className="FormInputContainer">
                     <Checkbox
                         className="dataCheckbox"
                         divClassName="checkboxDiv"
-                        name="Cond Ms Cm"
-                        label="Cond Ms Cm"
-                        id="condMsCm"
-                        value="condMsCm"
+                        name="Turbidity NTU"
+                        label="Turbidity NTU"
+                        id="turbidity_NTU"
+                        value="turbidity_NTU"
                     />
                     <Checkbox
                         className="dataCheckbox"
                         divClassName="checkboxDiv"
-                        name="Batt V"
-                        label="Batt V"
-                        id="battV"
-                        value="battV"
+                        name="CHLA (UG/ML)"
+                        label="CHLA (UG/ML)"
+                        id="chla_ug_mL"
+                        value="chla_ug_mL"
+                    />
+                    <Checkbox
+                        className="dataCheckbox"
+                        divClassName="checkboxDiv"
+                        name="CTD Flag"
+                        label="CTD Flag"
+                        id="ctd_Flag"
+                        value="ctd_Flag"
                     />
                 </InlineInputContainer>
                 <Container id="ButtonContainer">

@@ -5,7 +5,7 @@ import "./Data.css";
 import CustomizeADCPChartForm from "./CustomizeADCPChartForm.js";
 
 const ADCPHeadData = (props) => {
-    const {headID, startTime, endTime, dataPointCount} = props.header;
+    const {headID, startTime, endTime, dataPointCount, alignedDataPointCount} = props.header;
     const {enabled, onSubmit, csvButtonFunct} = props.form;
 
     return (
@@ -16,13 +16,14 @@ const ADCPHeadData = (props) => {
                 <p>Deployment Date: {startTime}</p>
                 <p>Recovery Date: {endTime}</p>
                 <p>Data Points: {dataPointCount}</p>
+                <p>Aligned Data Points: {alignedDataPointCount}</p>
             </BorderCard>
             {
-                enabled && dataPointCount > 0
+                enabled && alignedDataPointCount > 0
                 ?
                 <CustomizeADCPChartForm onSubmit={onSubmit} csvFunct={csvButtonFunct}/>
                 :
-                    enabled && dataPointCount <= 0
+                    enabled && alignedDataPointCount <= 0
                     ?
                     <h2>No Data Available To Chart</h2>
                     :
