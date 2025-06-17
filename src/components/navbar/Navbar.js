@@ -23,7 +23,7 @@ const Navbar = () => {
                 fontWeight: "bold",
                 fontSize: "2.5em",
                 margin: "0 20px"
-            }}>Davies Lab</h1>
+            }}>Davies Lab TSDB</h1>
             <div style={{
                 margin: "0 20px",
                 flexDirection: "row",

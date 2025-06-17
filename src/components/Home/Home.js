@@ -9,7 +9,7 @@ const Home = () => {
         return (
             <Container id="HomeContainer">
                 
-                <h1>Welcome to the Davies Lab</h1>
+                <h1>Welcome to the Davies Lab<br/>Lander Timeseries Database</h1>
 
                 <p>Navigate to Landers to view data</p>
                 <Splash id="LanderSplash"/>
