@@ -109,8 +109,8 @@ const DisplayData = () => {
             
             const _getData = async () => {
                 try {
-                    const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/data/headId/${pageState.head.headID}/startDate/${startDate}/endDate/${endDate}`);
-                
+                    const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/${params.headType === "ctd" || params.headType === "adcp" ? "aligned_data": "data"}/headId/${pageState.head.headID}/startDate/${startDate}/endDate/${endDate}`);
+
                     return res.data;
                 } catch (err) {
                     console.error(err.response ? err.response : err.message);

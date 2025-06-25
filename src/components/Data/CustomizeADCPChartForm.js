@@ -35,52 +35,26 @@ const CustomizeALBEXCTDChartForm = (props) => {
                     <Checkbox
                         className="dataCheckbox"
                         divClassName="checkboxDiv"
-                        name="battery"
-                        label="Battery"
-                        id="battery"
-                        value="battery"
+                        name="Horizontal Current Speed (CM/s)"
+                        label="Horizontal Current Speed (CM/s)"
+                        id="horizontal_Current_Speed_cm_s"
+                        value="horizontal_Current_Speed_cm_s"
                     />
                     <Checkbox
                         className="dataCheckbox"
                         divClassName="checkboxDiv"
-                        name="heading"
-                        label="Heading"
-                        id="heading"
-                        value="heading"
+                        name="Vertical Current Speed (CM/s)"
+                        label="Vertical Current Speed (CM/s)"
+                        id="vertical_Current_Speed_cm_s"
+                        value="vertical_Current_Speed_cm_s"
                     />
                     <Checkbox
                         className="dataCheckbox"
                         divClassName="checkboxDiv"
-                        name="pitch"
-                        label="Pitch"
-                        id="pitch"
-                        value="pitch"
-                    />
-                </InlineInputContainer>
-                <InlineInputContainer className="FormInputContainer">
-                    <Checkbox
-                        className="dataCheckbox"
-                        divClassName="checkboxDiv"
-                        name="roll"
-                        label="Roll"
-                        id="roll"
-                        value="roll"
-                    />
-                    <Checkbox
-                        className="dataCheckbox"
-                        divClassName="checkboxDiv"
-                        name="pressure"
-                        label="Pressure"
-                        id="pressure"
-                        value="pressure"
-                    />
-                    <Checkbox
-                        className="dataCheckbox"
-                        divClassName="checkboxDiv"
-                        name="temperature"
-                        label="Temperature"
-                        id="temperature"
-                        value="temperature"
+                        name="Current Direction"
+                        label="Current Direction"
+                        id="current_Direction"
+                        value="current_Direction"
                     />
                 </InlineInputContainer>
                 <Container id="ButtonContainer">
