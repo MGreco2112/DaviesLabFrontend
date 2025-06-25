@@ -110,8 +110,6 @@ const DisplayData = () => {
             const _getData = async () => {
                 try {
                     const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/${params.headType === "ctd" || params.headType === "adcp" ? "aligned_data": "data"}/headId/${pageState.head.headID}/startDate/${startDate}/endDate/${endDate}`);
-                
-                    console.table(res.data);
 
                     return res.data;
                 } catch (err) {
