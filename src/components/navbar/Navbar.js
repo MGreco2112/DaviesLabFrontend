@@ -33,6 +33,7 @@ const Navbar = () => {
             }}>
                 <NavButton to="/" label = "Home"/>
                 <NavButton to="/landers" label = "Landers"/>
+                <NavButton to="/dashboard" label = "Dashboard"/>
                 <NavButton to="/uploads" label="Upload Files"/>
                 <NavButton to="/forDevs" label="API Docs"/>
             </div>

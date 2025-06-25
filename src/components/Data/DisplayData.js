@@ -222,7 +222,15 @@ const DisplayData = () => {
             document.getElementById("CsvButton").innerText = "Creating CSV...";
             document.getElementById("CsvButton").disabled = true;
 
-            const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/data/headId/${params.headId}`);
+            let url = `${apiHostURL}/api/processed/${params.headType}/data`;
+
+            if (params.headType === "ctd" || params.headType === "adcp") {
+                url += `/header/${params.headId}/aligned/true`
+            } else {
+                url += `/headId/${params.headId}`
+            }
+
+            const res = await axios.get(url);
 
             createCSV(res.data);
 

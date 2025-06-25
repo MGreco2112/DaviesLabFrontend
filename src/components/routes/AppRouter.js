@@ -8,6 +8,7 @@ import DisplayData from "../Data/DisplayData";
 import Uploads from "../uploads/Uploads";
 import NewLander from "../uploads/NewLander";
 import ForDevelopers from "../ForDevelopers/ForDevelopers";
+import Dashboard from "../Dashboard/Dashboard";
 // import new routes here
 
 const AppRouter = () => {
@@ -22,6 +23,7 @@ const AppRouter = () => {
             <Route path="/uploads" element={<Uploads/>}/>
             <Route path="/uploads/new_lander" element={<NewLander/>}/>
             <Route path="/forDevs" element={<ForDevelopers/>}/>
+            <Route path="/dashboard" element={<Dashboard/>}/>
         </Routes>
     </div>
     )
