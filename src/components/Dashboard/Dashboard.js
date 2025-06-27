@@ -4,6 +4,7 @@ import Container from "../common/Container";
 import "./Dashboard.css";
 import { apiHostURL } from "../../config";
 import Chart from "chart.js/auto";
+import DashboardCard from "./DashboardCard";
 
 const Dashboard = () => {
     const [pageState, setPageState] = useState({
@@ -21,6 +22,7 @@ const Dashboard = () => {
                     loading: false,
                     dashboardObj: res.data
                 });
+                
             } catch (err) {
                 console.error(err.message ? err.message : err.response);
             }
@@ -45,8 +47,20 @@ const Dashboard = () => {
             }
         }
 
-        new Chart(canvas, chartData);
+        const pageHeader = document.createElement("h1");
 
+        pageHeader.innerText = "Database Dashboard";
+
+        const header = document.createElement("h2");
+
+        header.innerText = "Data Points:"
+
+        const chart = new Chart(canvas, chartData);
+
+        chart.id = "pieChart"
+
+        container.appendChild(pageHeader);
+        container.appendChild(header);
         container.appendChild(canvas);
     }
 
@@ -62,6 +76,13 @@ const Dashboard = () => {
                     null
                     :
                     createChart()
+            }
+            {
+                pageState.loading
+                ?
+                null
+                :
+                <DashboardCard id="dashCard" dashboard={pageState.dashboardObj}/>
             }
         </Container>
     );

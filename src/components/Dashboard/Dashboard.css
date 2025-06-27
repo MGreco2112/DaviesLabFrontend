@@ -1,3 +1,12 @@
 #dashboardContainer {
     min-height: 0%!important;
 }
+
+#dashboardCanvas {
+    height: 517px!important;
+    width: 517px!important;
+}
+
+#dashCard p{
+    text-align: center;
+}
