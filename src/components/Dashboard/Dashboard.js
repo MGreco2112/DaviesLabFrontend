@@ -9,18 +9,21 @@ import DashboardCard from "./DashboardCard";
 const Dashboard = () => {
     const [pageState, setPageState] = useState({
         loading: true,
-        dashboardObj: {}
+        dataPointObj: {},
+        dateCountList: {}
     });
 
     useEffect(() => {
         const _getDashboard = async () => {
             try {
-                const res =  await axios.get(`${apiHostURL}/api/dashboard/populate`);
+                const res = await axios.get(`${apiHostURL}/api/dashboard/populate`);
+                const dateCountRes = await axios.get(`${apiHostURL}/api/dashboard/dates`);
 
                 setPageState({
                     ...pageState,
                     loading: false,
-                    dashboardObj: res.data
+                    dataPointObj: res.data,
+                    dateCountList: dateCountRes.data
                 });
                 
             } catch (err) {
@@ -31,18 +34,31 @@ const Dashboard = () => {
     }, []);
 
 
-    const createChart = () => {
+    const createdataPointChart = () => {
         const container = document.getElementById("dashboardContainer");
         const canvas = document.createElement('canvas');
+        const dateCanvas = document.createElement('canvas');
         canvas.id = "dashboardCanvas";
+        dateCanvas.id = "dateDashboardCanvas";
 
-        const chartData = {
+        const dataPointChartData = {
             type: 'pie',
             data: {
                 datasets: [{
                     label: "Data Points",
-                    data: [pageState.dashboardObj.totalDataPoints, pageState.dashboardObj.totalAlignedDataPoints],
+                    data: [pageState.dataPointObj.totalDataPoints, pageState.dataPointObj.totalAlignedDataPoints],
                     hoverOffset: 4
+                }]
+            }
+        }
+
+        const dateChartData = {
+            type: 'line',
+            data: {
+                labels: Object.keys(pageState.dateCountList),
+                datasets: [{
+                    label: Object.keys(pageState.dateCountList),
+                    data: Object.values(pageState.dateCountList).map(val => val)
                 }]
             }
         }
@@ -55,34 +71,41 @@ const Dashboard = () => {
 
         header.innerText = "Data Points:"
 
-        const chart = new Chart(canvas, chartData);
+        const dataPointChart = new Chart(canvas, dataPointChartData);
 
-        chart.id = "pieChart"
+        dataPointChart.id = "piedataPointChart"
+
+        const dateChart = new Chart(dateCanvas, dateChartData);
+
+        dateChart.id = "lineDateChart";
 
         container.appendChild(pageHeader);
         container.appendChild(header);
         container.appendChild(canvas);
+        container.appendChild(dateCanvas);
     }
 
     return (
         <Container id="dashboardContainer">
-            {
-                pageState.loading
-                ?
-                <h1>Fetching Dashboard...</h1>
-                :
-                    document.getElementById("dashboardCanvas")
+            <Container id="dashboardChartContainer">
+                {
+                    pageState.loading
                     ?
-                    null
+                    <h1>Fetching Dashboard...</h1>
                     :
-                    createChart()
-            }
+                        document.getElementById("dashboardCanvas")
+                        ?
+                        null
+                        :
+                        createdataPointChart()
+                }
+            </Container>
             {
                 pageState.loading
                 ?
                 null
                 :
-                <DashboardCard id="dashCard" dashboard={pageState.dashboardObj}/>
+                <DashboardCard id="dashCard" dashboard={pageState.dataPointObj}/>
             }
         </Container>
     );
