@@ -17,13 +17,12 @@ const Dashboard = () => {
         const _getDashboard = async () => {
             try {
                 const res = await axios.get(`${apiHostURL}/api/dashboard/populate`);
-                const dateCountRes = await axios.get(`${apiHostURL}/api/dashboard/dates`);
 
                 setPageState({
                     ...pageState,
                     loading: false,
-                    dataPointObj: res.data,
-                    dateCountList: dateCountRes.data
+                    dataPointObj: res.data.dashboard,
+                    dateCountList: res.data.pointsPerYear
                 });
                 
             } catch (err) {
