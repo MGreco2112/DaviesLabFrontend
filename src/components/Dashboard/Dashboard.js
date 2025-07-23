@@ -62,31 +62,33 @@ const Dashboard = () => {
             }
         }
 
-        const pageHeader = document.createElement("h1");
 
-        pageHeader.innerText = "Database Dashboard";
+        const pieHeader = document.createElement("h2");
 
-        const header = document.createElement("h2");
-
-        header.innerText = "Data Points:"
+        pieHeader.innerText = "Data Points:"
 
         const dataPointChart = new Chart(canvas, dataPointChartData);
 
         dataPointChart.id = "piedataPointChart"
 
+        const lineHeader = document.createElement("h2");
+
+        lineHeader.innerText = "Data Per Year:"
+
         const dateChart = new Chart(dateCanvas, dateChartData);
 
         dateChart.id = "lineDateChart";
 
-        container.appendChild(pageHeader);
-        container.appendChild(header);
+        container.appendChild(pieHeader);
         container.appendChild(canvas);
+        container.appendChild(lineHeader);
         container.appendChild(dateCanvas);
     }
 
     return (
         <Container id="dashboardContainer">
             <Container id="dashboardChartContainer">
+                <h1>Database Dashboard</h1>
                 {
                     pageState.loading
                     ?
@@ -99,13 +101,15 @@ const Dashboard = () => {
                         createdataPointChart()
                 }
             </Container>
-            {
-                pageState.loading
-                ?
-                null
-                :
-                <DashboardCard id="dashCard" dashboard={pageState.dataPointObj}/>
-            }
+            <Container id="dashcardContainer">
+                {
+                    pageState.loading
+                    ?
+                    null
+                    :
+                    <DashboardCard id="dashCard" dashboard={pageState.dataPointObj}/>
+                }
+            </Container>
         </Container>
     );
 }
