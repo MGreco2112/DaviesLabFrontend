@@ -40,6 +40,10 @@ const DisplayLander = () => {
         _fetchLander();
     }, [pageState.lander.asdblanderID]);
 
+    const landersNav = () => {
+        navigate(`/landers`);
+    }
+
     const ctdNav = () => {
         navigate(`/landers/data/ctd/${pageState.lander.ctdhead.headID}`);
     }
@@ -164,9 +168,15 @@ const DisplayLander = () => {
                 pageState.loading ?
                     <p>FETCHING LANDER...</p>
                     :
-                    <BorderCard>
-                        {formatPage()}
-                    </BorderCard>
+                    <Container className="LandersContainer">
+                        <Button
+                            onClick={landersNav}
+                            id="LanderButton"
+                        >Return to Landers</Button>
+                        <BorderCard>
+                            {formatPage()}
+                        </BorderCard>
+                    </Container>
             }
             <Splash id="LanderSplash"/>
         </Container>
