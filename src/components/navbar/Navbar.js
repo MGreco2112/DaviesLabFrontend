@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { NavLink } from "react-router-dom";
 import NavButton from "./NavButton";
 
 const Navbar = () => {
@@ -18,12 +19,20 @@ const Navbar = () => {
             alignItems: "center",
 
         }}>
-            <h1 style={{
-                fontFamily: 'sans-serif',
-                fontWeight: "bold",
-                fontSize: "2.5em",
-                margin: "0 20px"
-            }}>Davies Lab TSDB</h1>
+            <NavLink
+                to="/"
+                style={{
+                    textDecoration: "none",
+                    color: "#010101"
+                }}
+            >
+                <h1 style={{
+                    fontFamily: 'sans-serif',
+                    fontWeight: "bold",
+                    fontSize: "2.5em",
+                    margin: "0 20px"
+                }}>Davies Lab TSDB</h1>
+            </NavLink>
             <div style={{
                 margin: "0 20px",
                 flexDirection: "row",
