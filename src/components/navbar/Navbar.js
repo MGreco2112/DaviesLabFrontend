@@ -21,17 +21,20 @@ const Navbar = () => {
         }}>
             <NavLink
                 to="/"
+                id="NavHeader"
                 style={{
                     textDecoration: "none",
                     color: "#010101"
                 }}
             >
-                <h1 style={{
-                    fontFamily: 'sans-serif',
-                    fontWeight: "bold",
-                    fontSize: "2.5em",
-                    margin: "0 20px"
-                }}>Davies Lab TSDB</h1>
+                <h1
+                    style={{
+                        fontFamily: 'sans-serif',
+                        fontWeight: "bold",
+                        fontSize: "2.5em",
+                        margin: "0 20px"
+                    }}
+                >Davies Lab TSDB</h1>
             </NavLink>
             <div style={{
                 margin: "0 20px",

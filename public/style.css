@@ -2,3 +2,11 @@
     Global Stylesheet for entire React App
     Automatically imported into every page
 */
+#NavHeader ::before {
+    content: url("/cropped-Logo_sq-32x32.png");
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 0.5em;
+    opacity: 80%;
+}
