@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import NavButton from "./NavButton";
+import "./style.css";
 
 const Navbar = () => {
 

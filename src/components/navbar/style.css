@@ -1,0 +1,8 @@
+#NavHeader ::before {
+    content: url("../../../public/cropped-Logo_sq-32x32.png");
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 0.5em;
+    opacity: 80%;
+}
