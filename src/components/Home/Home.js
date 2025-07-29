@@ -10,11 +10,11 @@ const Home = () => {
 
         const _populateCache = async () => {
             const urls = [
-                `${apiHostURL}/api/processed/ctd/headers`,
-                `${apiHostURL}/api/processed/do/headers`,
-                `${apiHostURL}/api/processed/flntu/headers`,
-                `${apiHostURL}/api/processed/albex_ctd/headers`,
-                `${apiHostURL}/api/processed/adcp/headers`
+                `${apiHostURL}/api/cache/ctd/headers`,
+                `${apiHostURL}/api/cache/do/headers`,
+                `${apiHostURL}/api/cache/flntu/headers`,
+                `${apiHostURL}/api/cache/albex_ctd/headers`,
+                `${apiHostURL}/api/cache/adcp/headers`
             ];
 
             await caches.open("site-cache").then(async (cache) => {
@@ -27,7 +27,7 @@ const Home = () => {
 
         const _retrieveCache = async () => {
             await caches.open("site-cache").then(async (cache) => {
-                await cache.match(`${apiHostURL}/api/processed/ctd/headers`).then(async function (response) {
+                await cache.match(`${apiHostURL}/api/cache/ctd/headers`).then(async function (response) {
                     if (response) {
                         const data = await response.json();
                         console.log(data);
