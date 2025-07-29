@@ -27,8 +27,68 @@ const DisplayData = () => {
 
     useEffect(() => {
 
+        const _checkCache = async () => {
+            const cacheName = "site-cache";
+            const cache = await caches.open(cacheName);
+
+            const requestURL = `${apiHostURL}/api/cache/${params.headType}/headers`;
+
+            const cachedResponse = await cache.match(requestURL);
+
+            if (cachedResponse) {
+
+                const data = await cachedResponse.json();
+                
+                const today = new Date();
+                const [thisMonth, thisDay, thisYear] = [
+                    today.getMonth(),
+                    today.getDate(),
+                    today.getFullYear()
+                ]
+                const cacheDate = new Date(data.cacheDate);
+                const [cacheMonth, cacheDay, cacheYear] = [
+                    cacheDate.getMonth(),
+                    cacheDate.getDate(),
+                    cacheDate.getFullYear()
+                ];
+                
+
+                if (thisDay <= cacheDay && thisMonth <= cacheMonth && thisYear <= cacheYear) {
+                    
+                    for (let i = 0; i < data.heads.length; i++) {
+                        if (data.heads[i].HeadID == params.headID) {
+                            console.log("Accessing Cache:",data.heads[i]);
+
+                            setPageState({
+                                ...pageState,
+                                head: await data.heads[i],
+                                loading: false
+                            });
+
+                            return;
+                        }
+                    }
+
+                    _fetchHead();
+                    return;
+                    
+                } else {
+                    
+                    _fetchHead();
+                    return;
+                    
+                }
+
+            } else {
+                
+                _fetchHead();
+            }
+        }
+
         const _fetchHead = async () => {
             try {
+                console.log("Calling Backend");
+                
                 const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/headers/sanitized/${params.headId}`);
                 
                 setPageState({
@@ -50,8 +110,9 @@ const DisplayData = () => {
             ...pageState,
             loading: true
         });
-        _fetchHead();
-    }, [pageState.head.headId, params.headId, params.headType]);
+
+        _checkCache();
+     }, [pageState.head.headId, params.headId, params.headType]);
 
     const returnToLander = () => {
         navigate(`/landers/${pageState.head.landerID}`);
