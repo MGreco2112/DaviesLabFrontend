@@ -67,10 +67,10 @@ const Uploads = () => {
         navigate("/uploads/new_lander");
     }
 
-    const _updateCache = async () => {
+    const _updateCache = async (sensorValue) => {
         await caches.open("site-cache").then(async (cache) => {
             await cache
-                .addAll(urls)
+                .add(`${apiHostURL}/api/cache/${sensorValue}/headers`)
                 .then(() => console.log("Data added to cache"))
                 .catch((error) => console.error("Error adding data to cache:", error))
         });
@@ -138,7 +138,7 @@ const Uploads = () => {
                     }
                 }
 
-                _updateCache();
+                _updateCache(sensorValue);
                 uploadButton.disabled = false;
 
             } else {
