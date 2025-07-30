@@ -36,9 +36,10 @@ const Home = () => {
                     ];
                     
                     if (thisDay > cacheDay || thisMonth > cacheMonth || thisYear > cacheYear) {
-                        _populateCache(urls)
+                        _populateCache(urls);
+                        return;
                     }
-                    break;
+                    return;
                 }
             }
             _populateCache(urls);
