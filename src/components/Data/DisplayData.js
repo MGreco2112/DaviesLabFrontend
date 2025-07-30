@@ -54,25 +54,23 @@ const DisplayData = () => {
                 
 
                 if (thisDay <= cacheDay && thisMonth <= cacheMonth && thisYear <= cacheYear) {
-                    
-                    for (let i = 0; i < data.heads.length; i++) {
-                        if (data.heads[i].HeadID == params.headID) {
-                            console.log("Accessing Cache:",data.heads[i]);
 
-                            setPageState({
-                                ...pageState,
-                                head: await data.heads[i],
-                                loading: false
-                            });
-
-                            return;
-                        }
+                    if (data.heads[params.headId]) {
+                        console.log("Loaded data from Cache");
+                        
+                        setPageState({
+                            ...pageState,
+                            head: await data.heads[params.headId],
+                            loading: false
+                        });
+                    } else {
+                        console.log("API Fetch");
+                        
+                        _fetchHead();
                     }
 
-                    _fetchHead();
-                    return;
-                    
                 } else {
+                    console.log("API Fetch");
                     
                     _fetchHead();
                     return;
@@ -172,6 +170,8 @@ const DisplayData = () => {
                 try {
                     const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/${params.headType === "ctd" || params.headType === "adcp" ? "aligned_data": "data"}/headId/${pageState.head.headID}/startDate/${startDate}/endDate/${endDate}`);
 
+                    console.log(res.data);
+
                     return res.data;
                 } catch (err) {
                     console.error(err.response ? err.response : err.message);
@@ -180,7 +180,26 @@ const DisplayData = () => {
                 }
             }
 
-            return await _getData();
+            const populateFromCache = () => {
+                const outputArr = [];
+
+                for (let i = 0; i < pageState.head.data.length; i++) {
+                    const dataElement = pageState.head.data[i];
+                    if (dataElement.date >= (startDate + "T00:00:00") && dataElement.date <= (endDate + "T00:00:00")) {
+                        outputArr.push(dataElement);
+                    }
+                }
+
+                return outputArr;
+            }
+
+            if (pageState.head.data.length > 0) {
+                console.log("Built from Cache");
+                return populateFromCache();
+            } else {
+                console.log("Built from API");
+                return await _getData();
+            }
         } else {
             alert("Invalid Date Range Entered");
         }

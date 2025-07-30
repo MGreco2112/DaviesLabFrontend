@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {apiHostURL} from "../../config";
+import {urls} from "../../config";
 import Container from "../common/Container";
 import "./Home.css";
 import Splash from "../common/Splash";
@@ -8,15 +8,43 @@ const Home = () => {
 
     useEffect(() => {
 
-        const _populateCache = async () => {
-            const urls = [
-                `${apiHostURL}/api/cache/ctd/headers`,
-                `${apiHostURL}/api/cache/do/headers`,
-                `${apiHostURL}/api/cache/flntu/headers`,
-                `${apiHostURL}/api/cache/albex_ctd/headers`,
-                `${apiHostURL}/api/cache/adcp/headers`
-            ];
+        const _checkCache = async () => {
 
+
+            const cacheName = "site-cache";
+            const cache = await caches.open(cacheName);
+
+            for (let i = 0; i < urls.length; i++) {
+                const cachedResponse = await cache.match(urls[i]);
+
+                if (cachedResponse) {
+                    const data = await cachedResponse.json();
+
+                    const today = new Date();
+
+
+                    const [thisMonth, thisDay, thisYear] = [
+                        today.getMonth(),
+                        today.getDate(),
+                        today.getFullYear()
+                    ]
+                    const cacheDate = new Date(data.cacheDate);
+                    const [cacheMonth, cacheDay, cacheYear] = [
+                        cacheDate.getMonth(),
+                        cacheDate.getDate(),
+                        cacheDate.getFullYear()
+                    ];
+                    
+                    if (thisDay > cacheDay || thisMonth > cacheMonth || thisYear > cacheYear) {
+                        _populateCache(urls)
+                    }
+                    break;
+                }
+            }
+            _populateCache(urls);
+        }
+
+        const _populateCache = async (urls) => {
             await caches.open("site-cache").then(async (cache) => {
                 await cache
                     .addAll(urls)
@@ -25,23 +53,7 @@ const Home = () => {
             });
         }
 
-        const _retrieveCache = async () => {
-            await caches.open("site-cache").then(async (cache) => {
-                await cache.match(`${apiHostURL}/api/cache/ctd/headers`).then(async function (response) {
-                    if (response) {
-                        const data = await response.json();
-                        console.log(data);
-                    } else {
-                        console.log("Resource Not Found");
-                    }
-                });
-            });
-        }
-
-        
-
-        _populateCache();
-        // _retrieveCache();
+        _checkCache();
     }, []);
 
     const formatPage = () => {

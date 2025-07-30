@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Container from "../common/Container";
-import {apiHostURL} from "../../config";
+import {apiHostURL, urls} from "../../config";
 import Button from "../common/Button";
 import "./Uploads.css";
 import { useNavigate } from "react-router-dom";
@@ -67,6 +67,15 @@ const Uploads = () => {
         navigate("/uploads/new_lander");
     }
 
+    const _updateCache = async () => {
+        await caches.open("site-cache").then(async (cache) => {
+            await cache
+                .addAll(urls)
+                .then(() => console.log("Data added to cache"))
+                .catch((error) => console.error("Error adding data to cache:", error))
+        });
+    } 
+
     const onFileUpload = async () => {
         const sensorValue = document.getElementById("sensor").value;
         let routeValue = document.getElementById("route").value;
@@ -129,6 +138,7 @@ const Uploads = () => {
                     }
                 }
 
+                _updateCache();
                 uploadButton.disabled = false;
 
             } else {
