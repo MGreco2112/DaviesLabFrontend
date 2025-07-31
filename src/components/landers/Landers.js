@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Container from "../common/Container";
-import Input from "../common/Input";
 import Button from "react-bootstrap/Button";
-import InlineInputContainer from "../common/InlineInputContainer";
 import {apiHostURL} from "../../config";
 import { useNavigate } from "react-router-dom";
 import Lander from "./Lander";
 import "./Landers.css";
 import Splash from "../common/Splash";
+import Form from "react-bootstrap/Form";
+import InputGroup from 'react-bootstrap/InputGroup';
 
 const Landers = () => {
 
@@ -55,31 +55,36 @@ const Landers = () => {
 
         return (
             <Container className="LandersContainer">
-                <InlineInputContainer className="inputContainer">
-                    <label htmlFor="searchSelect" id="SearchLabel">Type of Search:</label>
-                    <select id="searchSelect" onChange={onSelectChange}>
-                        <option value=""></option>
-                        <option value="landerId">Lander ID</option>
-                        <option value="date">Date</option>
-                    </select>
-                </InlineInputContainer>
-                <InlineInputContainer className="inputContainer">
-                    <Input
-                        name="searchInput"
-                        id="searchInput"
-                        onChange={onChange}
-                        disabled
-                    />
-                    <Button
-                        onClick={onSubmit}
-                    >Search</Button>
-                </InlineInputContainer>
+                <Form>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text>Type of Search:</InputGroup.Text>
+                        <Form.Select
+                            id="searchSelect"
+                            onChange={onSelectChange}
+                        >
+                            <option value=""></option>
+                            <option value="landerId">Lander ID</option>
+                            <option value="date">Date</option>
+                        </Form.Select>
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <Form.Control
+                            name="searchInput"
+                            id="searchInput"
+                            onChange={onChange}
+                            disabled
+                        />
+                    </InputGroup>
+                </Form>
+                <Button
+                    onClick={onSubmit}
+                >Search</Button>
             </Container>
-        )
+        );
     }
 
     const onChange = (e) => {
-        // setQuery(e.target.value);
+
         setPageState({
             ...pageState,
             query: e.target.value
@@ -142,7 +147,6 @@ const Landers = () => {
         }
     }
 
-    //onSelect function to navigate to future Lander Info page
     const onSelect = (id) => {
         navigate(`/landers/${id}`);
     }
