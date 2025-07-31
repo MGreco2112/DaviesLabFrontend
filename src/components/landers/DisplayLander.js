@@ -61,7 +61,7 @@ const DisplayLander = () => {
     }
 
     const adcpNav = () => {
-        navigate(`/landers/data/adcp/${pageState.lander.adcphead.headID}`)
+        navigate(`/landers/data/adcp/${pageState.lander.adcphead.headID}`);
     }
 
     const formatPage = () => {

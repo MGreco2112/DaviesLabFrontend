@@ -6,6 +6,9 @@ import Checkbox from "../common/Checkbox";
 import Button from "react-bootstrap/Button";
 import InlineInputContainer from "../common/InlineInputContainer";
 import BorderCard from "../common/BorderCard";
+import InputGroup from 'react-bootstrap/InputGroup';
+import BootstrapForm from "react-bootstrap/Form";
+
 
 const CustomizeFLNTUChartForm = (props) => {
     const {onSubmit, csvFunct} = props;
@@ -13,24 +16,28 @@ const CustomizeFLNTUChartForm = (props) => {
     return (
         <Container id="FormContainer">
             <h1>FLNTU Chart Options</h1>
-            <InlineInputContainer className="FormInputContainer">
-                <Input
-                    className="DateInput"
-                    id="startDateInput"
-                    type="date"
-                    label="Start Date"
-                    labelID="StartDateLabel"
-                />
-            </InlineInputContainer>
-            <InlineInputContainer className="FormInputContainer">
-                <Input
-                    className="DateInput"
-                    id="endDateInput"
-                    type="date"
-                    label="End Date"
-                    labelID="EndDateLabel"
-                />
-            </InlineInputContainer>
+            <BootstrapForm>
+                <InputGroup className="mb-3">
+                    <InputGroup.Text>Start Date:</InputGroup.Text>
+                        <BootstrapForm.Control
+                            className="DateInput"
+                            id="startDateInput"
+                            type="date"
+                            label="Start Date"
+                            labelID="StartDateLabel"
+                        />
+                </InputGroup>
+                <InputGroup className="mb-3">
+                    <InputGroup.Text>End Date:</InputGroup.Text>
+                    <BootstrapForm.Control
+                        className="DateInput"
+                        id="endDateInput"
+                        type="date"
+                        label="End Date"
+                        labelID="EndDateLabel"
+                    />
+                </InputGroup>
+            </BootstrapForm>
             <Form onSubmit={onSubmit} id="ChartForm">
                 <InlineInputContainer className="FormInputContainer">
                     <Checkbox

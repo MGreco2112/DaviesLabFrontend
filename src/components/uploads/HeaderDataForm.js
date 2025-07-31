@@ -26,20 +26,19 @@ const HeaderDataForm = (props) => {
             <h3>Data Range Information</h3>
             <Form>
                 <Row>
-                
-                <InputGroup className="mb-3">
-                    <InputGroup.Text>Burst Count:</InputGroup.Text>
-                        <Form.Control
-                            label="Burst Count"
-                            name="burstCnt"
-                            id="burstCnt"
-                            type="number"
-                            min={1}
-                            value={props.header.burstCtn}
-                            onChange={onChange}
-                            required
-                        />
-                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text>Burst Count:</InputGroup.Text>
+                            <Form.Control
+                                label="Burst Count"
+                                name="burstCnt"
+                                id="burstCnt"
+                                type="number"
+                                min={1}
+                                value={props.header.burstCtn}
+                                onChange={onChange}
+                                required
+                            />
+                        </InputGroup>
                 </Row>
                 <Row>
                     <InputGroup className="mb-3">
