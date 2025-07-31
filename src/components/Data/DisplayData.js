@@ -94,6 +94,8 @@ const DisplayData = () => {
                     head: res.data,
                     loading: false
                 });
+
+                _populateCache(`${apiHostURL}/api/cache/${params.headType}/headers`);
             } catch (err) {
                 console.error(err.response ? err.response : err.message);
 
@@ -102,6 +104,17 @@ const DisplayData = () => {
                     loading: false
                 });
             }
+        }
+
+        const _populateCache = async (url) => {
+            console.log("Populating Cache");
+
+            await caches.open("site-cache").then(async (cache) => {
+                await cache
+                    .add(url)
+                    .then(() => console.log("Data added to cache"))
+                    .catch((error) => console.error("Error adding data to cache:", error))
+            });
         }
 
         setPageState({
