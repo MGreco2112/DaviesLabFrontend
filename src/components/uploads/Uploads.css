@@ -6,6 +6,11 @@
     margin: 10px;
 }
 
+.FormDivs {
+    flex-direction: row;
+    display: flex;
+}
+
 .Button {
     align-self: center;
     background-color: #3343f2;

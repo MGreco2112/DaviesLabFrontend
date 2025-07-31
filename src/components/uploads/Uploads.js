@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Container from "../common/Container";
-import {apiHostURL, urls} from "../../config";
-import Button from "../common/Button";
+import {apiHostURL} from "../../config";
+import Button from "react-bootstrap/Button";
 import "./Uploads.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import HeaderDataForm from "./HeaderDataForm";
 import Splash from "../common/Splash";
+import Form from "react-bootstrap/Form";
+import InputGroup from 'react-bootstrap/InputGroup';
 
 const Uploads = () => {
     const navigate = useNavigate();
@@ -219,7 +221,13 @@ const Uploads = () => {
     const onRouteChange = () => {
         const route = document.getElementById("route");
         const sensor = document.getElementById("sensor").value;
-        const selLander = JSON.parse(document.getElementById("lander").value);
+        const landerVal = document.getElementById("lander").value;
+
+        if (landerVal === "") {
+            return;
+        }
+
+        const selLander = JSON.parse(landerVal);        
         
         if (document.getElementById("headerDataForm")) {
 
@@ -416,64 +424,81 @@ const Uploads = () => {
         return (
             <Container className="uploadsContainer">
                 <h1>CSV Upload</h1>
+                
+                    <div id="LanderSelectDiv" className="FormDivs">
+                        <InputGroup.Text>Select a Lander:</InputGroup.Text>
+                        <Form.Select
+                            label="Select a Lander:"
+                            onChange={onRouteChange}
+                            name="lander"
+                            id="lander"
+                        >
+                            <option value=""></option>
+                            {pageState.state.landers.map( option => { return <option value={JSON.stringify(option)} key={option.asdblanderID}>{option.asdblanderID}</option>})}
+                        </Form.Select>
+                    </div>
 
-                <div id="LanderSelectDiv">
-                    <label>Select a Lander:</label>
-                    <select onChange={onRouteChange} name="lander" id="lander">
-                        <option value=""></option>
-                        {pageState.state.landers.map( option => { return <option value={JSON.stringify(option)} key={option.asdblanderID}>{option.asdblanderID}</option>})}
-                    </select>
-                </div>
-
-                <Button
-                    id="AddLanderButton"
-                    className="Button"
-                    onClick={onLanderClick}
-                >Add Lander</Button>
-
-                <div id="SensorSelectDiv">
-                    <label htmlFor="sensor">Select a Sensor:</label>
-                    <select onChange={onRouteChange} name="sensor" id="sensor">
-                        <option value=""></option>
-                        <option value="ctd">CTD</option>
-                        <option value="do">DO</option>
-                        <option value="flntu">FLNTU</option>
-                        <option value="albex_ctd">ALBEX CTD</option>
-                        <option value="adcp">ADCP</option>
-                    </select>
-                </div>
-
-                <div id="RouteSelectDiv">
-                    <label htmlFor="route">Select File Type:</label>
-                    <select onChange={onRouteChange} name="route" id="route">
-                        <option value=""></option>
-                        <option value="header">Head</option>
-                        <option value="data">Data</option>
-                        <option value="combined">Combined</option>
-                    </select>
-                </div>
-
-                <div id="FileSelectDiv">
-                    <input id="UploadButton" type="file" onChange={onFileChange}/>
-                </div>
-
-                <div id="headerDataDiv">
-                {   pageState.state.showDisplayForm
-                    ?
-                    <HeaderDataForm header={pageState.dateRange} state={pageState} updateRange={setPageState} id="headerDataForm" className="uploadsContainer"/>
-                    :
-                    null
-                }
-                </div>
-
-                <div id="UploadButtonDiv">
                     <Button
-                        id="uploadButton"
+                        id="AddLanderButton"
                         className="Button"
-                        onClick={onFileUpload}
-                    >Upload!</Button>
-                </div>
+                        variant="outline-secondary"
+                        size="sm"
+                        onClick={onLanderClick}
+                    >Add Lander</Button>
 
+                    <div id="SensorSelectDiv" className="FormDivs">
+                        <InputGroup.Text>Select a Sensor:</InputGroup.Text>
+                        <Form.Select
+                            label="Select a Sensor"
+                            onChange={onRouteChange}
+                            name="sensor"
+                            id="sensor"
+                        >
+                            <option value=""></option>
+                            <option value="ctd">CTD</option>
+                            <option value="do">DO</option>
+                            <option value="flntu">FLNTU</option>
+                            <option value="albex_ctd">ALBEX CTD</option>
+                            <option value="adcp">ADCP</option>
+                        </Form.Select>
+                    </div>
+
+                    <div id="RouteSelectDiv" className="FormDivs">
+                        <InputGroup.Text>Select File Type:</InputGroup.Text>
+                        <Form.Select
+                            label="Select File Type:"
+                            onChange={onRouteChange}
+                            name="route"
+                            id="route"
+                        >
+                            <option value=""></option>
+                            <option value="header">Head</option>
+                            <option value="data">Data</option>
+                            <option value="combined">Combined</option>
+                        </Form.Select>
+                    </div>
+
+                    <Form.Group controlId="formFile" className="mb-3">
+                        <InputGroup.Text>Browse Lander Data</InputGroup.Text>
+                        <Form.Control type="file" onChange={onFileChange}/>
+                    </Form.Group>
+                    <div id="headerDataDiv" className="FormDivs">
+                    {   pageState.state.showDisplayForm
+                        ?
+                        <HeaderDataForm header={pageState.dateRange} state={pageState} updateRange={setPageState} id="headerDataForm" className="uploadsContainer"/>
+                        :
+                        null
+                    }
+                    </div>
+
+                    <div id="UploadButtonDiv" className="FormDivs">
+                        <Button
+                            id="uploadButton"
+                            className="Button"
+                            onClick={onFileUpload}
+                            size="lg"
+                        >Upload!</Button>
+                    </div>
                 {fileData()}
                 <Splash id="LanderSplash"/>
             </Container>
