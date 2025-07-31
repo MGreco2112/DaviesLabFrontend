@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { apiHostURL } from "../../config";
 import Container from "../common/Container";
-import Button from "../common/Button";
+import Button from "react-bootstrap/Button";
 import DOHeadData from "./DOHeadData";
 import CTDHeadData from "./CTDHeadData";
 import FLNTUHeadData from "./FLNTUHeadData";

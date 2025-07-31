@@ -3,7 +3,7 @@ import Container from "../common/Container";
 import Form from "../common/Form";
 import Input from "../common/Input";
 import Checkbox from "../common/Checkbox";
-import Button from "../common/Button";
+import Button from "react-bootstrap/Button";
 import InlineInputContainer from "../common/InlineInputContainer";
 import BorderCard from "../common/BorderCard";
 

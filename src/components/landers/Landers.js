@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Container from "../common/Container";
 import Input from "../common/Input";
-import Button from "../common/Button";
+import Button from "react-bootstrap/Button";
 import InlineInputContainer from "../common/InlineInputContainer";
 import {apiHostURL} from "../../config";
 import { useNavigate } from "react-router-dom";

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Container from "../common/Container";
 import BorderCard from "../common/BorderCard";
-import Button from "../common/Button";
+import Button from "react-bootstrap/Button";
 import "./Landers.css";
 import { useParams } from "react-router-dom";
 import { apiHostURL } from "../../config";

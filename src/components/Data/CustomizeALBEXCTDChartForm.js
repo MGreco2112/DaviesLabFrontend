@@ -4,7 +4,7 @@ import InlineInputContainer from "../common/InlineInputContainer";
 import Input from "../common/Input";
 import Form from "../common/Form";
 import Checkbox from "../common/Checkbox";
-import Button from "../common/Button";
+import Button from "react-bootstrap/Button";
 import BorderCard from "../common/BorderCard";
 
 const CustomizeALBEXCTDChartForm = (props) => {
