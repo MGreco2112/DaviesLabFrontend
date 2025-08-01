@@ -62,7 +62,7 @@ const Home = () => {
                     null
                     :
                     <Container className="LandersContainer">
-                        <h2>Latest Uploaded Landers</h2>
+                        <h2>Latest Deployed Landers</h2>
                         <Container className="LandersContainer" id="HomeLanders">
                             {createLanders()}
                         </Container>
