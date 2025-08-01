@@ -4,7 +4,7 @@ import Form from "../common/Form";
 import Input from "../common/Input";
 import InlineInputContainer from "../common/InlineInputContainer";
 import Checkbox from "../common/Checkbox";
-import Button from "react-bootstrap/Button";
+import Button from "../common/Button";
 import BorderCard from "../common/BorderCard";
 import InputGroup from 'react-bootstrap/InputGroup';
 import BootstrapForm from "react-bootstrap/Form";
@@ -24,7 +24,7 @@ const CustomizeCTDChartForm = (props) => {
                             id="startDateInput"
                             type="date"
                             label="Start Date"
-                            labelID="StartDateLabel"
+                            // labelID="StartDateLabel"
                         />
                 </InputGroup>
                 <InputGroup className="mb-3">
@@ -34,7 +34,7 @@ const CustomizeCTDChartForm = (props) => {
                         id="endDateInput"
                         type="date"
                         label="End Date"
-                        labelID="EndDateLabel"
+                        // labelID="EndDateLabel"
                     />
                 </InputGroup>
             </BootstrapForm>

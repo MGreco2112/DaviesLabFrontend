@@ -76,14 +76,21 @@ const Uploads = () => {
                 .then(() => console.log("Data added to cache"))
                 .catch((error) => console.error("Error adding data to cache:", error))
         });
-    } 
+    }
 
     const onFileUpload = async () => {
         const sensorValue = document.getElementById("sensor").value;
         let routeValue = document.getElementById("route").value;
-        const landerValue = JSON.parse(document.getElementById("lander").value);
         const uploadButton = document.getElementById("uploadButton");
+        const landerString = document.getElementById("lander").value;
+
+        if (landerString === "") {
+            return;
+        }
         
+
+        const landerValue = JSON.parse(landerString);
+
         if (pageState.state.selectedFile) {
         
             const timeProcessObject = {

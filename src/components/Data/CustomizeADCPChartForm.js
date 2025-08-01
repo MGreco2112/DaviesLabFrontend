@@ -4,7 +4,7 @@ import InlineInputContainer from "../common/InlineInputContainer";
 import Input from "../common/Input";
 import Form from "../common/Form";
 import Checkbox from "../common/Checkbox";
-import Button from "react-bootstrap/Button";
+import Button from "../common/Button";
 import BorderCard from "../common/BorderCard";
 import InputGroup from 'react-bootstrap/InputGroup';
 import BootstrapForm from "react-bootstrap/Form";
@@ -23,7 +23,7 @@ const CustomizeALBEXCTDChartForm = (props) => {
                             id="startDateInput"
                             type="date"
                             label="Start Date"
-                            labelID="StartDateLabel"
+                            // labelID="StartDateLabel"
                         />
                 </InputGroup>
                 <InputGroup className="mb-3">
@@ -33,7 +33,7 @@ const CustomizeALBEXCTDChartForm = (props) => {
                         id="endDateInput"
                         type="date"
                         label="End Date"
-                        labelID="EndDateLabel"
+                        // labelID="EndDateLabel"
                     />
                 </InputGroup>
             </BootstrapForm>

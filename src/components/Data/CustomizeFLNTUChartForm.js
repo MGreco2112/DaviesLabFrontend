@@ -3,7 +3,7 @@ import Container from "../common/Container";
 import Form from "../common/Form";
 import Input from "../common/Input";
 import Checkbox from "../common/Checkbox";
-import Button from "react-bootstrap/Button";
+import Button from "../common/Button";
 import InlineInputContainer from "../common/InlineInputContainer";
 import BorderCard from "../common/BorderCard";
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -24,7 +24,7 @@ const CustomizeFLNTUChartForm = (props) => {
                             id="startDateInput"
                             type="date"
                             label="Start Date"
-                            labelID="StartDateLabel"
+                            // labelID="StartDateLabel"
                         />
                 </InputGroup>
                 <InputGroup className="mb-3">
@@ -34,7 +34,7 @@ const CustomizeFLNTUChartForm = (props) => {
                         id="endDateInput"
                         type="date"
                         label="End Date"
-                        labelID="EndDateLabel"
+                        // labelID="EndDateLabel"
                     />
                 </InputGroup>
             </BootstrapForm>

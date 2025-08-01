@@ -95,7 +95,6 @@ const DisplayData = () => {
                     loading: false
                 });
 
-                _populateCache(`${apiHostURL}/api/cache/${params.headType}/headers`);
             } catch (err) {
                 console.error(err.response ? err.response : err.message);
 
@@ -104,17 +103,6 @@ const DisplayData = () => {
                     loading: false
                 });
             }
-        }
-
-        const _populateCache = async (url) => {
-            console.log("Populating Cache");
-
-            await caches.open("site-cache").then(async (cache) => {
-                await cache
-                    .add(url)
-                    .then(() => console.log("Data added to cache"))
-                    .catch((error) => console.error("Error adding data to cache:", error))
-            });
         }
 
         setPageState({
@@ -163,7 +151,7 @@ const DisplayData = () => {
 
     const fetchDataRange = async () => {
         let startDate = document.getElementById("startDateInput").value;
-        let endDate = document.getElementById("endDateInput").value;
+        let endDate = document.getElementById("endDateInput").value;        
         
         if (startDate === "" && pageState.head.startTime !== null) {
             startDate = pageState.head.startTime;
@@ -173,6 +161,9 @@ const DisplayData = () => {
             endDate = pageState.head.endTime;
         }
         
+
+        console.log(startDate, endDate);
+
         
         if (startDate !== undefined || endDate !== undefined) {
 
@@ -181,9 +172,9 @@ const DisplayData = () => {
             
             const _getData = async () => {
                 try {
-                    const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/
-                                    ${params.headType === "ctd" || params.headType === "adcp" ? "aligned_data": "data"}
-                                    /headId/${pageState.head.headID}/startDate/${startDate}/endDate/${endDate}`);
+                    const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/` + 
+                `${params.headType === "ctd" || params.headType === "adcp" ? "aligned_data": "data"}` + 
+                `/headId/${pageState.head.headID}/startDate/${startDate}/endDate/${endDate}`);
 
                     console.log(res.data);
 
@@ -310,6 +301,8 @@ const DisplayData = () => {
         container.appendChild(canvas);
         //call function to generate both .csv file and download link
         createCSV(dataSet);
+
+        _populateCache(`${apiHostURL}/api/cache/${params.headType}/headers`);
     }
 
     const createCSVButton = async () => {
@@ -363,6 +356,17 @@ const DisplayData = () => {
         link.textContent = 'Click to Download .CSV'
 
         document.getElementById("PageContainer").append(link);
+    }
+
+    const _populateCache = async (url) => {
+        console.log("Populating Cache");
+
+        await caches.open("site-cache").then(async (cache) => {
+            await cache
+                .add(url)
+                .then(() => console.log("Data added to cache"))
+                .catch((error) => console.error("Error adding data to cache:", error))
+        });
     }
     
 
