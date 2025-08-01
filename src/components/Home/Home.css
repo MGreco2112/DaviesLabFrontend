@@ -6,6 +6,11 @@
     height: 50vh!important;
 }
 
+#HomeWrapper {
+    margin-top: 1em!important;
+    margin-bottom: 1em!important;
+}
+
 #HomeLanders {
     display: flex!important;
     flex-direction: row!important;

@@ -55,13 +55,12 @@ const Home = () => {
                 
                 <h1>Welcome to the Davies Lab<br/>Lander Timeseries Database</h1>
 
-                <p>Navigate to Landers to view data</p>
                 {
                     pageState.loading
                     ?
                     null
                     :
-                    <Container className="LandersContainer">
+                    <Container className="LandersContainer" id="HomeWrapper">
                         <h2>Latest Deployed Landers</h2>
                         <Container className="LandersContainer" id="HomeLanders">
                             {createLanders()}
