@@ -6,6 +6,12 @@
     height: 50vh!important;
 }
 
+#HomeLanders {
+    display: flex!important;
+    flex-direction: row!important;
+    justify-content: center;
+}
+
 #LanderSplash {
     background-image: url(/src/components/Home/Davies\ Lab\ Logo.jpg);
 }
