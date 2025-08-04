@@ -2,8 +2,10 @@ import React from "react";
 import BorderCard from "../common/BorderCard";
 
 const Lander = (props) => {
+    console.log(props.lander);
+    
     //Destructure Lander obj
-    const {asdblanderID, landerPlatform, addbrovdiveID} = props.lander;
+    const {asdblanderID, landerPlatform, addbrovdiveID, deploymentDate, recoveryDate} = props.lander;
 
     const onSelect = () => {
         props.onSelect(asdblanderID);
@@ -13,8 +15,34 @@ const Lander = (props) => {
         <BorderCard className={props.className} onClick={onSelect}>
             <h2>ID: {asdblanderID}</h2>
             <div style={{flexDirection: "column"}}>
-                <p>Platform ID: {landerPlatform}</p>
-                <p>ROV Dive ID: {addbrovdiveID}</p>
+                {
+                    landerPlatform
+                    ?
+                    <p>Platform ID: {landerPlatform}</p>
+                    :
+                    null
+                }
+                {
+                    addbrovdiveID
+                    ?
+                    <p>ROV Dive ID: {addbrovdiveID}</p>
+                    :
+                    null
+                }
+                {
+                    deploymentDate
+                    ?
+                    <p>Deployment Date: {deploymentDate}</p>
+                    :
+                    null
+                }
+                {
+                    recoveryDate
+                    ?
+                    <p>Recovery Date: {recoveryDate}</p>
+                    :
+                    null
+                }
             </div>
         </BorderCard>
     );

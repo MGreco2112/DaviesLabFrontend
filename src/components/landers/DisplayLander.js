@@ -68,6 +68,22 @@ const DisplayLander = () => {
         return (
             <Container className="LandersContainer">
                 <strong>Lander ID: {pageState.lander.asdblanderID}</strong>
+                <div id="dateDiv">
+                    {
+                        pageState.lander.deploymentDate
+                        ?
+                        <p>Deployment Date: {pageState.lander.deploymentDate}</p>
+                        :
+                        null
+                    }
+                    {
+                        pageState.lander.recoveryDate
+                        ?
+                        <p>Recovery Date: {pageState.lander.recoveryDate}</p>
+                        :
+                        null
+                    }
+                </div>
                 {
                     pageState.lander.ctdhead
                     ?
