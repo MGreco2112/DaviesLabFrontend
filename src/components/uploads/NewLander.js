@@ -5,6 +5,7 @@ import axios from "axios";
 import Form from "react-bootstrap/Form";
 import InputGroup from 'react-bootstrap/InputGroup';
 import "./NewLander.css";
+import Splash from "../common/Splash.js";
 import { useNavigate } from "react-router-dom";
 import { apiHostURL } from "../../config";
 
@@ -124,6 +125,7 @@ const NewLander = () => {
                 <Button
                     onClick={onSubmit}
                 >Submit</Button>
+                <Splash id="LanderSplash"/>
             </Container>
         )
     }
