@@ -1,7 +1,6 @@
 import React from "react";
 import Container from "../common/Container";
 import InlineInputContainer from "../common/InlineInputContainer";
-import Input from "../common/Input";
 import Form from "../common/Form";
 import Checkbox from "../common/Checkbox";
 import Button from "../common/Button";
