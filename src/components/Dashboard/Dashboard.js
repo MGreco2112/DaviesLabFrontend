@@ -5,6 +5,7 @@ import "./Dashboard.css";
 import { apiHostURL } from "../../config";
 import Chart from "chart.js/auto";
 import DashboardCard from "./DashboardCard";
+import Splash from "../common/Splash.js";
 
 const Dashboard = () => {
     const [pageState, setPageState] = useState({
@@ -34,7 +35,7 @@ const Dashboard = () => {
 
 
     const createdataPointChart = () => {
-        const container = document.getElementById("dashboardContainer");
+        const container = document.getElementById("ChartsContainer");
         const canvas = document.createElement('canvas');
         const dateCanvas = document.createElement('canvas');
         canvas.id = "dashboardCanvas";
@@ -48,6 +49,19 @@ const Dashboard = () => {
                     data: [pageState.dataPointObj.totalDataPoints, pageState.dataPointObj.totalAlignedDataPoints],
                     hoverOffset: 4
                 }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        title: {
+                            text: "Data Points:",
+                            display: true,
+                            font: {
+                                size: 25
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -59,29 +73,32 @@ const Dashboard = () => {
                     label: Object.keys(pageState.dateCountList),
                     data: Object.values(pageState.dateCountList).map(val => val)
                 }]
+            }, 
+            options: {
+                plugins: {
+                    legend: {
+                        title: {
+                            text: "Data Per Year:",
+                            display: true,
+                            font: {
+                                size: 25
+                            }
+                        }
+                    }
+                }
             }
         }
 
-
-        const pieHeader = document.createElement("h2");
-
-        pieHeader.innerText = "Data Points:"
 
         const dataPointChart = new Chart(canvas, dataPointChartData);
 
         dataPointChart.id = "piedataPointChart"
 
-        const lineHeader = document.createElement("h2");
-
-        lineHeader.innerText = "Data Per Year:"
-
         const dateChart = new Chart(dateCanvas, dateChartData);
 
         dateChart.id = "lineDateChart";
 
-        container.appendChild(pieHeader);
         container.appendChild(canvas);
-        container.appendChild(lineHeader);
         container.appendChild(dateCanvas);
     }
 
@@ -89,17 +106,21 @@ const Dashboard = () => {
         <Container id="dashboardContainer">
             <Container id="dashboardChartContainer">
                 <h1>Database Dashboard</h1>
-                {
-                    pageState.loading
-                    ?
-                    <h1>Fetching Dashboard...</h1>
-                    :
-                        document.getElementById("dashboardCanvas")
+                <div
+                    id="ChartsContainer"
+                >
+                    {
+                        pageState.loading
                         ?
-                        null
+                        <h1>Fetching Dashboard...</h1>
                         :
-                        createdataPointChart()
-                }
+                            document.getElementById("dashboardCanvas")
+                            ?
+                            null
+                            :
+                            createdataPointChart()
+                    }
+                </div>
             </Container>
             <Container id="dashcardContainer">
                 {
@@ -110,6 +131,7 @@ const Dashboard = () => {
                     <DashboardCard id="dashCard" dashboard={pageState.dataPointObj}/>
                 }
             </Container>
+            <Splash id="LanderSplash"/>
         </Container>
     );
 }

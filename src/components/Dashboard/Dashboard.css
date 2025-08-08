@@ -25,3 +25,14 @@
 #dashCard p{
     text-align: center;
 }
+
+#ChartsContainer {
+    margin-top: 3em;
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: row;
+}
+
+#dateDashboardCanvas {
+    margin-left: 7em;
+}
