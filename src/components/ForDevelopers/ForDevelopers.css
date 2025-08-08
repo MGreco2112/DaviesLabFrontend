@@ -2,6 +2,10 @@
     height: 0%!important;
 }
 
+pre {
+    overflow: visible!important;
+}
+
 #LanderSplash {
     background-image: url(/src/components/Home/Davies\ Lab\ Logo.jpg);
 }

@@ -24,6 +24,10 @@
     border-color: #0d6efd!important;
 }
 
+#startDateInput, #endDateInput {
+    width:fit-content!important;
+}
+
 #SensorChart {
     width: 75%!important;
     height: 75%!important;
