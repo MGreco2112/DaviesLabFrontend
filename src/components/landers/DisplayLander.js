@@ -72,14 +72,14 @@ const DisplayLander = () => {
                     {
                         pageState.lander.deploymentDate
                         ?
-                        <p>Deployment Date: {pageState.lander.deploymentDate}</p>
+                        <p>Deployment Date: {pageState.lander.deploymentDate.substring(0, 10)}</p>
                         :
                         null
                     }
                     {
                         pageState.lander.recoveryDate
                         ?
-                        <p>Recovery Date: {pageState.lander.recoveryDate}</p>
+                        <p>Recovery Date: {pageState.lander.recoveryDate.substring(0, 10)}</p>
                         :
                         null
                     }

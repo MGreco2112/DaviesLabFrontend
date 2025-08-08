@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import Container from "../common/Container";
-import InlineInputContainer from "../common/InlineInputContainer";
-import Input from "../common/Input";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
@@ -54,10 +52,18 @@ const NewLander = () => {
         });
     }
 
+    const navToUploads = () => {
+        navigate("/uploads");
+    }
+
     const populatePage = () => {
         return (
             <Container className="NewLanderContainer">
                 <h1>Post New Lander</h1>
+                <Button
+                    id="LandersButton"
+                    onClick={navToUploads}
+                >Return To Uploads</Button>
                 <Form>
                     <InputGroup className="mb-3">
                         <InputGroup.Text>ASDB Lander ID:</InputGroup.Text>

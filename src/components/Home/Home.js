@@ -20,7 +20,7 @@ const Home = () => {
     useEffect(() => {
         const _populateLatestLanders = async () => {
             try {
-                const res = await axios.get(`${apiHostURL}/api/landers/latest_uploads`);
+                const res = await axios.get(`${apiHostURL}/api/landers/latest_uploads`);                
 
                 setPageState({
                     ...pageState,

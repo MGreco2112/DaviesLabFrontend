@@ -1,3 +1,7 @@
 .LanderInputContainer, .DateInput {
     width: 0%!important;
 }
+
+#LandersButton {
+    margin-bottom: 1em!important;
+}
