@@ -490,7 +490,8 @@ const Uploads = () => {
                         <Form.Control type="file" onChange={onFileChange}/>
                     </Form.Group>
                     <div id="headerDataDiv" className="FormDivs">
-                    {   pageState.state.showDisplayForm
+                    {   
+                        pageState.state.showDisplayForm
                         ?
                         <HeaderDataForm header={pageState.dateRange} state={pageState} updateRange={setPageState} id="headerDataForm" className="uploadsContainer"/>
                         :
