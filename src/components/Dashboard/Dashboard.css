@@ -17,6 +17,11 @@
     width: 517px!important;
 }
 
+#dashCard {
+    background: linear-gradient(135deg, var(--secondary-orange) 0%, var(--primary-orange) 100%)!important;
+    border-color: #0d6efd!important;
+}
+
 #dashCard p{
     text-align: center;
 }

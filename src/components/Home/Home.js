@@ -45,7 +45,7 @@ const Home = () => {
     const createLanders = () => {
         
         return pageState.latestLanders.map(land => {
-            return <Lander className="LanderCard" lander={land} key={land.asdblanderID} onSelect={onLanderClick}/>
+            return <Lander className="HomeLanderCard" lander={land} key={land.asdblanderID} onSelect={onLanderClick}/>
         });
     }
 

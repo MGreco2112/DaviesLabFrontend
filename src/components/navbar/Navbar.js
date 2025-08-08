@@ -7,19 +7,20 @@ const Navbar = () => {
 
     return (
         <Fragment>
-        <div style={{
-            backgroundColor: '#FFA500',
-            position: "fixed",
-            width: "100%",
-            zIndex: 9999,
-            top: 0,
-            left: 0,
-            height: "75px",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-
-        }}>
+        <div 
+            style={{
+                position: "fixed",
+                width: "100%",
+                zIndex: 9999,
+                top: 0,
+                left: 0,
+                height: "75px",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+            }}
+            id="Navbar"
+        >
             <NavLink
                 to="/"
                 id="NavHeader"

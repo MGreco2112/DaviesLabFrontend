@@ -2,7 +2,6 @@ import React from "react";
 import BorderCard from "../common/BorderCard";
 
 const Lander = (props) => {
-    console.log(props.lander);
     
     //Destructure Lander obj
     const {asdblanderID, landerPlatform, addbrovdiveID, deploymentDate, recoveryDate} = props.lander;

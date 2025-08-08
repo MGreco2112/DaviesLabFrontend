@@ -1,6 +1,7 @@
 import React from "react";
 import Container from "../common/Container";
 import BorderCard from "../common/BorderCard";
+import "./Data.css";
 import CustomizeCTDChartForm from "./CustomizeCTDChartForm";
 
 const CTDHeadData = (props) => {
@@ -12,7 +13,7 @@ const CTDHeadData = (props) => {
     return (
         <Container id={props.id}>
             <h1>CTD DATA</h1>
-            <BorderCard>
+            <BorderCard className="HeadCard">
                 <h1>Sonde Name: {sondeName}</h1>
                 <p>Sonde Number: {sondeNo}</p>
                 <p>Sensor Type: {sensorType}</p>

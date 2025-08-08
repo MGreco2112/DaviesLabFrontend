@@ -11,7 +11,7 @@ const ALBEXHeadData = (props) => {
     return (
         <Container id={props.id}>
             <h1>ALBEX CTD Data</h1>
-            <BorderCard>
+            <BorderCard className="HeadCard">
                 <h1>ALBEX CTD Head ID: {headID}</h1>
                 <p>Deployment Date: {startTime}</p>
                 <p>Recovery Date: {endTime}</p>

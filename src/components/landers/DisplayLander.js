@@ -189,7 +189,7 @@ const DisplayLander = () => {
                             onClick={landersNav}
                             id="LanderButton"
                         >Return to Landers</Button>
-                        <BorderCard>
+                        <BorderCard className="LanderCard">
                             {formatPage()}
                         </BorderCard>
                     </Container>

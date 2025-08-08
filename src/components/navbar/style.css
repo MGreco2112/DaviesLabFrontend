@@ -6,3 +6,7 @@
     margin-right: 0.5em;
     opacity: 80%;
 }
+
+#Navbar {
+    background: linear-gradient(135deg, var(--secondary-orange) 0%, var(--primary-orange) 100%)!important;
+}
