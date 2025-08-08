@@ -486,7 +486,7 @@ const Uploads = () => {
                     </div>
 
                     <Form.Group controlId="formFile" className="mb-3">
-                        <InputGroup.Text>Browse Lander Data</InputGroup.Text>
+                        <InputGroup.Text>Upload Lander Data</InputGroup.Text>
                         <Form.Control type="file" onChange={onFileChange}/>
                     </Form.Group>
                     <div id="headerDataDiv" className="FormDivs">
