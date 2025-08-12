@@ -13,8 +13,8 @@
 }
 
 #dashboardCanvas {
-    height: 517px!important;
-    width: 517px!important;
+    height: 20em!important;
+    width: 45vh!important;
 }
 
 #dashCard {

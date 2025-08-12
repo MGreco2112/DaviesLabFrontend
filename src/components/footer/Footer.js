@@ -49,7 +49,7 @@ const Footer = () => {
                                 className="mb-0"
                                 style={{"color": "white"}}
                             >
-                                Developed by Matthew Greco for DODAT.
+                                Developed by <a href="https://github.com/mgreco2112" target="_blank">Matthew Greco</a> for DODAT.
                             </p>
                         </div>
                         <div className="text-md-end col-md-6">
