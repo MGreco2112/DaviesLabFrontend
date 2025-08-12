@@ -154,8 +154,12 @@ const Landers = () => {
     return (
         <Container className="LandersContainer">
             <h1>Active Landers</h1>
-            { pageState.loading ? 
-                <p>FETCHING DATA...</p>
+            { 
+                pageState.loading 
+                ?
+                <Container> 
+                    <p>FETCHING DATA...</p>
+                </Container>
                 :
                 <Container className="LandersContainer">
                     {populateSearchElement()}

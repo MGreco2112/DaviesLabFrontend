@@ -32,6 +32,10 @@
     cursor: pointer;
 }
 
+#LoadingMessageContainer {
+    min-height: 100vh!important;
+}
+
 #UploadButton {
     cursor: pointer;
 }

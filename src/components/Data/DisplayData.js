@@ -375,7 +375,9 @@ const DisplayData = () => {
             {
                 pageState.loading
                 ?
-                <h1>Fetching Data...</h1>
+                <Container id="FetchingMessageContainer">
+                    <h1>Fetching Data...</h1>
+                </Container>
                 :
                 formatPage()
                 

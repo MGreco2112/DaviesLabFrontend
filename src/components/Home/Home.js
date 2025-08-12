@@ -58,7 +58,9 @@ const Home = () => {
                 {
                     pageState.loading
                     ?
-                    null
+                    <Container>
+                        {null}
+                    </Container>
                     :
                     <Container className="LandersContainer" id="HomeWrapper">
                         <h2>Latest Deployed Landers</h2>

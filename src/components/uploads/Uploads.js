@@ -518,7 +518,9 @@ const Uploads = () => {
             {
                 pageState.loading 
                 ?
-                <h1>loading...</h1> 
+                <Container id="LoadingMessageContainer">
+                    <h1>loading...</h1>
+                </Container> 
                 :
                 formatPage()
             }

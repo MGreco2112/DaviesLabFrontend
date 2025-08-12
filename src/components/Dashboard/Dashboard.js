@@ -126,7 +126,9 @@ const Dashboard = () => {
                 {
                     pageState.loading
                     ?
-                    null
+                    <Container>
+                        {null}
+                    </Container>
                     :
                     <DashboardCard id="dashCard" dashboard={pageState.dataPointObj}/>
                 }
