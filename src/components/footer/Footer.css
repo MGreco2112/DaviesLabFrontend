@@ -1,0 +1,20 @@
+#PageFooter {
+    bottom: 0;
+    background: var(--dark-orange);
+    margin-top: auto;
+    padding: 2rem 0;
+}
+
+.ImageSpan {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    padding: 4px 16px;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 8px;
+    vertical-align: middle;
+}
+
+#LogoImage {
+    height: 48px;
+    display: block;
+}
