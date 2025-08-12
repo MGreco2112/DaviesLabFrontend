@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import NavButton from "./NavButton";
+import Logo from "../footer/dodat-logo.png";
 import "./style.css";
 
 const Navbar = () => {
@@ -29,14 +30,13 @@ const Navbar = () => {
                     color: "#010101"
                 }}
             >
-                <h1
-                    style={{
-                        fontFamily: 'sans-serif',
-                        fontWeight: "bold",
-                        fontSize: "2.5em",
-                        margin: "0 20px"
-                    }}
-                >Davies Lab TSDB</h1>
+                <span className="LogoSpan">
+                    <img
+                        id="LogoImage"
+                        src={Logo}
+                        alt="DODAT Logo"
+                    />
+                </span>
             </NavLink>
             <div style={{
                 margin: "0 20px",

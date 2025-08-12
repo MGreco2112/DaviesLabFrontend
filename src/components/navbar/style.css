@@ -1,12 +1,14 @@
-#NavHeader ::before {
-    content: url("../../../public/cropped-Logo_sq-32x32.png");
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    margin-right: 0.5em;
-    opacity: 80%;
-}
-
 #Navbar {
     background: linear-gradient(135deg, var(--secondary-orange) 0%, var(--primary-orange) 100%)!important;
+}
+
+.LogoSpan {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    margin-top: 1px;
+    margin-left: 15px;
+    padding: 0px 16px;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 8px;
+    vertical-align: middle;
 }
