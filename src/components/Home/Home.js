@@ -6,7 +6,6 @@ import axios from "axios";
 import Container from "../common/Container";
 import "./Home.css";
 import Splash from "../common/Splash";
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Home = () => {
 
