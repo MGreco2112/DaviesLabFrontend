@@ -41,7 +41,7 @@ const Navbar = () => {
                 userSelect: "none",
                 alignItems: "center",
             }}>
-                <NavButton to="/" label = "Home "/>
+                <NavButton to="/" label = "Home"/>
                 <NavButton to="/landers" label = "Landers"/>
                 <NavButton to="/dashboard" label = "Dashboard"/>
                 <NavButton to="/uploads" label="Upload Files"/>

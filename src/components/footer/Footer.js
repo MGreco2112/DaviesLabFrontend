@@ -27,7 +27,8 @@ const Footer = () => {
                             </p>
                             <div className="d-flex gap-3">
                                 <a
-                                    className="test-light" href="https://github.com/MGreco2112/DaviesLabFrontend"
+                                    className="test-light" href="https://github.com/MGreco2112/DaviesLabLanders"
+                                    target="_blank"
                                 >
                                     <i className="fab fa-github fa-lg">
                                         
