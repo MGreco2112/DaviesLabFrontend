@@ -8,17 +8,41 @@ import Splash from "../common/Splash";
 // Display information about endpoints in Backend for returning JSON data
 
 const ForDevelopers = () => {
-    const [markdown, setMarkdown] = useState("");
+    const [pageState, setPageState] = useState({
+        markdown: "",
+        loading: true
+    });
 
     useEffect(() => {
-        fetch(DevelopersMD)
-        .then((response) => response.text())
-        .then((text) => setMarkdown(text));
+
+        const fetchMarkdown = () => {
+            fetch(DevelopersMD)
+            .then((response) => response.text())
+            .then((text) => setPageState({
+                loading: false,
+                markdown: text
+            }));
+        }
+
+        setPageState({
+            ...pageState,
+            loading: true
+        });
+
+        fetchMarkdown();
     }, []);
 
     return(
         <Container className="MarkdownContainer">
-            <ReactMarkdown children={markdown}/>
+            {
+                pageState.loading
+                ?
+                <Container>
+                    <h2>Loading...</h2>
+                </Container>
+                :
+                <ReactMarkdown children={pageState.markdown}/>
+            }
             <Splash id="LanderSplash"/>
         </Container>
     );
