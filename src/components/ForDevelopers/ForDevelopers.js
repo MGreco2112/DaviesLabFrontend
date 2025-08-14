@@ -24,12 +24,9 @@ const ForDevelopers = () => {
             }));
         }
 
-        setPageState({
-            ...pageState,
-            loading: true
-        });
-
-        fetchMarkdown();
+        if (pageState.loading) {
+            fetchMarkdown();
+        }
     }, []);
 
     return(
