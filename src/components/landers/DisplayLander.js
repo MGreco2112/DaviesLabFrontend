@@ -181,18 +181,21 @@ const DisplayLander = () => {
     return(
         <Container className="LandersContainer">
             {
-                pageState.loading ?
+                pageState.loading
+                ?
+                <Container>
                     <p>FETCHING LANDER...</p>
-                    :
-                    <Container className="LandersContainer">
-                        <Button
-                            onClick={landersNav}
-                            id="LanderButton"
-                        >Return to Landers</Button>
-                        <BorderCard className="DisplayLanderCard">
-                            {formatPage()}
-                        </BorderCard>
-                    </Container>
+                </Container>
+                :
+                <Container className="LandersContainer">
+                    <Button
+                        onClick={landersNav}
+                        id="LanderButton"
+                    >Return to Landers</Button>
+                    <BorderCard className="DisplayLanderCard">
+                        {formatPage()}
+                    </BorderCard>
+                </Container>
             }
             <Splash id="LanderSplash"/>
         </Container>
