@@ -50,7 +50,7 @@ const Footer = () => {
                                 className="mb-0"
                                 style={{"color": "white"}}
                             >
-                                Developed by <a href="https://github.com/mgreco2112" target="_blank">Matthew Greco</a> for DODAT.
+                                Developed by <a href="https://github.com/mgreco2112" target="_blank">Matthew Greco</a> for <a href="https://github.com/marecotec/DODAT" target="_blank">DODAT</a> and <a href="https://marecotec.com/" target="_blank">Marecotec</a>.
                             </p>
                         </div>
                         <div className="text-md-end col-md-6">
