@@ -36,6 +36,7 @@ const HeaderDataForm = (props) => {
                                 min={1}
                                 value={props.header.burstCtn}
                                 onChange={onChange}
+                                className="LanderFormComponent"
                                 required
                             />
                         </InputGroup>
@@ -51,6 +52,7 @@ const HeaderDataForm = (props) => {
                             min={0}
                             value={props.header.burstTime}
                             onChange={onChange}
+                            className="LanderFormComponent"
                             required
                         />
                     </InputGroup>
@@ -65,6 +67,7 @@ const HeaderDataForm = (props) => {
                             value={props.header.startTime}
                             type="date"
                             onChange={onChange}
+                            className="LanderFormComponent"
                             required
                         />
                     </InputGroup>
@@ -79,6 +82,7 @@ const HeaderDataForm = (props) => {
                             value={props.header.endTime}
                             type="date"
                             onChange={onChange}
+                            className="LanderFormComponent"
                             required
                         />
                     </InputGroup>

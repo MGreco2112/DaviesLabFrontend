@@ -18,7 +18,7 @@ const Uploads = () => {
             selectedFile: null,
             isUploading: false,
             landers: [],
-            showDisplayForm: false
+            showDisplayForm: false,
         },
         dateRange: {
             burstTime: "",
@@ -69,20 +69,11 @@ const Uploads = () => {
         navigate("/uploads/new_lander");
     }
 
-    const _updateCache = async (sensorValue) => {
-        await caches.open("site-cache").then(async (cache) => {
-            await cache
-                .add(`${apiHostURL}/api/cache/${sensorValue}/headers`)
-                .then(() => console.log("Data added to cache"))
-                .catch((error) => console.error("Error adding data to cache:", error))
-        });
-    }
-
     const onFileUpload = async () => {
         const sensorValue = document.getElementById("sensor").value;
         let routeValue = document.getElementById("route").value;
-        const uploadButton = document.getElementById("uploadButton");
         const landerString = document.getElementById("lander").value;
+        const formComponentList = Array.from(document.getElementsByClassName("LanderFormComponent"));
 
         if (landerString === "") {
             return;
@@ -113,8 +104,8 @@ const Uploads = () => {
                         paramName = "processedFile";
                     }
                     
+                    formComponentList.forEach((component) => {component.disabled = true});
 
-                    uploadButton.disabled = true;
                     var intervalID = null;
                     if (routeValue !== "header") {
                         updateMessage(timeProcessObject);
@@ -147,8 +138,7 @@ const Uploads = () => {
                     }
                 }
 
-                _updateCache(sensorValue);
-                uploadButton.disabled = false;
+                formComponentList.forEach((component) => {component.disabled = false});
 
             } else {
                 alert("No Sensor or Upload Type Selected!");
@@ -166,8 +156,6 @@ const Uploads = () => {
             if (!pageState.state.showDisplayForm) {
                 const res = await axios.get(`${apiHostURL}/api/processed/${timeProcessObject.sensorValue}/data/count/${timeProcessObject.landerValue}`);
             
-                // console.table(res.data);
-
                 if (!document.getElementById("uploadProgressBar")) {
 
                     setPageState({
@@ -202,8 +190,6 @@ const Uploads = () => {
                     } else {
                         const res = await axios.get(`${apiHostURL}/api/processed/${timeProcessObject.sensorValue}/data/count/${timeProcessObject.landerValue}`);
             
-                        // console.table(res.data);
-
                         document.getElementById("progressPercentage").innerText = `Upload Progress: ${Math.trunc((res.data.fileCount / timeProcessObject.estimatedTotal) * 100)}%`;
                         document.getElementById("uploadProgressBar").value = (res.data.fileCount / timeProcessObject.estimatedTotal);
                     }
@@ -386,7 +372,6 @@ const Uploads = () => {
                 }
                     
             }
-            
         }
     }
 
@@ -439,6 +424,7 @@ const Uploads = () => {
                             onChange={onRouteChange}
                             name="lander"
                             id="lander"
+                            className="LanderFormComponent"
                         >
                             <option value=""></option>
                             {pageState.state.landers.map( option => { return <option value={JSON.stringify(option)} key={option.asdblanderID}>{option.asdblanderID}</option>})}
@@ -447,7 +433,7 @@ const Uploads = () => {
 
                     <Button
                         id="AddLanderButton"
-                        className="Button"
+                        className="Button LanderFormComponent"
                         variant="outline-secondary"
                         size="sm"
                         onClick={onLanderClick}
@@ -460,6 +446,7 @@ const Uploads = () => {
                             onChange={onRouteChange}
                             name="sensor"
                             id="sensor"
+                            className="LanderFormComponent"
                         >
                             <option value=""></option>
                             <option value="ctd">CTD</option>
@@ -477,6 +464,7 @@ const Uploads = () => {
                             onChange={onRouteChange}
                             name="route"
                             id="route"
+                            className="LanderFormComponent"
                         >
                             <option value=""></option>
                             <option value="header">Head</option>
@@ -487,7 +475,7 @@ const Uploads = () => {
 
                     <Form.Group controlId="formFile" className="mb-3">
                         <InputGroup.Text>Upload Lander Data</InputGroup.Text>
-                        <Form.Control type="file" onChange={onFileChange}/>
+                        <Form.Control type="file" onChange={onFileChange} className="LanderFormComponent"/>
                     </Form.Group>
                     <div id="headerDataDiv" className="FormDivs">
                     {   
@@ -502,7 +490,7 @@ const Uploads = () => {
                     <div id="UploadButtonDiv" className="FormDivs">
                         <Button
                             id="uploadButton"
-                            className="Button"
+                            className="Button LanderFormComponent"
                             onClick={onFileUpload}
                             size="lg"
                         >Upload!</Button>

@@ -40,6 +40,10 @@
     cursor: pointer;
 }
 
+#uploadProgressBar {
+    margin-left: 0.5em!important;
+}
+
 #LanderSplash {
     background-image: url(/src/components/Home/Davies\ Lab\ Logo.jpg);
 }
