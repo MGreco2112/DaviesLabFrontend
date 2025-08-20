@@ -14,7 +14,6 @@ import ALBEXHeadData from "./ALBEXHeadData";
 import ADCPHeadData from "./ADCPHeadData";
 import Splash from "../common/Splash";
 
-
 const DisplayData = () => {
     const navigate = useNavigate();
     const params = useParams();
@@ -31,7 +30,11 @@ const DisplayData = () => {
             const cacheName = "site-cache";
             const cache = await caches.open(cacheName);
 
-            const requestURL = `${apiHostURL}/api/cache/${params.headType}/headers`;
+            // URL for all headers of that sensor type
+            // const requestURL = `${apiHostURL}/api/cache/${params.headType}/headers`;
+
+            // URL for single Header viewed by ID param
+            const requestURL = `${apiHostURL}/api/cache/${params.headType}/headers/${params.headId}`;
 
             const cachedResponse = await cache.match(requestURL);
 
@@ -71,6 +74,10 @@ const DisplayData = () => {
 
                 } else {
                     console.log("API Fetch");
+
+                    cache.delete(requestURL);
+
+                    console.log("Emptied Cache");
                     
                     _fetchHead();
                     return;
@@ -302,7 +309,7 @@ const DisplayData = () => {
         //call function to generate both .csv file and download link
         createCSV(dataSet);
 
-        _populateCache(`${apiHostURL}/api/cache/${params.headType}/headers`);
+        _populateCache(`${apiHostURL}/api/cache/${params.headType}/headers/${params.headId}`);
     }
 
     const createCSVButton = async () => {
