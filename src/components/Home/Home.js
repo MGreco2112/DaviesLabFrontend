@@ -32,8 +32,45 @@ const Home = () => {
             }
         }
 
+        const _auditCache = async () => {
+            const cacheName = "site-cache";
+            const cache = await caches.open(cacheName);
+            const cacheKeys = await cache.keys();
+
+            cacheKeys.forEach(async (key) => {
+                const cachedResponse = await cache.match(key);
+                
+                if (cachedResponse) {
+                    const data = await cachedResponse.json();
+                    console.log(data);
+                    
+                    const today = new Date();
+                    
+                    const [thisMonth, thisDay, thisYear] = [
+                        today.getMonth(),
+                        today.getDate(),
+                        today.getFullYear()
+                    ]
+                    const cacheDate = new Date(data.cacheDate);
+                    
+                    const [cacheMonth, cacheDay, cacheYear] = [
+                        cacheDate.getMonth(),
+                        cacheDate.getDate(),
+                        cacheDate.getFullYear()
+                    ];
+
+                    if ((thisDay > cacheDay && thisMonth >= cacheMonth) || thisYear > cacheYear) {
+                        cache.delete(key);
+                    }
+                } else {
+                    cache.delete(key);
+                }
+            });
+        }
+
         if (pageState.loading) {
             _populateLatestLanders();
+            _auditCache();
         }
     }, []);
 
