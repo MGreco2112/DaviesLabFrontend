@@ -31,14 +31,14 @@ const Lander = (props) => {
                 {
                     deploymentDate
                     ?
-                    <p>Deployment Date: {deploymentDate.substring(0, 10)}</p>
+                    <p>Deployment Date: {new Date(deploymentDate).toDateString()}</p>
                     :
                     null
                 }
                 {
                     recoveryDate
                     ?
-                    <p>Recovery Date: {recoveryDate.substring(0, 10)}</p>
+                    <p>Recovery Date: {new Date(recoveryDate).toDateString()}</p>
                     :
                     null
                 }
