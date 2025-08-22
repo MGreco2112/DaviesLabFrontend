@@ -27,7 +27,7 @@ const AppRouter = () => {
                     <Route path="/dashboard" element={<Dashboard/>}/>
                 </Routes>
             <Footer/>
-    </div>
+        </div>
     )
 }
 
