@@ -13,8 +13,8 @@ const ALBEXHeadData = (props) => {
             <h1>ALBEX CTD Data</h1>
             <BorderCard className="HeadCard">
                 <h1>ALBEX CTD Head ID: {headID}</h1>
-                <p>Deployment Date: {startTime}</p>
-                <p>Recovery Date: {endTime}</p>
+                <p>Deployment Date: {new Date(startTime).toDateString()}</p>
+                <p>Recovery Date: {new Date(endTime).toDateString()}</p>
                 <p>Data Points: {dataPointCount}</p>
             </BorderCard>
             {

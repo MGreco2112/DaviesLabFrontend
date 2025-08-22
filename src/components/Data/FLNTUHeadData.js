@@ -25,11 +25,11 @@ const FLNTUHeadData = (props) => {
                 <p>Interval: {intervalData}</p>
                 <p>Wiper Interval: {wiperInterval}</p>
                 <p>Sample Count: {sampleCnt}</p>
-                <p>Start Time: {startTime}</p>
-                <p>End Time: {endTime}</p>
+                <p>Start Time: {new Date(startTime).toDateString()}</p>
+                <p>End Time: {new Date(endTime).toDateString()}</p>
                 <p>CHLA: {chla}</p>
                 <p>CHLB: {chlb}</p>
-                <p>Coeffecient Date: {coefDate}</p>
+                <p>Coeffecient Date: {new Date(coefDate).toDateString()}</p>
                 <p>Channel 1: {ch1}</p>
                 <p>Channel 2: {ch2}</p>
                 <p>Channel 3: {ch3}</p>

@@ -25,14 +25,14 @@ const CTDHeadData = (props) => {
                 <p>Burst Count: {burstCnt}</p>
                 <p>Interval: {intervalData}</p>
                 <p>Sample Count: {sampleCnt}</p>
-                <p>Start Time: {startTime}</p>
-                <p>End Time: {endTime}</p>
+                <p>Start Time: {new Date(startTime).toDateString()}</p>
+                <p>End Time: {new Date(endTime).toDateString()}</p>
                 <p>Dep Adj Rho: {depAdiRho}</p>
                 <p>ECA: {eca}</p>
                 <p>ECB: {ecb}</p>
                 <p>EC Degrees: {ecdeg}</p>
                 <p>EC Coeffecient: {eccoef}</p>
-                <p>Coeffecient Date: {coefDate}</p>
+                <p>Coeffecient Date: {new Date(coefDate).toDateString()}</p>
                 <p>Channel 1: {ch1}</p>
                 <p>Channel 2: {ch2}</p>
                 <p>Channel 3: {ch3}</p>

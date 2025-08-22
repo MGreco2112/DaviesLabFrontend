@@ -168,10 +168,6 @@ const DisplayData = () => {
             endDate = pageState.head.endTime;
         }
         
-
-        console.log(startDate, endDate);
-
-        
         if (startDate !== undefined || endDate !== undefined) {
 
             document.getElementById("SubmitButton").disabled = true;
@@ -182,8 +178,6 @@ const DisplayData = () => {
                     const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/` + 
                 `${params.headType === "ctd" || params.headType === "adcp" ? "aligned_data": "data"}` + 
                 `/headId/${pageState.head.headID}/startDate/${startDate}/endDate/${endDate}`);
-
-                    console.log(res.data);
 
                     return res.data;
                 } catch (err) {
