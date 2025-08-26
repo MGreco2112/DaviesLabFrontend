@@ -143,7 +143,7 @@ const DisplayData = () => {
             headInfo = <ALBEXHeadData header={pageState.head} id="PageContainer" form={formProps}/>
         } else if (params.headType === "adcp") {
             headInfo = <ADCPHeadData header={pageState.head} id="PageContainer" form={formProps}/>
-        }
+        } //TODO: Create SensorData Components for Battery, Beacon, Camera, and Sediment Trap
 
 
         return (

@@ -64,6 +64,23 @@ const DisplayLander = () => {
         navigate(`/landers/data/adcp/${pageState.lander.adcphead.headID}`);
     }
 
+    // TODO: Create Data Page settings for Sensors below this comment
+    const batteryNav = () => {
+        navigate(`landers/data/battery/${pageState.lander.batteryhead.headID}`);
+    }
+
+    const beaconNav = () => {
+        navigate(`landers/data/beacon/${pageState.lander.beaconhead.headID}`);
+    }
+
+    const cameraNav = () => {
+        navigate(`landers/data/camera/${pageState.lander.camerahead.headID}`);
+    }
+
+    const sedimentTrapNav = () => {
+        navigate(`landers/data/sediment_trap/${pageState.lander.sedimentTrapHead.headID}`);
+    }
+
     const formatPage = () => {
         return (
             <Container className="LandersContainer">
@@ -119,12 +136,40 @@ const DisplayLander = () => {
                     :
                     null
                 }
+                {
+                    pageState.lander.batteryhead
+                    ?
+                    <p>Battery Header ID: {pageState.lander.batteryhead.headID}</p>
+                    :
+                    null
+                }
+                {
+                    pageState.lander.beaconhead
+                    ?
+                    <p>Beacon Header ID: {pageState.lander.beaconhead.headID}</p>
+                    :
+                    null
+                }
+                {
+                    pageState.lander.camerahead
+                    ?
+                    <p>Camera Header ID: {pageState.lander.camerahead.headID}</p>
+                    :
+                    null
+                }
+                {
+                    pageState.lander.sedimentTrapHead
+                    ?
+                    <p>Sediment Trap Header ID: {pageState.lander.sedimentTrapHead.headID}</p>
+                    :
+                    null
+                }
                 <div id="ButtonDiv">
                     {
                         pageState.lander.ctdhead
                         ?
                         <Button 
-                            id="LanderButton"
+                            className="LanderButton"
                             onClick={ctdNav}
                         >CTD Data</Button>
                         :
@@ -134,7 +179,7 @@ const DisplayLander = () => {
                         pageState.lander.dohead
                         ?
                         <Button 
-                            id="LanderButton"
+                            className="LanderButton"
                             onClick={doNav}
                         >DO Data</Button>
                         :
@@ -144,7 +189,7 @@ const DisplayLander = () => {
                         pageState.lander.flntuhead
                         ?
                         <Button 
-                            id="LanderButton"
+                            className="LanderButton"
                             onClick={flntuNav}
                         >FLNTU Data</Button>
                         :
@@ -154,7 +199,7 @@ const DisplayLander = () => {
                         pageState.lander.albexCTDHead
                         ?
                         <Button
-                            id="LanderButton"
+                            className="LanderButton"
                             onClick={albexNav}
                         >ALBEX CTD Data</Button>
                         :
@@ -164,9 +209,49 @@ const DisplayLander = () => {
                         pageState.lander.adcphead
                         ?
                         <Button
-                            id="LanderButton"
+                            className="LanderButton"
                             onClick={adcpNav}
                         >ADCP Data</Button>
+                        :
+                        null
+                    }
+                    {
+                        pageState.lander.batteryhead
+                        ?
+                        <Button
+                            className="LanderButton"
+                            onClick={batteryNav}
+                        >Battery Data</Button>
+                        :
+                        null
+                    }
+                    {
+                        pageState.lander.beaconhead
+                        ?
+                        <Button
+                            className="LanderButton"
+                            onClick={beaconNav}
+                        >Beacon Data</Button>
+                        :
+                        null
+                    }
+                    {
+                        pageState.lander.camerahead
+                        ?
+                        <Button
+                            className="LanderButton"
+                            onClick={cameraNav}
+                        >Camera Data</Button>
+                        :
+                        null
+                    }
+                    {
+                        pageState.lander.sedimentTrapHead
+                        ?
+                        <Button
+                            className="LanderButton"
+                            onClick={sedimentTrapNav}
+                        >Sediment Trap Data</Button>
                         :
                         null
                     }
