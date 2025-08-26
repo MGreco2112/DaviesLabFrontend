@@ -262,7 +262,7 @@ Response: ADCP Header -> Aligned ADCP Data Set
     "landerID": "NF2306_20230914_03"
 }
 ```
-
+<!-- Update with new Head and Data for new Models once they are configured -->
 ## Get Complete Lander By Name
 
 Return complete Lander JSON by Lander Name Query 
