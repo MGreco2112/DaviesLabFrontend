@@ -366,11 +366,70 @@ const Uploads = () => {
                     }
                     break;
                 }
-                default: {
-                    console.log("Invalid Selection");
-                            
+                case "battery": {
+                    if (!selLander.batteryhead) {
+
+                        setPageState({
+                            ...pageState,
+                            showDisplayForm: true
+                        });
+                    } else {
+                        setPageState({
+                            ...pageState,
+                            showDisplayForm: false
+                        });
+                    }
+                    break;
                 }
-                    
+                case "beacon": {
+                    if (!selLander.beaconhead) {
+
+                        setPageState({
+                            ...pageState,
+                            showDisplayForm: true
+                        });
+                    } else {
+                        setPageState({
+                            ...pageState,
+                            showDisplayForm: false
+                        });
+                    }
+                    break;
+                }
+                case "battery": {
+
+                    if (!selLander.batteryhead) {
+                        setPageState({
+                            ...pageState,
+                            showDisplayForm: true
+                        });
+                    } else {
+                        setPageState({
+                            ...pageState,
+                            showDisplayForm: false
+                        });
+                    }
+                    break;
+                }
+                case "sediment_trap": {
+
+                    if (!selLander.sedimentTrapHead) {
+                        setPageState({
+                            ...pageState,
+                            showDisplayForm: true
+                        });
+                    } else {
+                        setPageState({
+                            ...pageState,
+                            showDisplayForm: false
+                        });
+                    }
+                    break;
+                }
+                default: {
+
+                    console.log("Invalid Selection");        
+                }
             }
         }
     }
@@ -454,6 +513,10 @@ const Uploads = () => {
                             <option value="flntu">FLNTU</option>
                             <option value="albex_ctd">ALBEX CTD</option>
                             <option value="adcp">ADCP</option>
+                            <option value="battery">Battery</option>
+                            <option value="beacon">Beacon</option>
+                            <option value="camera">Camera</option>
+                            <option value="sediment_trap">Sediment Trap</option>
                         </Form.Select>
                     </div>
 
