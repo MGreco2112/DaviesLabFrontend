@@ -262,7 +262,95 @@ Response: ADCP Header -> Aligned ADCP Data Set
     "landerID": "NF2306_20230914_03"
 }
 ```
-<!-- Update with new Head and Data for new Models once they are configured -->
+
+## Get Battery Info VIA Lander ID
+
+Return Header and Data Set from Battery of specified Lander
+
+```HTTP
+https://https://desmophyllum.marecotec.com:8444/api/developers/lander/id/${asdb_lander_id}/battery
+```
+
+Response: Battery Header -> Battery Data Set
+
+```JSON
+{
+    "data": [
+        {
+            "id": 1,
+            "headID": 1
+        },
+    ],
+    "headID": 1,
+    "landerID": "NF2306_20230914_03"
+}
+```
+
+## Get Beacon Info VIA Lander ID
+
+Return Header and Data Set from Battery of specified Lander
+
+```HTTP
+https://https://desmophyllum.marecotec.com:8444/api/developers/lander/id/${asdb_lander_id}/beacon
+```
+
+Response: Beacon Header -> Beacon Data Set
+
+```JSON
+{
+    "data": [
+        {
+            "id": 1,
+            "headID": 1
+        },
+    ],
+    "headID": 1,
+    "landerID": "NF2306_20230914_03"
+}
+```
+
+## Get Camera Info VIA Lander ID
+
+```HTTP
+https://https://desmophyllum.marecotec.com:8444/api/developers/lander/id/${asdb_lander_id}/camera
+```
+
+Response: Camera Header -> Camera Data Set
+
+```JSON
+{
+    "data": [
+        {
+            "id": 1,
+            "headID": 1
+        },
+    ],
+    "headID": 1,
+    "landerID": "NF2306_20230914_03"
+}
+```
+
+## Get Sediment Trap Info VIA Lander ID
+
+```HTTP
+https://https://desmophyllum.marecotec.com:8444/api/developers/lander/id/${asdb_lander_id}/sediment_trap
+```
+
+Response: Sediment Trap Header -> Sediment Trap Data Set
+
+```JSON
+{
+    "data": [
+        {
+            "id": 1,
+            "headID": 1
+        },
+    ],
+    "headID": 1,
+    "landerID": "NF2306_20230914_03"
+}
+```
+
 ## Get Complete Lander By Name
 
 Return complete Lander JSON by Lander Name Query 
@@ -432,7 +520,7 @@ Response: Lander -> Sensor Header -> Sensor Data
             }
         ]
     },
-    "adcphead": {
+    "adcpHead": {
         "data": [
             {
                 "id": 1,
@@ -441,6 +529,46 @@ Response: Lander -> Sensor Header -> Sensor Data
                 "current_Direction": 142.9269267,
                 "horizontal_Current_Speed_cm_s": 0.056400355,
                 "vertical_Current_Speed_cm_s": -0.005
+            },
+        ],
+        "headID": 1,
+        "landerID": "NF2306_20230914_03"
+    },
+    "batteryHead": {
+        "data": [
+            {
+                "id": 1,
+                "headID": 1
+            },
+        ],
+        "headID": 1,
+        "landerID": "NF2306_20230914_03"
+    },
+    "beaconHead": {
+        "data": [
+            {
+                "id": 1,
+                "headID": 1
+            },
+        ],
+        "headID": 1,
+        "landerID": "NF2306_20230914_03"
+    },
+    "cameraHead": {
+        "data": [
+            {
+                "id": 1,
+                "headID": 1
+            },
+        ],
+        "headID": 1,
+        "landerID": "NF2306_20230914_03"
+    },
+    "sedimentTrapHead": {
+        "data": [
+            {
+                "id": 1,
+                "headID": 1
             },
         ],
         "headID": 1,
