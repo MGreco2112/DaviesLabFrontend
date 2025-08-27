@@ -1,20 +1,20 @@
 import React from "react";
-import Container from "../common/Container";
-import Form from "../common/Form";
-import InlineInputContainer from "../common/InlineInputContainer";
-import Checkbox from "../common/Checkbox";
-import Button from "../common/Button";
-import BorderCard from "../common/BorderCard";
+import Container from "../../common/Container";
+import Form from "../../common/Form";
+import Checkbox from "../../common/Checkbox";
+import Button from "../../common/Button";
+import InlineInputContainer from "../../common/InlineInputContainer";
+import BorderCard from "../../common/BorderCard";
 import InputGroup from 'react-bootstrap/InputGroup';
 import BootstrapForm from "react-bootstrap/Form";
 
 
-const CustomizeCTDChartForm = (props) => {
+const CustomizeFLNTUChartForm = (props) => {
     const {onSubmit, csvFunct} = props;
 
     return (
         <Container id="FormContainer">
-            <h1>CTD Chart Options</h1>
+            <h1>FLNTU Chart Options</h1>
             <BootstrapForm>
                 <InputGroup className="mb-3">
                     <InputGroup.Text>Start Date:</InputGroup.Text>
@@ -43,64 +43,49 @@ const CustomizeCTDChartForm = (props) => {
                         className="dataCheckbox"
                         divClassName="checkboxDiv"
                         name="Temp Degrees (C)"
-                        label="Temp Degrees (C)"
-                        id="temperature_C"
-                        value="temperature_C"
+                        label = "Temp Degrees (C)"
+                        id="tempDegC"
+                        value="tempDegC"
                     />
                     <Checkbox
                         className="dataCheckbox"
                         divClassName="checkboxDiv"
-                        name="Oxygen Sat %"
-                        label="Oxygen Sat %"
-                        id="oxygen_Sat_Percent"
-                        value="oxygen_Sat_Percent"
-                    />
-                    <Checkbox
-                        className="dataCheckbox"
-                        divClassName="checkboxDiv"
-                        name="Pressure"
-                        label="Pressure"
-                        id="pressure"
-                        value="pressure"
-                    />
-                    <Checkbox
-                        className="dataCheckbox"
-                        divClassName="checkboxDiv"
-                        name="Oxygen (ML/L)"
-                        label="Oxygen (ML/L)"
-                        id="oxygen_ML_L"
-                        value="oxygen_ML_L"
+                        name="Chl Flu PPB"
+                        label = "Chl Flu PPB"
+                        id="chlFluPPB"
+                        value="chlFluPPB"
                     />
                 </InlineInputContainer>
                 <InlineInputContainer className="FormInputContainer">
                     <Checkbox
                         className="dataCheckbox"
                         divClassName="checkboxDiv"
-                        name="Turbidity NTU"
-                        label="Turbidity NTU"
-                        id="turbidity_NTU"
-                        value="turbidity_NTU"
+                        name="Chl AU gL"
+                        label = "Chl AU gL"
+                        id="chlAUgL"
+                        value="chlAUgL"
                     />
                     <Checkbox
                         className="dataCheckbox"
                         divClassName="checkboxDiv"
-                        name="CHLA (UG/ML)"
-                        label="CHLA (UG/ML)"
-                        id="chla_ug_mL"
-                        value="chla_ug_mL"
+                        name="Turb MFTU"
+                        label = "Turb MFTU"
+                        id="turbMFTU"
+                        value="turbMFTU"
                     />
                     <Checkbox
                         className="dataCheckbox"
                         divClassName="checkboxDiv"
-                        name="CTD Flag"
-                        label="CTD Flag"
-                        id="ctd_Flag"
-                        value="ctd_Flag"
+                        name="Batt V"
+                        label = "Batt V"
+                        id="battV"
+                        value="battV"
                     />
                 </InlineInputContainer>
                 <Container id="ButtonContainer">
-                    <Button 
-                        id="SubmitButton" 
+                    <Button
+                        id="SubmitButton"
+                        disabled={document.getElementById("SensorChart")}
                     >Create Chart</Button>
                 </Container>
             </Form>
@@ -112,7 +97,7 @@ const CustomizeCTDChartForm = (props) => {
                 >Create CSV</Button>
             </BorderCard>
         </Container>
-    );
+    )
 }
 
-export default CustomizeCTDChartForm;
+export default CustomizeFLNTUChartForm;

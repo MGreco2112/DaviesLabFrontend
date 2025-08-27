@@ -1,17 +1,18 @@
 import React from "react";
-import Container from "../common/Container";
-import BorderCard from "../common/BorderCard";
-import "./Data.css";
-import CustomizeFLNTUChartForm from "./CustomizeFLNTUChartForm";
+import Container from "../../common/Container";
+import BorderCard from "../../common/BorderCard";
+import "../Data.css";
+import CustomizeDOChartForm from "../DataForms/CustomizeDOChartForm";
 
-const FLNTUHeadData = (props) => {
-    const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measMode, burstTime, burstCnt, intervalData, wiperInterval, sampleCnt, startTime, endTime, chla, chlb, coefDate, ch1, ch2, ch3, ch4, buzzerEN, buzzerInterval, comment, sensorType2, buzzerNumber, dataPointCount} = props.header;
+const DOHeadData = (props) => {
+    const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measModel, burstTime, burstCnt, intervalData, sampleCnt, startTime, endTime, depAdiRho, coefDate, ch1, ch2, ch3, buzzerEN, buzzerInterval, comment, sensorType2, buzzerNumber, depM, setSal, filmNo, dataPointCount} = props.header;
 
     const {enabled, onSubmit, csvButtonFunct} = props.form;
 
+
     return (
         <Container id={props.id}>
-            <h1>FLNTU DATA</h1>
+            <h1>DO DATA</h1>
             <BorderCard className="HeadCard">
                 <h1>Sonde Name: {sondeName}</h1>
                 <p>Sonde Number: {sondeNo}</p>
@@ -19,32 +20,32 @@ const FLNTUHeadData = (props) => {
                 <p>Channel: {channel}</p>
                 <p>Delay Time: {delayTime}</p>
                 <p>Pre Heat: {preHeat}</p>
-                <p>Meas Mode: {measMode}</p>
+                <p>Meas Model: {measModel}</p>
                 <p>Burst Time: {burstTime}</p>
                 <p>Burst Count: {burstCnt}</p>
                 <p>Interval: {intervalData}</p>
-                <p>Wiper Interval: {wiperInterval}</p>
                 <p>Sample Count: {sampleCnt}</p>
                 <p>Start Time: {new Date(startTime).toDateString()}</p>
                 <p>End Time: {new Date(endTime).toDateString()}</p>
-                <p>CHLA: {chla}</p>
-                <p>CHLB: {chlb}</p>
+                <p>Dep Adi Rho: {depAdiRho}</p>
                 <p>Coeffecient Date: {new Date(coefDate).toDateString()}</p>
                 <p>Channel 1: {ch1}</p>
                 <p>Channel 2: {ch2}</p>
                 <p>Channel 3: {ch3}</p>
-                <p>Channel 4: {ch4}</p>
                 <p>Buzzer EN: {buzzerEN}</p>
                 <p>Buzzer Interval: {buzzerInterval}</p>
                 <p>Comment: {comment}</p>
                 <p>Sensor Type 2: {sensorType2}</p>
                 <p>Buzzer Number: {buzzerNumber}</p>
+                <p>Dep M: {depM}</p>
+                <p>Set Sal: {setSal}</p>
+                <p>Film Number: {filmNo}</p>
                 <p>Data Points: {dataPointCount}</p>
             </BorderCard>
             {
                 enabled && dataPointCount > 0
                 ?
-                <CustomizeFLNTUChartForm onSubmit={onSubmit} csvFunct={csvButtonFunct}/>
+                <CustomizeDOChartForm onSubmit={onSubmit} csvFunct={csvButtonFunct}/>
                 :
                     enabled && dataPointCount <= 0
                     ?
@@ -56,4 +57,4 @@ const FLNTUHeadData = (props) => {
     );
 }
 
-export default FLNTUHeadData;
+export default DOHeadData;

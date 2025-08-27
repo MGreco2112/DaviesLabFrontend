@@ -4,15 +4,19 @@ import { useNavigate } from "react-router-dom";
 import { apiHostURL } from "../../config";
 import Container from "../common/Container";
 import Button from "react-bootstrap/Button";
-import DOHeadData from "./DOHeadData";
-import CTDHeadData from "./CTDHeadData";
-import FLNTUHeadData from "./FLNTUHeadData";
+import DOHeadData from "./HeadData/DOHeadData";
+import CTDHeadData from "./HeadData/CTDHeadData";
+import FLNTUHeadData from "./HeadData/FLNTUHeadData";
 import Chart from "chart.js/auto";
 import axios from "axios";
 import "./Data.css";
-import ALBEXHeadData from "./ALBEXHeadData";
-import ADCPHeadData from "./ADCPHeadData";
+import ALBEXHeadData from "./HeadData/ALBEXHeadData";
+import ADCPHeadData from "./HeadData/ADCPHeadData";
+import BatteryHead from "./HeadData/BatteryHead";
 import Splash from "../common/Splash";
+import BeaconHead from "./HeadData/BeaconHead";
+import CameraHead from "./HeadData/CameraHead";
+import SedimentTraphead from "./HeadData/SedimentTrapHead";
 
 const DisplayData = () => {
     const navigate = useNavigate();
@@ -133,18 +137,47 @@ const DisplayData = () => {
             csvButtonFunct: createCSVButton
         }
 
-        if (params.headType === "ctd") {
-            headInfo = <CTDHeadData header={pageState.head} id="PageContainer" form={formProps}/>
-        } else if (params.headType === "do") {
-            headInfo = <DOHeadData header={pageState.head} id="PageContainer" form={formProps}/>
-        } else if (params.headType === "flntu") {
-            headInfo = <FLNTUHeadData header={pageState.head} id="PageContainer" form={formProps}/>
-        } else if (params.headType === "albex_ctd") {
-            headInfo = <ALBEXHeadData header={pageState.head} id="PageContainer" form={formProps}/>
-        } else if (params.headType === "adcp") {
-            headInfo = <ADCPHeadData header={pageState.head} id="PageContainer" form={formProps}/>
-        } //TODO: Create SensorData Components for Battery, Beacon, Camera, and Sediment Trap
-
+        switch (params.headType) {
+            case "ctd": {
+                headInfo = <CTDHeadData header={pageState.head} id="PageContainer" form={formProps}/>;
+                break;
+            }
+            case "do": {
+                headInfo = <DOHeadData header={pageState.head} id="PageContainer" form={formProps}/>;
+                break;
+            }
+            case "flntu": {
+                headInfo = <FLNTUHeadData header={pageState.head} id="PageContainer" form={formProps}/>;
+                break;
+            }
+            case "albex_ctd": {
+                headInfo = <ALBEXHeadData header={pageState.head} id="PageContainer" form={formProps}/>;
+                break;
+            }
+            case "adcp": {
+                headInfo = <ADCPHeadData header={pageState.head} id="PageContainer" form={formProps}/>;
+                break;
+            }
+            case "battery": {
+                headInfo = <BatteryHead header={pageState.head} id="PageContainer" form={formProps}/>
+                break;
+            }
+            case "beacon": {
+                headInfo = <BeaconHead header={pageState.head} id="PageContainer" form={formProps}/>
+                break;
+            }
+            case "camera": {
+                headInfo = <CameraHead header={pageState.head} id="PageContainer" form={formProps}/>
+                break;
+            }
+            case "sediment_trap": {
+                headInfo = <SedimentTraphead header={pageState.head} id="PageContainer" form={formProps}/>
+                break;
+            }
+            default: {
+                console.log("Invalid Head Type");
+            }
+        }
 
         return (
             <Container id="FormatPageContainer">

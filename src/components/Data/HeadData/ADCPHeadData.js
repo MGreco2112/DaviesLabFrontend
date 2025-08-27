@@ -1,8 +1,8 @@
 import React from "react";
-import Container from "../common/Container";
-import BorderCard from "../common/BorderCard";
-import "./Data.css";
-import CustomizeADCPChartForm from "./CustomizeADCPChartForm.js";
+import Container from "../../common/Container.js";
+import BorderCard from "../../common/BorderCard.js";
+import "../Data.css";
+import CustomizeADCPChartForm from "../DataForms/CustomizeADCPChartForm.js";
 
 const ADCPHeadData = (props) => {
     const {headID, startTime, endTime, dataPointCount, alignedDataPointCount} = props.header;

@@ -1,8 +1,8 @@
 import React from "react";
-import Container from "../common/Container";
-import BorderCard from "../common/BorderCard";
-import "./Data.css";
-import CustomizeALBEXCTDChartForm from "./CustomizeALBEXCTDChartForm";
+import Container from "../../common/Container";
+import BorderCard from "../../common/BorderCard";
+import "../Data.css";
+import CustomizeALBEXCTDChartForm from "../DataForms/CustomizeALBEXCTDChartForm";
 
 const ALBEXHeadData = (props) => {
     const {headID, startTime, endTime, dataPointCount} = props.header;

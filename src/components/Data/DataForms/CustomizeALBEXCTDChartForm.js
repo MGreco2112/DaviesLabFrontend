@@ -1,10 +1,10 @@
 import React from "react";
-import Container from "../common/Container";
-import InlineInputContainer from "../common/InlineInputContainer";
-import Form from "../common/Form";
-import Checkbox from "../common/Checkbox";
-import Button from "../common/Button";
-import BorderCard from "../common/BorderCard";
+import Container from "../../common/Container";
+import InlineInputContainer from "../../common/InlineInputContainer";
+import Form from "../../common/Form";
+import Checkbox from "../../common/Checkbox";
+import Button from "../../common/Button";
+import BorderCard from "../../common/BorderCard";
 import InputGroup from 'react-bootstrap/InputGroup';
 import BootstrapForm from "react-bootstrap/Form";
 
@@ -22,7 +22,6 @@ const CustomizeALBEXCTDChartForm = (props) => {
                             id="startDateInput"
                             type="date"
                             label="Start Date"
-                            // labelID="StartDateLabel"
                         />
                 </InputGroup>
                 <InputGroup className="mb-3">
@@ -32,7 +31,6 @@ const CustomizeALBEXCTDChartForm = (props) => {
                         id="endDateInput"
                         type="date"
                         label="End Date"
-                        // labelID="EndDateLabel"
                     />
                 </InputGroup>
             </BootstrapForm>
@@ -121,7 +119,7 @@ const CustomizeALBEXCTDChartForm = (props) => {
                 >Create CSV</Button>
             </BorderCard>
         </Container>
-    )
+    );
 }
 
 export default CustomizeALBEXCTDChartForm;

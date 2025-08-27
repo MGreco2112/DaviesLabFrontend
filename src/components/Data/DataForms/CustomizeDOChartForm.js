@@ -1,19 +1,19 @@
 import React from "react";
-import Container from "../common/Container";
-import InlineInputContainer from "../common/InlineInputContainer";
-import Form from "../common/Form";
-import Checkbox from "../common/Checkbox";
-import Button from "../common/Button";
-import BorderCard from "../common/BorderCard";
+import Container from "../../common/Container";
+import Form from "../../common/Form";
+import InlineInputContainer from "../../common/InlineInputContainer";
+import Checkbox from "../../common/Checkbox";
+import Button from "../../common/Button";
+import BorderCard from "../../common/BorderCard";
 import InputGroup from 'react-bootstrap/InputGroup';
 import BootstrapForm from "react-bootstrap/Form";
 
-
-const CustomizeALBEXCTDChartForm = (props) => {
+const CustomizeDOChartForm = (props) => {
     const {onSubmit, csvFunct} = props;
+
     return (
         <Container id="FormContainer">
-            <h1>ADCP Chart Options</h1>
+            <h1>DO Chart Options</h1>
             <BootstrapForm>
                 <InputGroup className="mb-3">
                     <InputGroup.Text>Start Date:</InputGroup.Text>
@@ -22,7 +22,7 @@ const CustomizeALBEXCTDChartForm = (props) => {
                             id="startDateInput"
                             type="date"
                             label="Start Date"
-                            // labelID="StartDateLabel"
+                            labelID="StartDateLabel"
                         />
                 </InputGroup>
                 <InputGroup className="mb-3">
@@ -32,7 +32,7 @@ const CustomizeALBEXCTDChartForm = (props) => {
                         id="endDateInput"
                         type="date"
                         label="End Date"
-                        // labelID="EndDateLabel"
+                        labelID="EndDateLabel"
                     />
                 </InputGroup>
             </BootstrapForm>
@@ -41,31 +41,58 @@ const CustomizeALBEXCTDChartForm = (props) => {
                     <Checkbox
                         className="dataCheckbox"
                         divClassName="checkboxDiv"
-                        name="Horizontal Current Speed (CM/s)"
-                        label="Horizontal Current Speed (CM/s)"
-                        id="horizontal_Current_Speed_cm_s"
-                        value="horizontal_Current_Speed_cm_s"
+                        name="Temp Degrees (C)"
+                        label="Temp Degrees (C)"
+                        id="tempDegC"
+                        value="tempDegC"
                     />
                     <Checkbox
                         className="dataCheckbox"
                         divClassName="checkboxDiv"
-                        name="Vertical Current Speed (CM/s)"
-                        label="Vertical Current Speed (CM/s)"
-                        id="vertical_Current_Speed_cm_s"
-                        value="vertical_Current_Speed_cm_s"
+                        name="DO"
+                        label="DO"
+                        id="do"
+                        value="do"
                     />
                     <Checkbox
                         className="dataCheckbox"
                         divClassName="checkboxDiv"
-                        name="Current Direction"
-                        label="Current Direction"
-                        id="current_Direction"
-                        value="current_Direction"
+                        name="Weiss Do Mg L"
+                        label="Weiss Do Mg L"
+                        id="weissDoMgL"
+                        value="weissDoMgL"
+                    />
+                </InlineInputContainer>
+                <InlineInputContainer className="FormInputContainer">
+                    <Checkbox
+                        className="dataCheckbox"
+                        divClassName="checkboxDiv"
+                        name="Batt V"
+                        label="Batt V"
+                        id="battV"
+                        value="battV"
+                    />
+                    <Checkbox
+                        className="dataCheckbox"
+                        divClassName="checkboxDiv"
+                        name="GG DO Mg L"
+                        label="GG DO Mg L"
+                        id="ggdomgL"
+                        value="ggdomgL"
+                    />
+                    <Checkbox
+                        className="dataCheckbox"
+                        divClassName="checkboxDiv"
+                        name="BK DO Mg L"
+                        label="BK DO Mg L"
+                        id="bkdomgL"
+                        value="bkdomgL"
                     />
                 </InlineInputContainer>
                 <Container id="ButtonContainer">
                     <Button
                         id="SubmitButton"
+                        disabled={document.getElementById("SensorChart")}
                     >Create Chart</Button>
                 </Container>
             </Form>
@@ -77,7 +104,7 @@ const CustomizeALBEXCTDChartForm = (props) => {
                 >Create CSV</Button>
             </BorderCard>
         </Container>
-    );
+    )
 }
 
-export default CustomizeALBEXCTDChartForm;
+export default CustomizeDOChartForm;
