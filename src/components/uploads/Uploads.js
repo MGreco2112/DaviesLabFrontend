@@ -125,7 +125,7 @@ const Uploads = () => {
                     }
 
                     if (document.getElementById("uploadProgressBar")) {
-                        document.getElementById("progressPercentage").innerText = "Upload Progress: 100%";
+                        document.getElementById("progressPercentage").innerText = "Upload Progress: 100%\nUpload Completed";
                         document.getElementById("uploadProgressBar").value = 1;
                     } else {
                         timeProcessObject.pageElement.innerText = "Upload Completed!";
