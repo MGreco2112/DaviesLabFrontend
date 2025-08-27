@@ -46,7 +46,7 @@ const Footer = () => {
                             >
                                 &#169; 2025 DODAT. All rights reserved.
                             </p>
-                                                        <p
+                            <p
                                 className="mb-0"
                                 style={{"color": "white"}}
                             >

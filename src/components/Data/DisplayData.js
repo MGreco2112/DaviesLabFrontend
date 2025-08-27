@@ -159,19 +159,19 @@ const DisplayData = () => {
                 break;
             }
             case "battery": {
-                headInfo = <BatteryHead header={pageState.head} id="PageContainer" form={formProps}/>
+                headInfo = <BatteryHead header={pageState.head} id="PageContainer" form={formProps}/>;
                 break;
             }
             case "beacon": {
-                headInfo = <BeaconHead header={pageState.head} id="PageContainer" form={formProps}/>
+                headInfo = <BeaconHead header={pageState.head} id="PageContainer" form={formProps}/>;
                 break;
             }
             case "camera": {
-                headInfo = <CameraHead header={pageState.head} id="PageContainer" form={formProps}/>
+                headInfo = <CameraHead header={pageState.head} id="PageContainer" form={formProps}/>;
                 break;
             }
             case "sediment_trap": {
-                headInfo = <SedimentTraphead header={pageState.head} id="PageContainer" form={formProps}/>
+                headInfo = <SedimentTraphead header={pageState.head} id="PageContainer" form={formProps}/>;
                 break;
             }
             default: {
@@ -372,22 +372,22 @@ const DisplayData = () => {
         exportData.push(titleKeys);
 
         data.forEach(dataPoint => {
-            exportData.push(Object.values(dataPoint))
+            exportData.push(Object.values(dataPoint));
         });
 
         let csvContent = '';
 
         exportData.forEach(dataPoint => {
-            csvContent += dataPoint.join(",") + "\n"
+            csvContent += dataPoint.join(",") + "\n";
         });
 
-        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8,' })
-        const objUrl = URL.createObjectURL(blob)
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8,' });
+        const objUrl = URL.createObjectURL(blob);
 
-        const link = document.createElement('a')
-        link.setAttribute('href', objUrl)
-        link.setAttribute('download', `${pageState.head.landerID}_${params.headType}.csv`)
-        link.textContent = 'Click to Download .CSV'
+        const link = document.createElement('a');
+        link.setAttribute('href', objUrl);
+        link.setAttribute('download', `${pageState.head.landerID}_${params.headType}.csv`);
+        link.textContent = 'Click to Download .CSV';
 
         document.getElementById("PageContainer").append(link);
     }

@@ -78,7 +78,6 @@ const Uploads = () => {
         if (landerString === "") {
             return;
         }
-        
 
         const landerValue = JSON.parse(landerString);
 
@@ -107,6 +106,7 @@ const Uploads = () => {
                     formComponentList.forEach((component) => {component.disabled = true});
 
                     var intervalID = null;
+
                     if (routeValue !== "header") {
                         updateMessage(timeProcessObject);
                         intervalID = setInterval(updateMessage, 5_000, timeProcessObject);
@@ -123,6 +123,7 @@ const Uploads = () => {
                     if (intervalID) {
                         clearInterval(intervalID);
                     }
+
                     if (document.getElementById("uploadProgressBar")) {
                         document.getElementById("progressPercentage").innerText = "Upload Progress: 100%";
                         document.getElementById("uploadProgressBar").value = 1;
@@ -133,6 +134,7 @@ const Uploads = () => {
                 } catch (err) {
                     console.error(err.message ? err.message : err.response);
                     alert((err.message ? err.message : err.response) + (err.response.data ? "\n" + err.response.data : ""));
+
                     if (intervalID) {
                         clearInterval(intervalID);
                     }
