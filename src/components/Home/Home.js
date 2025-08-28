@@ -49,7 +49,7 @@ const Home = () => {
                         today.getMonth(),
                         today.getDate(),
                         today.getFullYear()
-                    ]
+                    ];
                     const cacheDate = new Date(data.cacheDate);
                     
                     const [cacheMonth, cacheDay, cacheYear] = [
