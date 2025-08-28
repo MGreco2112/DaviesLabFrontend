@@ -398,21 +398,6 @@ const Uploads = () => {
                     }
                     break;
                 }
-                case "battery": {
-
-                    if (!selLander.batteryhead) {
-                        setPageState({
-                            ...pageState,
-                            showDisplayForm: true
-                        });
-                    } else {
-                        setPageState({
-                            ...pageState,
-                            showDisplayForm: false
-                        });
-                    }
-                    break;
-                }
                 case "sediment_trap": {
 
                     if (!selLander.sedimentTrapHead) {

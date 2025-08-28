@@ -71,17 +71,12 @@ const DisplayData = () => {
                             loading: false
                         });
                     } else {
-                        console.log("API Fetch");
-                        
+
                         _fetchHead();
                     }
 
                 } else {
-                    console.log("API Fetch");
-
                     cache.delete(requestURL);
-
-                    console.log("Emptied Cache");
                     
                     _fetchHead();
                     return;
@@ -96,7 +91,6 @@ const DisplayData = () => {
 
         const _fetchHead = async () => {
             try {
-                console.log("Calling Backend");
                 
                 const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/headers/sanitized/${params.headId}`);
                 
@@ -234,10 +228,10 @@ const DisplayData = () => {
             }
 
             if (pageState.head.data.length > 0) {
-                console.log("Built from Cache");
+
                 return populateFromCache();
             } else {
-                console.log("Built from API");
+
                 return await _getData();
             }
         } else {

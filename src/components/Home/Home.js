@@ -42,7 +42,6 @@ const Home = () => {
                 
                 if (cachedResponse) {
                     const data = await cachedResponse.json();
-                    console.log(data);
                     
                     const today = new Date();
                     

@@ -114,19 +114,19 @@ const Landers = () => {
     const onSubmit = async () => {
         const searchValue = document.getElementById("searchSelect").value;
 
-        let urlVal = "";
+        let urlVal = "/api/landers/search/";
 
         switch (searchValue) {
             case "landerId": {
-                urlVal = `/api/landers/search/id/${pageState.query}`;
+                urlVal += `id/${pageState.query}`;
                 break;
             }
             case "date": {
-                urlVal = `/api/landers/search/date/${pageState.query}`;
+                urlVal += `date/${pageState.query}`;
                 break;
             }
             default: {
-                urlVal = "/api/landers/all";
+                urlVal += "all";
                 break;
             }
         }

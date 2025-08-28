@@ -64,7 +64,6 @@ const DisplayLander = () => {
         navigate(`/landers/data/adcp/${pageState.lander.adcphead.headID}`);
     }
 
-    // TODO: Create Data Page settings for Sensors below this comment
     const batteryNav = () => {
         navigate(`landers/data/battery/${pageState.lander.batteryhead.headID}`);
     }
