@@ -51,7 +51,8 @@ const DisplayData = () => {
                     today.getMonth(),
                     today.getDate(),
                     today.getFullYear()
-                ]
+                ];
+
                 const cacheDate = new Date(data.cacheDate);
                 const [cacheMonth, cacheDay, cacheYear] = [
                     cacheDate.getMonth(),
@@ -169,7 +170,7 @@ const DisplayData = () => {
                 break;
             }
             default: {
-                console.log("Invalid Head Type");
+                console.error("Invalid Head Type");
             }
         }
 
