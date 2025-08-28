@@ -104,7 +104,7 @@ const Home = () => {
                 }
                 <Splash id="LanderSplash"/>
             </Container>
-        )
+        );
     }
 
     return formatPage();
