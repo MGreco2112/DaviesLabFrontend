@@ -17,21 +17,6 @@ const Home = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const _populateLatestLanders = async () => {
-            try {
-                const res = await axios.get(`${apiHostURL}/api/landers/latest_uploads`);                
-
-                setPageState({
-                    ...pageState,
-                    loading: false,
-                    latestLanders: res.data.landers
-                });
-                
-            } catch (err) {
-                console.error(err.message ? err.message : err.response);
-            }
-        }
-
         const _auditCache = async () => {
             const cacheName = "site-cache";
             const cache = await caches.open(cacheName);
@@ -67,9 +52,25 @@ const Home = () => {
             });
         }
 
+        const _populateLatestLanders = async () => {
+            try {
+                const res = await axios.get(`${apiHostURL}/api/landers/latest_uploads`);                
+
+                setPageState({
+                    ...pageState,
+                    loading: false,
+                    latestLanders: res.data.landers
+                });
+
+                _auditCache();
+                
+            } catch (err) {
+                console.error(err.message ? err.message : err.response);
+            }
+        }
+
         if (pageState.loading) {
             _populateLatestLanders();
-            _auditCache();
         }
     }, []);
 
