@@ -61,10 +61,12 @@ const NewLander = () => {
         return (
             <Container className="NewLanderContainer">
                 <h1>Post New Lander</h1>
+
                 <Button
                     id="LandersButton"
                     onClick={navToUploads}
                 >Return To Uploads</Button>
+
                 <Form>
                     <InputGroup className="mb-3">
                         <InputGroup.Text>ASDB Lander ID:</InputGroup.Text>
@@ -122,12 +124,15 @@ const NewLander = () => {
                         />
                     </InputGroup>
                 </Form>
+
                 <Button
                     onClick={onSubmit}
                 >Submit</Button>
+
                 <Splash id="LanderSplash"/>
+
             </Container>
-        )
+        );
     }
 
     return (
