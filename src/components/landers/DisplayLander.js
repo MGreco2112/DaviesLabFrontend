@@ -37,6 +37,7 @@ const DisplayLander = () => {
             ...pageState,
             loading: true
         });
+
         _fetchLander();
     }, [pageState.lander.asdblanderID]);
 
@@ -44,40 +45,49 @@ const DisplayLander = () => {
         navigate(`/landers`);
     }
 
-    const ctdNav = () => {
-        navigate(`/landers/data/ctd/${pageState.lander.ctdhead.headID}`);
-    }
+    const dynamicButtonNav = (button) => {
+        let navURL = `/landers/data/${button.id}/`
 
-    const doNav = () => {
-        navigate(`/landers/data/do/${pageState.lander.dohead.headID}`);
-    }
+        switch (button.id) {
+            case "ctd": {
+                navURL += `${pageState.lander.ctdhead.headID}`;
+                break;
+            }
+            case "do": {
+                navURL += `${pageState.lander.dohead.headID}`;
+                break;
+            }
+            case "flntu": {
+                navURL += `${pageState.lander.flntuhead.headID}`;
+                break;
+            }
+            case "albex": {
+                navURL += `${pageState.lander.albexCTDHead.headID}`;
+                break;
+            }
+            case "adcp": {
+                navURL += `${pageState.lander.adcphead.headID}`;
+                break;
+            }
+            case "battery": {
+                navURL += `${pageState.lander.batteryhead.headID}`;
+                break;
+            }
+            case "beacon": {
+                navURL += `${pageState.lander.beaconhead.headID}`;
+                break;
+            }
+            case "camera": {
+                navURL += `${pageState.lander.camerahead.headID}`;
+                break;
+            }
+            case "sediment": {
+                navURL += `${pageState.lander.sedimentTrapHead.headID}`;
+                break;
+            }
+        }
 
-    const flntuNav = () => {
-        navigate(`/landers/data/flntu/${pageState.lander.flntuhead.headID}`);
-    }
-
-    const albexNav = () => {
-        navigate(`/landers/data/albex_ctd/${pageState.lander.albexCTDHead.headID}`);
-    }
-
-    const adcpNav = () => {
-        navigate(`/landers/data/adcp/${pageState.lander.adcphead.headID}`);
-    }
-
-    const batteryNav = () => {
-        navigate(`landers/data/battery/${pageState.lander.batteryhead.headID}`);
-    }
-
-    const beaconNav = () => {
-        navigate(`landers/data/beacon/${pageState.lander.beaconhead.headID}`);
-    }
-
-    const cameraNav = () => {
-        navigate(`landers/data/camera/${pageState.lander.camerahead.headID}`);
-    }
-
-    const sedimentTrapNav = () => {
-        navigate(`landers/data/sediment_trap/${pageState.lander.sedimentTrapHead.headID}`);
+        navigate(navURL);
     }
 
     const formatPage = () => {
@@ -167,9 +177,10 @@ const DisplayLander = () => {
                     {
                         pageState.lander.ctdhead
                         ?
-                        <Button 
+                        <Button
+                            id="ctd"
                             className="LanderButton"
-                            onClick={ctdNav}
+                            onClick={() => dynamicButtonNav(document.getElementById("ctd"))}
                         >CTD Data</Button>
                         :
                         null
@@ -177,9 +188,10 @@ const DisplayLander = () => {
                     {
                         pageState.lander.dohead
                         ?
-                        <Button 
+                        <Button
+                            id="do"
                             className="LanderButton"
-                            onClick={doNav}
+                            onClick={() => dynamicButtonNav(document.getElementById("do"))}
                         >DO Data</Button>
                         :
                         null
@@ -187,9 +199,10 @@ const DisplayLander = () => {
                     {
                         pageState.lander.flntuhead
                         ?
-                        <Button 
+                        <Button
+                            id="flntu"
                             className="LanderButton"
-                            onClick={flntuNav}
+                            onClick={() => dynamicButtonNav(document.getElementById("flntu"))}
                         >FLNTU Data</Button>
                         :
                         null
@@ -198,8 +211,9 @@ const DisplayLander = () => {
                         pageState.lander.albexCTDHead
                         ?
                         <Button
+                            id="albex_ctd"
                             className="LanderButton"
-                            onClick={albexNav}
+                            onClick={() => dynamicButtonNav(document.getElementById("albex_ctd"))}
                         >ALBEX CTD Data</Button>
                         :
                         null
@@ -208,8 +222,9 @@ const DisplayLander = () => {
                         pageState.lander.adcphead
                         ?
                         <Button
+                            id="adcp"
                             className="LanderButton"
-                            onClick={adcpNav}
+                            onClick={() => dynamicButtonNav(document.getElementById("adcp"))}
                         >ADCP Data</Button>
                         :
                         null
@@ -218,8 +233,9 @@ const DisplayLander = () => {
                         pageState.lander.batteryhead
                         ?
                         <Button
+                            id="battery"
                             className="LanderButton"
-                            onClick={batteryNav}
+                            onClick={() => dynamicButtonNav(document.getElementById("battery"))}
                         >Battery Data</Button>
                         :
                         null
@@ -228,8 +244,9 @@ const DisplayLander = () => {
                         pageState.lander.beaconhead
                         ?
                         <Button
+                            id="beacon"
                             className="LanderButton"
-                            onClick={beaconNav}
+                            onClick={() => dynamicButtonNav(document.getElementById("beacon"))}
                         >Beacon Data</Button>
                         :
                         null
@@ -238,8 +255,9 @@ const DisplayLander = () => {
                         pageState.lander.camerahead
                         ?
                         <Button
+                            id="camera"
                             className="LanderButton"
-                            onClick={cameraNav}
+                            onClick={() => dynamicButtonNav(document.getElementById("camera"))}
                         >Camera Data</Button>
                         :
                         null
@@ -248,8 +266,9 @@ const DisplayLander = () => {
                         pageState.lander.sedimentTrapHead
                         ?
                         <Button
+                            id="sediment_trap"
                             className="LanderButton"
-                            onClick={sedimentTrapNav}
+                            onClick={() => dynamicButtonNav(document.getElementById("sediment_trap"))}
                         >Sediment Trap Data</Button>
                         :
                         null
