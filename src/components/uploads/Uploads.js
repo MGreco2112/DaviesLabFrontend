@@ -52,7 +52,9 @@ const Uploads = () => {
             ...pageState,
             loading: true
         });
+
         _getAllLanders();
+
     }, []);
 
     const onFileChange = (event) => {
@@ -473,7 +475,11 @@ const Uploads = () => {
                             className="LanderFormComponent"
                         >
                             <option value=""></option>
-                            {pageState.state.landers.map( option => { return <option value={JSON.stringify(option)} key={option.asdblanderID}>{option.asdblanderID}</option>})}
+                            {
+                                pageState.state.landers.map(
+                                    option => { return <option value={JSON.stringify(option)} key={option.asdblanderID}>{option.asdblanderID}</option> }
+                                )
+                            }
                         </Form.Select>
                     </div>
 
