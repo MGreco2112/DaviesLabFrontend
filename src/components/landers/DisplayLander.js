@@ -85,6 +85,9 @@ const DisplayLander = () => {
                 navURL += `${pageState.lander.sedimentTrapHead.headID}`;
                 break;
             }
+            default: {
+                console.error("Invalid Sensor Navigation");
+            }
         }
 
         navigate(navURL);
