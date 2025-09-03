@@ -204,8 +204,8 @@ const DisplayData = () => {
             const _getData = async () => {
                 try {
                     const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/` + 
-                `${params.headType === "ctd" || params.headType === "adcp" ? "aligned_data": "data"}` + 
-                `/headId/${pageState.head.headID}/startDate/${startDate}/endDate/${endDate}`);
+                        `${params.headType === "ctd" || params.headType === "adcp" ? "aligned_data": "data"}` + 
+                        `/headId/${pageState.head.headID}/startDate/${startDate}/endDate/${endDate}`);
 
                     return res.data;
                 } catch (err) {
@@ -220,7 +220,9 @@ const DisplayData = () => {
 
                 for (let i = 0; i < pageState.head.data.length; i++) {
                     const dataElement = pageState.head.data[i];
+
                     if (dataElement.date >= (startDate + "T00:00:00") && dataElement.date <= (endDate + "T00:00:00")) {
+
                         outputArr.push(dataElement);
                     }
                 }
@@ -246,7 +248,9 @@ const DisplayData = () => {
         const dataValues = [];
 
         for (let i = 0; i < dataButtons.length; i++) {
+
             if (dataButtons[i].checked) {
+
                 const tempObj = {
                     label: dataButtons[i].name,
                     data: dataButtons[i].value
@@ -335,13 +339,16 @@ const DisplayData = () => {
     }
 
     const createCSVButton = async () => {
+
         try {
+
             document.getElementById("CsvButton").innerText = "Creating CSV...";
             document.getElementById("CsvButton").disabled = true;
 
             let url = `${apiHostURL}/api/processed/${params.headType}/data`;
 
             if (params.headType === "ctd" || params.headType === "adcp") {
+
                 url += `/header/${params.headId}/aligned/true`
             } else {
                 url += `/headId/${params.headId}`
@@ -352,6 +359,7 @@ const DisplayData = () => {
             createCSV(res.data);
 
             document.getElementById("CsvButton").innerText = "Finished CSV";
+
         } catch (err) {
             document.getElementById("CsvButton").disabled = false;
             document.getElementById("CsvButton").innerText = "Error Creating CSV"
@@ -409,7 +417,6 @@ const DisplayData = () => {
                 </Container>
                 :
                 formatPage()
-                
             }
         </Container>
     );
