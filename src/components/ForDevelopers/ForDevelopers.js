@@ -18,15 +18,18 @@ const ForDevelopers = () => {
         const fetchMarkdown = () => {
             fetch(DevelopersMD)
             .then((response) => response.text())
-            .then((text) => setPageState({
-                loading: false,
-                markdown: text
-            }));
+            .then(
+                    (text) => setPageState({
+                    loading: false,
+                    markdown: text
+                })
+            );
         }
 
         if (pageState.loading) {
             fetchMarkdown();
         }
+        
     }, []);
 
     return(
