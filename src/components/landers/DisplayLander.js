@@ -47,6 +47,7 @@ const DisplayLander = () => {
 
     const dynamicButtonNav = (button) => {
         let navURL = `/landers/data/${button.id}/`
+        let runNav = true;
 
         switch (button.id) {
             case "ctd": {
@@ -87,10 +88,13 @@ const DisplayLander = () => {
             }
             default: {
                 console.error("Invalid Sensor Navigation");
+                runNav = false;
             }
         }
 
-        navigate(navURL);
+        if (runNav) {
+            navigate(navURL);
+        }
     }
 
     const formatPage = () => {
