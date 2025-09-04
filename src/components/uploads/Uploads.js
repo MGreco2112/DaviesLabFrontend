@@ -387,12 +387,18 @@ const Uploads = () => {
 
                         setPageState({
                             ...pageState,
-                            showDisplayForm: true
+                            state: {
+                                ...pageState.state,
+                                showDisplayForm: true
+                            }
                         });
                     } else {
                         setPageState({
                             ...pageState,
-                            showDisplayForm: false
+                            state: {
+                                ...pageState.state,
+                                showDisplayForm: false
+                            }
                         });
                     }
                     break;
@@ -402,12 +408,18 @@ const Uploads = () => {
 
                         setPageState({
                             ...pageState,
-                            showDisplayForm: true
+                            state: {
+                                ...pageState.state,
+                                showDisplayForm: true
+                            }
                         });
                     } else {
                         setPageState({
                             ...pageState,
-                            showDisplayForm: false
+                            state: {
+                                ...pageState.state,
+                                showDisplayForm: false
+                            }
                         });
                     }
                     break;
@@ -417,12 +429,18 @@ const Uploads = () => {
                     if (!selLander.sedimentTrapHead) {
                         setPageState({
                             ...pageState,
-                            showDisplayForm: true
+                            state: {
+                                ...pageState.state,
+                                showDisplayForm: true
+                            }
                         });
                     } else {
                         setPageState({
                             ...pageState,
-                            showDisplayForm: false
+                            state: {
+                                ...pageState.state,
+                                showDisplayForm: false
+                            }
                         });
                     }
                     break;
@@ -489,7 +507,12 @@ const Uploads = () => {
                             <option value=""></option>
                             {
                                 pageState.state.landers.map(
-                                    option => { return <option value={JSON.stringify(option)} key={option.asdblanderID}>{option.asdblanderID}</option> }
+                                    lander => {
+                                        return <option 
+                                                    value={JSON.stringify(lander)}
+                                                    key={lander.asdblanderID}
+                                                >{lander.asdblanderID}</option>
+                                            }
                                 )
                             }
                         </Form.Select>
@@ -549,7 +572,13 @@ const Uploads = () => {
                     {   
                         pageState.state.showDisplayForm
                         ?
-                        <HeaderDataForm header={pageState.dateRange} state={pageState} updateRange={setPageState} id="headerDataForm" className="uploadsContainer"/>
+                        <HeaderDataForm
+                            header={pageState.dateRange}
+                            state={pageState}
+                            updateRange={setPageState}
+                            id="headerDataForm"
+                            className="uploadsContainer"
+                        />
                         :
                         null
                     }
@@ -563,7 +592,9 @@ const Uploads = () => {
                             size="lg"
                         >Upload!</Button>
                     </div>
+
                 {fileData()}
+                
                 <Splash id="LanderSplash"/>
             </Container>
         );
