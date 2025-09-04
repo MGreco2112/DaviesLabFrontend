@@ -158,7 +158,7 @@ const Landers = () => {
                 pageState.loading 
                 ?
                 <Container> 
-                    <p>FETCHING DATA...</p>
+                    <h2>FETCHING DATA...</h2>
                 </Container>
                 :
                 <Container className="LandersContainer">

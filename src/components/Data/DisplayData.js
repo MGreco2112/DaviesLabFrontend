@@ -99,6 +99,8 @@ const DisplayData = () => {
 
                 } else {
                     cache.delete(requestURL);
+
+                    console.log(`Cache (${requestURL}) deleted`);
                     
                     _fetchHead();
                     return;
@@ -117,7 +119,7 @@ const DisplayData = () => {
         });
 
         _checkCache();
-     }, [pageState.head.headId, params.headId, params.headType]);
+    }, [pageState.head.headId, params.headId, params.headType]);
 
     const returnToLander = () => {
         navigate(`/landers/${pageState.head.landerID}`);
@@ -134,39 +136,75 @@ const DisplayData = () => {
 
         switch (params.headType) {
             case "ctd": {
-                headInfo = <CTDHeadData header={pageState.head} id="PageContainer" form={formProps}/>;
+                headInfo = <CTDHeadData 
+                                header={pageState.head}
+                                id="PageContainer"
+                                form={formProps}
+                            />;
                 break;
             }
             case "do": {
-                headInfo = <DOHeadData header={pageState.head} id="PageContainer" form={formProps}/>;
+                headInfo = <DOHeadData
+                                header={pageState.head}
+                                id="PageContainer"
+                                form={formProps}
+                            />;
                 break;
             }
             case "flntu": {
-                headInfo = <FLNTUHeadData header={pageState.head} id="PageContainer" form={formProps}/>;
+                headInfo = <FLNTUHeadData
+                                header={pageState.head}
+                                id="PageContainer"
+                                form={formProps}
+                            />;
                 break;
             }
             case "albex_ctd": {
-                headInfo = <ALBEXHeadData header={pageState.head} id="PageContainer" form={formProps}/>;
+                headInfo = <ALBEXHeadData
+                                header={pageState.head}
+                                id="PageContainer"
+                                form={formProps}
+                            />;
                 break;
             }
             case "adcp": {
-                headInfo = <ADCPHeadData header={pageState.head} id="PageContainer" form={formProps}/>;
+                headInfo = <ADCPHeadData
+                                header={pageState.head}
+                                id="PageContainer"
+                                form={formProps}
+                            />;
                 break;
             }
             case "battery": {
-                headInfo = <BatteryHead header={pageState.head} id="PageContainer" form={formProps}/>;
+                headInfo = <BatteryHead
+                                header={pageState.head}
+                                id="PageContainer"
+                                form={formProps}
+                            />;
                 break;
             }
             case "beacon": {
-                headInfo = <BeaconHead header={pageState.head} id="PageContainer" form={formProps}/>;
+                headInfo = <BeaconHead
+                                header={pageState.head}
+                                id="PageContainer" 
+                                form={formProps}
+                            />;
                 break;
             }
             case "camera": {
-                headInfo = <CameraHead header={pageState.head} id="PageContainer" form={formProps}/>;
+                headInfo = <CameraHead
+                                header={pageState.head}
+                                id="PageContainer"
+                                form={formProps}
+                            />;
                 break;
             }
             case "sediment_trap": {
-                headInfo = <SedimentTraphead header={pageState.head} id="PageContainer" form={formProps}/>;
+                headInfo = <SedimentTraphead 
+                                header={pageState.head}
+                                id="PageContainer"
+                                form={formProps}
+                            />;
                 break;
             }
             default: {
@@ -176,8 +214,13 @@ const DisplayData = () => {
 
         return (
             <Container id="FormatPageContainer">
-                <Button id="LanderButton" onClick={returnToLander}>Return to Lander</Button>
+                <Button
+                    id="LanderButton"
+                    onClick={returnToLander}
+                >Return to Lander</Button>
+
                 {headInfo}
+                
                 <Splash id="LanderSplash"/>
             </Container>
         );
@@ -204,8 +247,14 @@ const DisplayData = () => {
             const _getData = async () => {
                 try {
                     const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/` + 
-                        `${params.headType === "ctd" || params.headType === "adcp" ? "aligned_data": "data"}` + 
-                        `/headId/${pageState.head.headID}/startDate/${startDate}/endDate/${endDate}`);
+                        `${
+                            params.headType === "ctd" || params.headType === "adcp"
+                            ?
+                            "aligned_"
+                            :
+                            ""
+                        }`
+                        + `data/headId/${pageState.head.headID}/startDate/${startDate}/endDate/${endDate}`);
 
                     return res.data;
                 } catch (err) {
@@ -334,6 +383,10 @@ const DisplayData = () => {
         container.appendChild(canvas);
         //call function to generate both .csv file and download link
         createCSV(dataSet);
+
+        if (pageState.head.data.length > 0) {
+            return;
+        }
 
         _populateCache(`${apiHostURL}/api/cache/${params.headType}/headers/${params.headId}`);
     }

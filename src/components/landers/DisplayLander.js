@@ -294,7 +294,7 @@ const DisplayLander = () => {
                 pageState.loading
                 ?
                 <Container>
-                    <p>FETCHING LANDER...</p>
+                    <h1>FETCHING LANDER...</h1>
                 </Container>
                 :
                 <Container className="LandersContainer">
