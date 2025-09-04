@@ -236,7 +236,7 @@ const Uploads = () => {
             return;
         }
 
-        const selLander = JSON.parse(landerVal);        
+        const selLander = JSON.parse(landerVal);  //Option values can only be Strings. Stringify the JSON from the API, Parse that here  
         
         if (document.getElementById("headerDataForm")) {
 
@@ -393,6 +393,7 @@ const Uploads = () => {
                             }
                         });
                     } else {
+
                         setPageState({
                             ...pageState,
                             state: {
@@ -414,6 +415,7 @@ const Uploads = () => {
                             }
                         });
                     } else {
+
                         setPageState({
                             ...pageState,
                             state: {
@@ -435,6 +437,7 @@ const Uploads = () => {
                             }
                         });
                     } else {
+
                         setPageState({
                             ...pageState,
                             state: {
@@ -594,7 +597,7 @@ const Uploads = () => {
                     </div>
 
                 {fileData()}
-                
+
                 <Splash id="LanderSplash"/>
             </Container>
         );
