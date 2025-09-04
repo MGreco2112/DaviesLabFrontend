@@ -19,9 +19,9 @@ const ForDevelopers = () => {
             fetch(DevelopersMD)
             .then((response) => response.text())
             .then(
-                    (text) => setPageState({
-                    loading: false,
-                    markdown: text
+                (text) => setPageState({
+                    markdown: text,
+                    loading: false
                 })
             );
         }
