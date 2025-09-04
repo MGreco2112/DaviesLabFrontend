@@ -30,6 +30,27 @@ const DisplayData = () => {
 
     useEffect(() => {
 
+        const _fetchHead = async () => {
+            try {
+                
+                const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/headers/sanitized/${params.headId}`);
+                
+                setPageState({
+                    ...pageState,
+                    head: res.data,
+                    loading: false
+                });
+
+            } catch (err) {
+                console.error(err.response ? err.response : err.message);
+
+                setPageState({
+                    ...pageState,
+                    loading: false
+                });
+            }
+        }
+
         const _checkCache = async () => {
             const cacheName = "site-cache";
             const cache = await caches.open(cacheName);
@@ -87,27 +108,6 @@ const DisplayData = () => {
             } else {
                 
                 _fetchHead();
-            }
-        }
-
-        const _fetchHead = async () => {
-            try {
-                
-                const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/headers/sanitized/${params.headId}`);
-                
-                setPageState({
-                    ...pageState,
-                    head: res.data,
-                    loading: false
-                });
-
-            } catch (err) {
-                console.error(err.response ? err.response : err.message);
-
-                setPageState({
-                    ...pageState,
-                    loading: false
-                });
             }
         }
 
