@@ -71,19 +71,34 @@ const Uploads = () => {
         navigate("/uploads/new_lander");
     }
 
+    const getFileExtension = (filename) => {
+        const match = filename.match(/\.([^.]+)$/);
+        return match ? match[1] : '';
+    }
+
     const onFileUpload = async () => {
         const sensorValue = document.getElementById("sensor").value;
         let routeValue = document.getElementById("route").value;
         const landerString = document.getElementById("lander").value;
         const formComponentList = Array.from(document.getElementsByClassName("LanderFormComponent"));
 
-        if (landerString === "") {
+        if (landerString === "") { //check for lander select holding valid option from API
             return;
         }
 
-        const landerValue = JSON.parse(landerString);
+        const landerValue = JSON.parse(landerString); //Option values can only be Strings. Stringify the JSON from the API, Parse that here
 
-        if (pageState.state.selectedFile) {
+        if (pageState.state.selectedFile) { //check if user has selected file to upload
+
+            const extension = getFileExtension(pageState.state.selectedFile.name);
+
+            console.log(extension);
+            
+
+            if (!['csv'].includes(extension.toLowerCase())) {
+                alert("Invalid File Type\nOnly .csv files are valid");
+                return;
+            }
         
             const timeProcessObject = {
                 pageElement: document.getElementById("fileDataDiv"),
