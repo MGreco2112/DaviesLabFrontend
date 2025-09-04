@@ -90,12 +90,9 @@ const Uploads = () => {
 
         if (pageState.state.selectedFile) { //check if user has selected file to upload
 
-            const extension = getFileExtension(pageState.state.selectedFile.name);
+            const extension = getFileExtension(pageState.state.selectedFile.name); //get file extension            
 
-            console.log(extension);
-            
-
-            if (!['csv'].includes(extension.toLowerCase())) {
+            if (!['csv'].includes(extension.toLowerCase())) { //check file extension against valid type
                 alert("Invalid File Type\nOnly .csv files are valid");
                 return;
             }
