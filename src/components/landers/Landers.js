@@ -47,7 +47,12 @@ const Landers = () => {
     const displayLanders = () => {
 
         return pageState.landers.map(land => {
-            return <Lander className="LanderCard" lander={land} key={land.asdblanderID} onSelect={onSelect}/>
+            return <Lander 
+                        className="LanderCard"
+                        lander={land}
+                        key={land.asdblanderID}
+                        onSelect={onSelect}
+                    />
         });
     }
 
@@ -76,9 +81,11 @@ const Landers = () => {
                         />
                     </InputGroup>
                 </Form>
+
                 <Button
                     onClick={onSubmit}
                 >Search</Button>
+                
             </Container>
         );
     }
@@ -162,8 +169,10 @@ const Landers = () => {
                 </Container>
                 :
                 <Container className="LandersContainer">
+
                     {populateSearchElement()}
                     {displayLanders()}
+                    
                     <Splash id="LanderSplash"/>
                 </Container>
             }
