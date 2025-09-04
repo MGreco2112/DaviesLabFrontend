@@ -47,3 +47,7 @@
 #LanderSplash {
     background-image: url(/src/components/Home/Davies\ Lab\ Logo.jpg);
 }
+
+#lander, #sensor, #route {
+    cursor: pointer;
+}

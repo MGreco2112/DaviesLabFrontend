@@ -6,6 +6,10 @@
     margin-right: 10px!important;
 }
 
+#searchSelect {
+    cursor: pointer;
+}
+
 #ButtonDiv {
     display: flex;
     flex-direction: row;
