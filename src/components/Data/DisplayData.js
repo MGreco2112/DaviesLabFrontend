@@ -413,6 +413,7 @@ const DisplayData = () => {
 
             document.getElementById("CsvButton").innerText = "Finished CSV";
 
+            _populateCache(`${apiHostURL}/api/cache/${params.headType}/headers/${params.headId}`);
         } catch (err) {
             document.getElementById("CsvButton").disabled = false;
             document.getElementById("CsvButton").innerText = "Error Creating CSV"
