@@ -515,7 +515,7 @@ const Uploads = () => {
                                                     value={JSON.stringify(lander)}
                                                     key={lander.asdblanderID}
                                                 >{lander.asdblanderID}</option>
-                                            }
+                                    }
                                 )
                             }
                         </Form.Select>
