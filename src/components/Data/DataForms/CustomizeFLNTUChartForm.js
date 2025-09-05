@@ -23,7 +23,6 @@ const CustomizeFLNTUChartForm = (props) => {
                             id="startDateInput"
                             type="date"
                             label="Start Date"
-                            // labelID="StartDateLabel"
                         />
                 </InputGroup>
                 <InputGroup className="mb-3">
@@ -33,7 +32,6 @@ const CustomizeFLNTUChartForm = (props) => {
                         id="endDateInput"
                         type="date"
                         label="End Date"
-                        // labelID="EndDateLabel"
                     />
                 </InputGroup>
             </BootstrapForm>
