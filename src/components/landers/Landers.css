@@ -17,6 +17,10 @@
     align-items: center;
 }
 
+#LanderID {
+    margin-bottom: 1em;;
+}
+
 .LanderButton {
     align-self: center;
     margin-left: 10px;

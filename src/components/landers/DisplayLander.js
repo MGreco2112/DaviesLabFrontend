@@ -100,7 +100,7 @@ const DisplayLander = () => {
     const formatPage = () => {
         return (
             <Container className="LandersContainer">
-                <strong>Lander ID: {pageState.lander.asdblanderID}</strong>
+                <strong id="LanderID">Lander ID: {pageState.lander.asdblanderID}</strong>
                 <div id="dateDiv">
                     {
                         pageState.lander.deploymentDate
