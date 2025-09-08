@@ -128,7 +128,10 @@ const Dashboard = () => {
                     ?
                     <Container/>
                     :
-                    <DashboardCard id="dashCard" dashboard={pageState.dataPointObj}/>
+                    <DashboardCard
+                        id="dashCard" 
+                        dashboard={pageState.dataPointObj}
+                    />
                 }
             </Container>
             <Splash id="LanderSplash"/>
