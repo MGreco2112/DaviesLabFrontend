@@ -83,6 +83,7 @@ const Landers = () => {
                 </Form>
 
                 <Button
+                    id="LanderSearchButton"
                     onClick={onSubmit}
                 >Search</Button>
                 
@@ -101,20 +102,37 @@ const Landers = () => {
     const onSelectChange = () => {
         const value = document.getElementById("searchSelect").value;
         const inputElement = document.getElementById("searchInput");
+        const button = document.getElementById("LanderSearchButton");
 
-        if (value === "landerId" || value === "") {
-            if (value === "") {
+        switch (value) {
+            case "": {
                 inputElement.placeholder = "";
                 inputElement.disabled = true;
-            } else {
+                inputElement.style.cursor = "not-allowed";
+                inputElement.type = "text";
+                button.disabled = true;
+                break;
+            }
+            case "landerId": {
                 inputElement.placeholder = "Enter Lander ID";
                 inputElement.disabled = false;
+                inputElement.style.cursor = "auto";
+                inputElement.type = "text";
+                button.disabled = false;
+                break;
             }
-
-            inputElement.type = "text";
-        } else if (value === "date") {
-            inputElement.type = "date";
-            inputElement.disabled = false;
+            case "date": {
+                inputElement.type = "date";
+                inputElement.disabled = false;
+                inputElement.style.cursor = "auto";
+                button.disabled = false;
+                break;
+            }
+            default: {
+                inputElement.style.cursor = "auto";
+                button.disabled = true;
+                console.error("Invalid Search Param")
+            }
         }
     }
 
