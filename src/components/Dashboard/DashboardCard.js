@@ -6,9 +6,9 @@ const DashboardCard = (props) => {
 
     return (
         <BorderCard id={props.id}>
-            <p><strong>Total Landers: {landerSetCount}</strong></p>
-            <p><strong>Total Data Points: {totalDataPoints}</strong></p>
-            <p><strong>Total Aligned Data Points: {totalAlignedDataPoints}</strong></p>
+            <p><strong>Total Landers: {landerSetCount.toLocaleString('en-US')}</strong></p>
+            <p><strong>Total Data Points: {totalDataPoints.toLocaleString('en-US')}</strong></p>
+            <p><strong>Total Aligned Data Points: {totalAlignedDataPoints.toLocaleString('en-US')}</strong></p>
         </BorderCard>
     );
 }
