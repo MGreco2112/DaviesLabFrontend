@@ -18,43 +18,46 @@ const Home = () => {
 
     useEffect(() => {
         const _auditCache = async () => {
-            const cacheName = "site-cache";
-            const cache = await caches.open(cacheName);
-            const cacheKeys = await cache.keys();
 
-            cacheKeys.forEach(async (key) => {
-                const cachedResponse = await cache.match(key);
+            const cacheName = "site-cache"; //name of cache
+            const cache = await caches.open(cacheName); //set cache variable
+            const cacheKeys = await cache.keys(); //generate list of all keys in browser session cache
+
+            cacheKeys.forEach(async (key) => { //iterate through each key
+                const cachedResponse = await cache.match(key); //set var to response of cache via key
                 
-                if (cachedResponse) {
-                    const data = await cachedResponse.json();
+                if (cachedResponse) { //if cache exists via that key
+                    const data = await cachedResponse.json(); //parse cache to json for interaction
                     
-                    const today = new Date();
+                    const today = new Date(); //generate today's date
                     
-                    const [thisMonth, thisDay, thisYear] = [
+                    const [thisMonth, thisDay, thisYear] = [ //create new vars for month, day, year from today's date
                         today.getMonth(),
                         today.getDate(),
                         today.getFullYear()
                     ];
-                    const cacheDate = new Date(data.cacheDate);
+
+                    const cacheDate = new Date(data.cacheDate); //parse cache date from json
                     
-                    const [cacheMonth, cacheDay, cacheYear] = [
+                    const [cacheMonth, cacheDay, cacheYear] = [ //create vars for cached date
                         cacheDate.getMonth(),
                         cacheDate.getDate(),
                         cacheDate.getFullYear()
                     ];
 
-                    if ((thisDay > cacheDay && thisMonth >= cacheMonth) || thisYear > cacheYear) {
-                        cache.delete(key);
+                    if ((thisDay > cacheDay && thisMonth >= cacheMonth) || thisYear > cacheYear) { //compare today to cached date to determine if it's old
+                        cache.delete(key); //remove from cache
                     }
-                } else {
-                    cache.delete(key);
+                } else { //if no valid cache element for key
+                    cache.delete(key); //delete from cache
                 }
             });
         }
 
         const _populateLatestLanders = async () => {
+
             try {
-                const res = await axios.get(`${apiHostURL}/api/landers/latest_uploads`);                
+                const res = await axios.get(`${apiHostURL}/api/landers/latest_uploads`);    
 
                 setPageState({
                     ...pageState,
@@ -81,7 +84,12 @@ const Home = () => {
     const createLanders = () => {
         
         return pageState.latestLanders.map(land => {
-            return <Lander className="HomeLanderCard" lander={land} key={land.asdblanderID} onSelect={onLanderClick}/>
+            return <Lander
+                        className="HomeLanderCard"
+                        lander={land}
+                        key={land.asdblanderID}
+                        onSelect={onLanderClick}
+                    />
         });
     }
 
