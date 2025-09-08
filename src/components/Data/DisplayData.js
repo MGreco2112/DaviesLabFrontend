@@ -248,7 +248,7 @@ const DisplayData = () => {
                 try {
                     const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/` + 
                         `${
-                            params.headType === "ctd" || params.headType === "adcp"
+                            (params.headType === "ctd" || params.headType === "adcp")
                             ?
                             "aligned_"
                             :
@@ -289,7 +289,6 @@ const DisplayData = () => {
         } else {
             alert("Invalid Date Range Entered");
         }
-        
     }
 
     const buildDataNames = () => {
