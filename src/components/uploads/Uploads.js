@@ -83,6 +83,7 @@ const Uploads = () => {
         const formComponentList = Array.from(document.getElementsByClassName("LanderFormComponent"));
 
         if (landerString === "") { //check for lander select holding valid option from API
+            alert("No Lander selected");
             return;
         }
 
@@ -100,7 +101,8 @@ const Uploads = () => {
             const timeProcessObject = {
                 pageElement: document.getElementById("fileDataDiv"),
                 sensorValue: sensorValue,
-                landerValue: landerValue.asdblanderID
+                landerValue: landerValue.asdblanderID,
+                intervalID: null
             }
     
 
@@ -119,13 +121,11 @@ const Uploads = () => {
                     
                     formComponentList.forEach((component) => {component.disabled = true});
 
-                    var intervalID = null;
-
                     if (routeValue !== "header") {
                         updateMessage(timeProcessObject);
-                        intervalID = setInterval(updateMessage, 5_000, timeProcessObject);
+                        timeProcessObject.intervalID = setInterval(updateMessage, 5_000, timeProcessObject);
                     }
-                    
+
                     formData.append(
                         paramName,
                         pageState.state.selectedFile,
@@ -134,8 +134,8 @@ const Uploads = () => {
                     
                     await axios.post(`${apiHostURL}/api/processed/${sensorValue}/upload_csv/${routeValue}/${landerValue.asdblanderID}`, formData);
 
-                    if (intervalID) {
-                        clearInterval(intervalID);
+                    if (timeProcessObject.intervalID) {
+                        clearInterval(timeProcessObject.intervalID);
                     }
 
                     if (document.getElementById("uploadProgressBar")) {
@@ -147,10 +147,10 @@ const Uploads = () => {
                     
                 } catch (err) {
                     console.error(err.message ? err.message : err.response);
-                    alert((err.message ? err.message : err.response) + (err.response.data ? "\n" + err.response.data : ""));
+                    alert((err.message ? err.message : err.response) + (err.response ? err.response.data ? "\n" + err.response.data : "" : ""));
 
-                    if (intervalID) {
-                        clearInterval(intervalID);
+                    if (timeProcessObject.intervalID) {
+                        clearInterval(timeProcessObject.intervalID);
                     }
                 }
 
@@ -222,6 +222,9 @@ const Uploads = () => {
             }
             
         } catch (err) {
+            clearInterval(timeProcessObject.intervalID);
+
+            alert(err.response ? err.response : err.message);
             console.error(err.response ? err.response : err.message);
         }
         
