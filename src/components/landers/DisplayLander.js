@@ -14,7 +14,9 @@ const DisplayLander = () => {
     const navigate = useNavigate();
 
     const [pageState, setPageState] = useState({
-        lander: {asdblanderID: params.id},
+        lander: {
+            asdblanderID: params.id
+        },
         loading: true
     });
     
@@ -46,10 +48,10 @@ const DisplayLander = () => {
     }
 
     const dynamicButtonNav = (button) => {
-        let navURL = `/landers/data/${button.id}/`
+        let navURL = `/landers/data/${button}/`
         let runNav = true;
 
-        switch (button.id) {
+        switch (button) {
             case "ctd": {
                 navURL += `${pageState.lander.ctdhead.headID}`;
                 break;
@@ -187,7 +189,7 @@ const DisplayLander = () => {
                         <Button
                             id="ctd"
                             className="LanderButton"
-                            onClick={() => dynamicButtonNav(document.getElementById("ctd"))}
+                            onClick={() => {dynamicButtonNav("ctd")}}
                         >CTD Data</Button>
                         :
                         null
@@ -198,7 +200,7 @@ const DisplayLander = () => {
                         <Button
                             id="do"
                             className="LanderButton"
-                            onClick={() => dynamicButtonNav(document.getElementById("do"))}
+                            onClick={() => dynamicButtonNav("do")}
                         >DO Data</Button>
                         :
                         null
@@ -209,7 +211,7 @@ const DisplayLander = () => {
                         <Button
                             id="flntu"
                             className="LanderButton"
-                            onClick={() => dynamicButtonNav(document.getElementById("flntu"))}
+                            onClick={() => dynamicButtonNav("flntu")}
                         >FLNTU Data</Button>
                         :
                         null
@@ -220,7 +222,7 @@ const DisplayLander = () => {
                         <Button
                             id="albex_ctd"
                             className="LanderButton"
-                            onClick={() => dynamicButtonNav(document.getElementById("albex_ctd"))}
+                            onClick={() => dynamicButtonNav("albex_ctd")}
                         >ALBEX CTD Data</Button>
                         :
                         null
@@ -231,7 +233,7 @@ const DisplayLander = () => {
                         <Button
                             id="adcp"
                             className="LanderButton"
-                            onClick={() => dynamicButtonNav(document.getElementById("adcp"))}
+                            onClick={() => dynamicButtonNav("adcp")}
                         >ADCP Data</Button>
                         :
                         null
@@ -242,7 +244,7 @@ const DisplayLander = () => {
                         <Button
                             id="battery"
                             className="LanderButton"
-                            onClick={() => dynamicButtonNav(document.getElementById("battery"))}
+                            onClick={() => dynamicButtonNav("battery")}
                         >Battery Data</Button>
                         :
                         null
@@ -253,7 +255,7 @@ const DisplayLander = () => {
                         <Button
                             id="beacon"
                             className="LanderButton"
-                            onClick={() => dynamicButtonNav(document.getElementById("beacon"))}
+                            onClick={() => dynamicButtonNav("beacon")}
                         >Beacon Data</Button>
                         :
                         null
@@ -264,7 +266,7 @@ const DisplayLander = () => {
                         <Button
                             id="camera"
                             className="LanderButton"
-                            onClick={() => dynamicButtonNav(document.getElementById("camera"))}
+                            onClick={() => dynamicButtonNav("camera")}
                         >Camera Data</Button>
                         :
                         null
@@ -275,7 +277,7 @@ const DisplayLander = () => {
                         <Button
                             id="sediment_trap"
                             className="LanderButton"
-                            onClick={() => dynamicButtonNav(document.getElementById("sediment_trap"))}
+                            onClick={() => dynamicButtonNav("sediment_trap")}
                         >Sediment Trap Data</Button>
                         :
                         null
