@@ -43,31 +43,31 @@ const CustomizeCTDChartForm = (props) => {
                         name="Temp Degrees (C)"
                         label="Temp Degrees (C)"
                         id="temperature_C"
-                        value="temperature_C"
+                        value="tempDegC"
                     />
                     <Checkbox
                         className="dataCheckbox"
                         divClassName="checkboxDiv"
-                        name="Oxygen Sat %"
-                        label="Oxygen Sat %"
-                        id="oxygen_Sat_Percent"
-                        value="oxygen_Sat_Percent"
+                        name="Salinity"
+                        label="Salinity"
+                        id="Salinity"
+                        value="sal"
                     />
                     <Checkbox
                         className="dataCheckbox"
                         divClassName="checkboxDiv"
-                        name="Pressure"
-                        label="Pressure"
-                        id="pressure"
-                        value="pressure"
+                        name="Cond Ms Cm"
+                        label="Cond Ms Cm"
+                        id="Cond Ms Cm"
+                        value="condMsCm"
                     />
                     <Checkbox
                         className="dataCheckbox"
                         divClassName="checkboxDiv"
-                        name="Oxygen (ML/L)"
-                        label="Oxygen (ML/L)"
-                        id="oxygen_ML_L"
-                        value="oxygen_ML_L"
+                        name="EC25 Us Cm"
+                        label="EC25 Us Cm"
+                        id="EC25 Us Cm"
+                        value="ec25UsCm"
                     />
                 </InlineInputContainer>
                 <InlineInputContainer className="FormInputContainer">
@@ -82,19 +82,19 @@ const CustomizeCTDChartForm = (props) => {
                     <Checkbox
                         className="dataCheckbox"
                         divClassName="checkboxDiv"
-                        name="CHLA (UG/ML)"
-                        label="CHLA (UG/ML)"
-                        id="chla_ug_mL"
-                        value="chla_ug_mL"
+                        name="Battery Voltage"
+                        label="Battery Voltage"
+                        id="Battery Voltage"
+                        value="battV"
                     />
-                    <Checkbox
+                    {/* <Checkbox
                         className="dataCheckbox"
                         divClassName="checkboxDiv"
                         name="CTD Flag"
                         label="CTD Flag"
                         id="ctd_Flag"
                         value="ctd_Flag"
-                    />
+                    /> */}
                 </InlineInputContainer>
                 <Container id="ButtonContainer">
                     <Button 
