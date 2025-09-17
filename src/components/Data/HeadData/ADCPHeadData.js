@@ -19,11 +19,13 @@ const ADCPHeadData = (props) => {
                 <p>Aligned Data Points: {alignedDataPointCount}</p>
             </BorderCard>
             {
-                enabled && alignedDataPointCount > 0
+                // enabled && alignedDataPointCount > 0 //commented out due to aligned priority unknown
+                enabled && dataPointCount > 0
                 ?
                 <CustomizeADCPChartForm onSubmit={onSubmit} csvFunct={csvButtonFunct}/>
                 :
-                    enabled && alignedDataPointCount <= 0
+                    // enabled && alignedDataPointCount <= 0
+                    enabled && dataPointCount <= 0
                     ?
                     <h2>No Data Available To Chart</h2>
                     :

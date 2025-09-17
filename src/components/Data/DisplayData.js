@@ -247,14 +247,16 @@ const DisplayData = () => {
             const _getData = async () => {
                 try {
                     const res = await axios.get(`${apiHostURL}/api/processed/${params.headType}/` + 
-                        `${
-                            (params.headType === "ctd" || params.headType === "adcp")
-                            ?
-                            "aligned_"
-                            :
-                            ""
-                        }`
-                        + `data/headId/${pageState.head.headID}/startDate/${startDate}/endDate/${endDate}`);
+                        // `${
+                        //     (params.headType === "ctd" || params.headType === "adcp")
+                        //     ?
+                        //     "aligned_"
+                        //     :
+                        //     ""
+                        // }` +
+                        
+                        //Commented out due to unknown priority on aligned data for graphing
+                        `data/headId/${pageState.head.headID}/startDate/${startDate}/endDate/${endDate}`);
 
                     return res.data;
                 } catch (err) {

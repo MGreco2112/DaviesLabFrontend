@@ -2,7 +2,7 @@ import React from "react";
 import Container from "../../common/Container";
 import BorderCard from "../../common/BorderCard";
 import "../Data.css";
-import CustomizeCTDChartForm from "../DataForms/CustomizeALBEXCTDChartForm.js";
+import CustomizeCTDChartForm from "../DataForms/CustomizeCTDChartForm.js";
 
 const CTDHeadData = (props) => {
     const {sondeName, sondeNo, sensorType, channel, delayTime, preHeat, measMode, burstTime, burstCnt, intervalData, sampleCnt, startTime, endTime, depAdiRho, eca, ecb, ecdeg, eccoef, coefDate, ch1, ch2, ch3, ch4, buzzerEN, buzzerInterval, comment, sensorType2, buzzerNumber, depM, condDepB, dataPointCount, alignedDataPointCount} = props.header;
@@ -48,11 +48,13 @@ const CTDHeadData = (props) => {
                 <p>Aligned Data Points: {alignedDataPointCount}</p>
             </BorderCard>
             {
-                enabled && alignedDataPointCount > 0
+                // enabled && alignedDataPointCount > 0 //commented out due to aligned priority unknown
+                enabled && dataPointCount > 0
                 ?
                 <CustomizeCTDChartForm onSubmit={onSubmit} csvFunct={csvButtonFunct}/>
                 :
-                    enabled && alignedDataPointCount <= 0
+                    // enabled && alignedDataPointCount <= 0
+                    enabled && dataPointCount <= 0
                     ?
                     <h2>No Data Available To Chart</h2>
                     :
